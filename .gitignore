@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.tools/
+.env
+.env.*
+!.env.example
+*.blend1
+*.blend2
+playwright-report/
+test-results/
+coverage/
+release/
+data/
+.DS_Store
+reports/
+dist-bundle/
+.claude/

@@ -1,0 +1,9 @@
+21:58:36 | INFO: Data are loaded, start creating Blender stuff
+21:58:36 | INFO: Blender create Mesh node prop_magic_card
+21:58:36 | INFO: glTF import finished in 0.01s
+Nguồn Blender packed và GLB roundtrip: đạt
+Blender 4.5.0 (hash 8cb6b388974a built 2025-07-15 01:35:28)
+Read blend: "/Users/quyen.tran5/lairgame/assets/blender/cards/magic_cards_pixel.blend"
+Read blend: "/Users/quyen.tran5/lairgame/assets/blender/cards/magic_cards_preview.blend"
+
+Blender quit

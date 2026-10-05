@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "sources": [
+    {
+      "file": "assets/blender/cards/magic_cards_pixel.blend",
+      "packedImages": 29,
+      "collections": [
+        "SOURCE",
+        "EXPORT",
+        "PREVIEW"
+      ]
+    },
+    {
+      "file": "assets/blender/cards/magic_cards_preview.blend",
+      "packedImages": 35,
+      "collections": [
+        "SOURCE",
+        "EXPORT",
+        "PREVIEW"
+      ]
+    }
+  ],
+  "roundtrip": {
+    "node": "prop_magic_card",
+    "triangles": 64,
+    "materials": [
+      "mat_pixel_K01",
+      "mat_pixel_back",
+      "mat_card_edge"
+    ],
+    "sourceBlenderDimensions": [
+      0.06400000303983688,
+      0.0008000038214959204,
+      0.08799999952316284
+    ],
+    "frontNormal": "-Y (GLB +Z)",
+    "backNormal": "+Y (GLB -Z)",
+    "uvWithinUnitSquare": true
+  }
+}

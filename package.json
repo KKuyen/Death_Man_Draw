@@ -1,0 +1,35 @@
+{
+  "name": "dead-mans-draw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c yellow,cyan \"npm run dev -w @saloon/server\" \"npm run dev -w @saloon/web\"",
+    "build": "npm run build -w @saloon/web && npm run build -w @saloon/server",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "desktop": "npm run build -w @saloon/web && npm run bundle:server && electron apps/desktop/main.cjs",
+    "desktop:pack": "npm run build -w @saloon/web && npm run bundle:server && electron-builder --config apps/desktop/electron-builder.yml --dir",
+    "models": "python3 scripts/blender/run.py",
+    "check:assets": "node scripts/check-assets.mjs",
+    "bundle:server": "node scripts/bundle-server.mjs",
+    "desktop:smoke": "npm run build -w @saloon/web && npm run bundle:server && SALOON_SMOKE=1 SALOON_HEADLESS=1 electron apps/desktop/main.cjs",
+    "test:e2e:fast": "playwright test tests/e2e/demo.spec.ts",
+    "test:e2e:full": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.0.0",
+    "concurrently": "^9.2.0",
+    "electron": "^41.10.7",
+    "electron-builder": "^26.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

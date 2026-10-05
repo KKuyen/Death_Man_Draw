@@ -1,0 +1,40 @@
+{
+  "assetId": "prop_axis_calibration",
+  "assetVersion": "1.0.0",
+  "contractVersion": "1.0.0",
+  "source": "assets/blender/props/prop_gameplay_set.blend",
+  "file": "public/models/props/axis_calibration.glb",
+  "blenderVersion": "4.5.0",
+  "exporter": "Blender bundled Khronos glTF 2.0",
+  "units": "meters",
+  "sourceUp": "+Z",
+  "sourceForward": "-Y",
+  "exportedUp": "+Y",
+  "exportedForward": "+Z",
+  "engineHandedness": "right",
+  "sourceRoot": [
+    0,
+    0,
+    0
+  ],
+  "provenance": "Original geometry authored by scripts/blender/generate.py; no third-party art.",
+  "statistics": {
+    "bytes": 8328,
+    "triangles": 168,
+    "vertices": 192,
+    "meshes": 1,
+    "nodes": 1,
+    "materials": 3,
+    "textures": 0,
+    "skins": 0,
+    "primitives": 3
+  },
+  "lods": [
+    "LOD0"
+  ],
+  "textures": "None; portable Principled PBR colors",
+  "contentIds": [],
+  "notes": [
+    "Shared prop centered at origin; attach to a runtime socket."
+  ]
+}

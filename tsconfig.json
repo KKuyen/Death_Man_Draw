@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext", "moduleResolution": "Bundler", "jsx": "react-jsx",
+    "strict": true, "skipLibCheck": true, "esModuleInterop": true,
+    "resolveJsonModule": true, "allowImportingTsExtensions": true,
+    "noEmit": true, "types": ["node", "vite/client"],
+    "baseUrl": ".", "paths": {
+      "@saloon/protocol": ["packages/protocol/src/index.ts"],
+      "@saloon/rules": ["packages/rules/src/index.ts"],
+      "@saloon/content": ["packages/content/src/index.ts"],
+      "@saloon/bots": ["packages/bots/src/index.ts"]
+    }
+  },
+  "include": ["apps/**/*.ts", "apps/**/*.tsx", "packages/**/*.ts", "tests/**/*.ts", "*.config.ts"]
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "file": "environment.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 17
+  },
+  {
+    "file": "characters/badger.glb",
+    "errors": 0,
+    "warnings": 31,
+    "infos": 9
+  },
+  {
+    "file": "characters/coyote.glb",
+    "errors": 0,
+    "warnings": 31,
+    "infos": 9
+  },
+  {
+    "file": "characters/dealer.glb",
+    "errors": 0,
+    "warnings": 31,
+    "infos": 9
+  },
+  {
+    "file": "characters/lynx.glb",
+    "errors": 0,
+    "warnings": 31,
+    "infos": 9
+  },
+  {
+    "file": "characters/rabbit.glb",
+    "errors": 0,
+    "warnings": 31,
+    "infos": 9
+  },
+  {
+    "file": "props/axis_calibration.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/cards.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/chips.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/cloth.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/coin.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/copy_paper.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/cup.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/deck.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/lighter.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/magic_card.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 3
+  },
+  {
+    "file": "props/mark.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/mirror.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/prosthetics.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  {
+    "file": "props/sleeve.glb",
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  }
+]

@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+**/dist
+dist-bundle
+.tools
+release
+test-results
+playwright-report
+data
+assets/previews
+assets/blender
+reports
+.env
+.git

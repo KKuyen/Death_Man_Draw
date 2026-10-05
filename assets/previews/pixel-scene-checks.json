@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "port": 5317,
+  "frameCapture": "Manual fx.update steps 25 ms; SwiftShader; scene-only fabricated snapshots",
+  "checks": [
+    {
+      "name": "K03 replacement",
+      "id": "2S",
+      "rank": "facemat-2S|2S|gold"
+    },
+    {
+      "name": "Six popups, unique lanes, NEAREST, no texture labels",
+      "popIds": [
+        "K09",
+        "N02",
+        "K03",
+        "K02",
+        "N02",
+        "K03"
+      ],
+      "slots": [
+        2,
+        0,
+        1,
+        4,
+        3,
+        7
+      ],
+      "nearest": true,
+      "labels": 0
+    },
+    {
+      "name": "Browser page errors",
+      "errors": []
+    }
+  ],
+  "stats": {
+    "tweens": 0,
+    "ld": 0,
+    "handId": 1,
+    "boardShown": 3,
+    "picked": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "rig": [
+      "held",
+      "held"
+    ],
+    "tray": [
+      "tray:N01",
+      "hidden:",
+      "hidden:",
+      "hidden:",
+      "hidden:"
+    ],
+    "pops": 0,
+    "cards": 9
+  }
+}

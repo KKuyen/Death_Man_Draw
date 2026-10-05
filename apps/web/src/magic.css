@@ -1,0 +1,232 @@
+/* Bài Phép UI: board strip, own hand, private market, magic tray, toasts. Loaded after game.css. */
+.app.in-game{--gx-bar:168px;--gx-top:192px}
+/* playing cards with modifiers */
+.playing-card .card-corner{font-size:15px}
+.playing-card.mod{box-shadow:0 0 0 2px var(--mc,#d7b779),0 5px 14px #0006}
+.playing-card.mod-gold{--mc:#e8c050;background:linear-gradient(150deg,#f6e7ad,#e2c46a)}
+.playing-card.mod-wild{--mc:#b78cf0;background:linear-gradient(135deg,#f3d9e3,#d8f0e0 40%,#d6e0f6 70%,#f0e1ff)}
+.playing-card.mod-lucky{--mc:#7fd48c;background:linear-gradient(150deg,#e9f4d4,#cfe8c0)}
+.playing-card.mod-trapRank,.playing-card.mod-trapSuit{--mc:#d9694f;background:repeating-linear-gradient(135deg,#eee3c8 0 7px,#e7c8b4 7px 9px)}
+.playing-card.mod-cursed{--mc:#a14fc8;background:linear-gradient(150deg,#d9cfe3,#b9a7c8);color:#2e1f3c}
+.mod-badge{position:absolute;right:-6px;top:-8px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:12px;line-height:1;background:#15110c;color:var(--mc,#d7b779);border:1px solid var(--mc,#d7b779);z-index:2}
+.mod-caption{position:absolute;left:50%;bottom:-17px;transform:translateX(-50%);white-space:nowrap;font-family:var(--condensed);font-size:9px;letter-spacing:.8px;color:var(--mc,#d7b779);text-shadow:0 1px 3px #000}
+.playing-card.small .mod-badge{width:15px;height:15px;font-size:9px;right:-5px;top:-6px}
+.playing-card.small .mod-caption{font-size:8px;bottom:-13px}
+.playing-card.small .card-corner{font-size:11px}
+.card-slot-empty{display:grid;place-items:center;width:100%;height:100%;border:1px dashed #c1ab7866;border-radius:5px;font-family:var(--condensed);font-size:9px;letter-spacing:1px;color:#a59c80;background:#0d120c88}
+
+/* board strip (HUD) */
+.app.in-game .gx-board{position:absolute;z-index:5;left:50%;top:190px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 14px 8px;background:#0c110bd0;border:1px solid var(--line);border-radius:8px;backdrop-filter:blur(8px)}
+.gx-hud-label{font-family:var(--condensed);font-size:9px;letter-spacing:1.6px;color:#a9ad93}
+.gx-board-cards{display:flex;gap:7px}
+.gx-board-slot{width:50px;height:72px}
+.gx-board .playing-card{width:50px;height:72px}
+.gx-board .card-corner{font-size:15px}
+.gx-board .card-suit{font-size:26px}
+.gx-board[data-count="3"] .gx-board-slot:nth-child(-n+3) .playing-card{box-shadow:0 5px 14px #0006}
+
+/* own hand */
+.app.in-game .gx-bottom{grid-template-columns:330px minmax(0,1fr) 350px;gap:20px;align-items:end}
+.app.in-game .gx-bottom .wallet-block{display:grid;grid-template-columns:auto auto;column-gap:12px;align-items:center;align-self:end}
+.app.in-game .gx-bottom .wallet-block>.eyebrow,.app.in-game .gx-bottom .wallet-block>.gx-trend{grid-column:1/-1}
+.app.in-game .gx-bottom .wallet-block>strong{font-size:34px;line-height:1.1}
+.gx-hand{display:flex;flex-direction:column;gap:4px;align-items:flex-end;padding-bottom:16px}
+.gx-hand .gx-hud-label{white-space:nowrap}
+.gx-hand-cards{display:flex;gap:8px}
+.gx-hand .playing-card.big{width:58px;height:84px}
+.gx-hand .playing-card.big .card-corner{font-size:17px}
+.gx-hand .playing-card.big .card-suit{font-size:30px}
+.gx-hand.folded .playing-card{opacity:.5!important}
+.gx-hand.empty{align-items:flex-start;justify-content:center}.gx-hand-none{font-size:12px;color:#8f9380}
+
+/* right column: tray + 3D-look button */
+.gx-right{display:flex;flex-direction:column;gap:6px;position:relative;align-self:end}
+.gx-tray-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.gx-tray-priv{font-size:9px;color:#83947b;letter-spacing:.8px}
+.gx-tray-slots{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.gx-slot{position:relative;aspect-ratio:3/4;min-height:0;padding:0;border:1px solid #c1ab7855;background:#12170f;border-radius:6px;overflow:hidden;color:#e6dcc3;transition:transform .12s,border-color .12s}
+.gx-slot.empty{display:grid;place-items:center;border-style:dashed;color:#6d7260;font-family:var(--serif);font-size:18px;background:#0d120c88}
+.gx-slot.kind-passive{border-color:#8a6fc0aa}.gx-slot.kind-active{border-color:#d9694faa}.gx-slot.kind-swap{border-color:#d7b779cc}
+.gx-slot:hover{transform:translateY(-2px)}.gx-slot.sel{box-shadow:0 0 0 2px var(--gold)}
+.gx-slot.ready{animation:gx-ready 1.2s ease-in-out infinite}
+@keyframes gx-ready{50%{box-shadow:0 0 14px 1px #e8c050aa}}
+.gx-slot .magic-art{position:absolute;inset:0}
+.gx-slot-name{position:absolute;left:0;right:0;bottom:0;padding:10px 2px 2px;font-size:8.5px;line-height:1.1;letter-spacing:.2px;background:linear-gradient(0deg,#050805f0 55%,#0500);text-align:center;font-weight:600}
+.gx-slot-dot{position:absolute;right:3px;top:3px;width:8px;height:8px;border-radius:50%;background:#e8c050;box-shadow:0 0 8px #e8c050}
+.magic-art{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,#3a2a4c,#140f1c)}
+.magic-art img{display:block;width:100%;height:100%;object-fit:cover}
+.magic-art.kind-active{background:radial-gradient(circle at 50% 35%,#5a2430,#1a0d12)}.magic-art.kind-swap{background:radial-gradient(circle at 50% 35%,#4f4220,#17130a)}
+.magic-art-fallback{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-size:28px;color:#e8c050}.magic-art-fallback small{font-size:9px;opacity:.7;letter-spacing:1px}
+.kind-pill{font-style:normal;font-family:var(--condensed);font-size:9px;letter-spacing:1.2px;padding:2px 7px;border-radius:999px;border:1px solid #c1ab7855;color:#d9cba2}
+.kind-pill.kind-passive{border-color:#8a6fc0;color:#c5b0f0}.kind-pill.kind-active{border-color:#d9694f;color:#f0a58f}.kind-pill.kind-swap{border-color:#d7b779;color:#ecd29f}
+.reveal-pill{font-family:var(--condensed);font-size:8px;letter-spacing:1px;padding:2px 6px;background:#d9694f33;color:#f0a58f;border-radius:999px}
+
+/* use popover */
+.gx-use{position:absolute;right:0;bottom:calc(100% + 8px);width:350px;z-index:20;padding:12px 14px;background:linear-gradient(150deg,#252b21,#10160e);border:1px solid var(--gold);border-radius:8px;box-shadow:0 20px 60px #000c}
+.gx-use-head{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:start}
+.gx-use-art{width:54px;height:72px;border-radius:4px}
+.gx-use h4{margin:3px 0 2px;font-family:var(--serif);font-size:19px;color:#f0e4c4}.gx-use p{margin:0;font-size:11.5px;line-height:1.45;color:#c0c3ad}
+.gx-x{background:none;border:0;color:#a79f8d;font-size:20px;line-height:1;padding:0 4px}
+.gx-use-timing{margin-top:8px!important;padding:5px 8px;border-left:2px solid #8f9380;background:#0006;color:#d7cfb4!important}.gx-use-timing.ok{border-color:#8fd08a;color:#bfe9b8!important}
+.gx-use-warn{margin-top:6px!important;color:#f0a58f!important}
+.gx-use-row{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;font-size:11px;color:#a9ad93}.gx-use-row>span:first-child{min-width:62px;font-family:var(--condensed);letter-spacing:1px}
+.gx-use-row .playing-card{margin-bottom:12px}
+.chip{background:#1a251a;border:1px solid var(--line);color:#d9d3b9;padding:4px 10px;border-radius:999px;font-size:11px}.chip.on{background:var(--gold);color:#241f12;border-color:var(--gold)}
+.gx-use-actions{display:flex;gap:8px;margin-top:10px}.gx-use-actions .btn{width:auto;min-height:38px;padding:8px 14px;font-size:12px}
+
+/* private market */
+.app.in-game .gx-market{left:370px;right:28px;top:var(--gx-top);display:flex;flex-direction:column;gap:8px;overflow:visible;max-height:calc(100% - var(--gx-top) - var(--gx-bar) - 12px)}
+.gx-market-note{font-size:12px;color:#c9cbb4;padding:6px 12px;background:#0c110bcc;border-left:3px solid #8a6fc0;border-radius:0 5px 5px 0;align-self:flex-start}
+.gx-market-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-content:start}
+.app.in-game .gx-offer{min-height:0;padding:10px 11px 10px;gap:5px;background:linear-gradient(170deg,#2a2438f5,#130f1af0);border-color:#9a82d055}
+.gx-offer.kind-active{background:linear-gradient(170deg,#3a2128f5,#180e11f0);border-color:#d9694f66}.gx-offer.kind-swap{background:linear-gradient(170deg,#3a3220f5,#17130af0);border-color:#d7b77988}
+.gx-offer-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.gx-offer-art{width:100%;height:clamp(92px,16vh,150px);border-radius:5px;border:1px solid #ffffff22}
+.app.in-game .gx-offer h3{font-size:18px;margin:2px 0 0}
+.app.in-game .gx-offer p.gx-offer-text{font-size:11.5px;line-height:1.4;color:#d0d2bd;flex:0 0 auto;min-height:32px}
+.gx-offer p.gx-offer-timing{font-size:9.5px;letter-spacing:.4px;color:#9a9f86;margin:0}
+.app.in-game .gx-offer footer{margin-top:auto}
+.app.in-game .gx-buy{padding:8px 12px;font-size:16px}
+.gx-replace{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:11px;color:#c9cbb4}.gx-replace button{background:#1a251a;border:1px solid var(--line);color:#d9d3b9;padding:4px 10px;border-radius:999px;font-size:11px}.gx-replace button.on{background:#d9694f;color:#fff;border-color:#f0a58f}
+
+/* toasts + opponents' revealed cards */
+.gx-toasts{position:absolute;z-index:60;left:50%;top:128px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
+.app.in-game .gx-toasts{top:292px}
+.gx-toast{display:flex;gap:10px;align-items:center;padding:8px 16px;background:#14100ce6;border:1px solid var(--gold);color:#f0e4c4;font-size:13px;border-radius:6px;animation:gx-toast 5s ease both;box-shadow:0 10px 30px #000a}
+.gx-toast.private{border-color:#8a6fc0}.gx-toast.public{border-color:#d9694f}
+@keyframes gx-toast{0%{opacity:0;transform:translateY(-8px)}8%,86%{opacity:1;transform:none}100%{opacity:0}}
+.gx-revealed{display:flex;align-items:center;gap:5px;margin-top:5px}.gx-revealed>span{font-family:var(--condensed);font-size:9px;letter-spacing:1px;color:#f0a58f}
+.table-feed .feed-magic{color:#f0a58f}.table-feed .own{color:#cdbfef}
+.check-row{display:flex;gap:8px;align-items:center;font-size:13px;margin-top:10px;color:#d3d3bd}
+.secret-note{display:flex;flex-direction:column;gap:6px;max-width:220px}.secret-note>div{display:flex;gap:8px;align-items:center}
+.app.in-game .secret-note{left:auto;right:28px;top:auto;bottom:calc(var(--gx-bar) + 18px);z-index:6}
+
+@media(max-height:780px){
+  .app.in-game{--gx-bar:150px;--gx-top:176px}
+  .app.in-game .gx-board{top:174px;padding:5px 10px}
+  .gx-board-slot,.gx-board .playing-card{width:42px;height:60px}.gx-board .card-corner{font-size:13px}.gx-board .card-suit{font-size:22px}
+  .gx-hand .playing-card.big{width:48px;height:70px}.gx-hand-cards{gap:6px}
+  .gx-offer-art{height:clamp(70px,13vh,110px)}
+  .app.in-game .gx-offer h3{font-size:16px}
+  .app.in-game .gx-market{left:350px}
+  .app.in-game .gx-toasts{top:250px}
+}
+@media(max-width:1350px){.app.in-game .gx-bottom{grid-template-columns:290px minmax(0,1fr) 320px;gap:14px}.app.in-game .gx-market{left:350px}.gx-use{width:320px}}
+
+/* public magic banner, peek modal, slot kind tag */
+.gx-toast.gx-magic-banner{padding:8px 22px 8px 8px;font-size:16px;border-width:2px;background:#1a0d12f2;box-shadow:0 0 40px #d9694f66,0 10px 30px #000a;gap:14px}
+.gx-banner-art{width:42px;height:58px;border-radius:4px;flex:none}
+.gx-peek-modal{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:#050805aa}
+.gx-peek-card{width:min(360px,90vw);padding:22px 26px;text-align:center;background:linear-gradient(150deg,#2a2438,#110d18);border:1px solid #9a82d0;box-shadow:0 30px 100px #000c}
+.gx-peek-card h3{margin:6px 0 2px;font-family:var(--serif);font-size:28px;color:#f0e4c4}.gx-peek-label{margin:0 0 10px;font-size:13px;color:#d3d3bd}
+.gx-peek-cards{display:flex;justify-content:center;margin:6px 0 24px}.gx-peek-text{font-size:15px;color:#efe2c2}
+.gx-peek-note{font-size:10.5px;color:#9a9f86;line-height:1.5;margin:6px 0 14px}.gx-peek-card .btn{width:auto}
+.gx-slot-tag{position:absolute;left:3px;top:3px;z-index:2;font-family:var(--condensed);font-size:8px;letter-spacing:.8px;padding:1px 4px;border-radius:3px;background:#050805d0;color:#d9cba2}
+.gx-slot.kind-passive .gx-slot-tag{color:#c5b0f0}.gx-slot.kind-active .gx-slot-tag{color:#f0a58f}
+.app.in-game .gx-log{max-height:150px;overflow:hidden}
+.vis-pill{font-family:var(--condensed);font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:999px;border:1px solid #ffffff33;white-space:nowrap}
+.vis-pill.vis-public{color:#f0a58f;border-color:#d9694f88}.vis-pill.vis-hinted{color:#e8c050;border-color:#e8c05088}.vis-pill.vis-hidden{color:#9fb0c8;border-color:#9fb0c888}
+.gx-offer-vis{margin:0;font-size:10px;line-height:1.35;color:#b3b69f;border-top:1px dashed #ffffff22;padding-top:4px}
+.gx-use-warn.vis-note{color:#b3b69f!important;font-size:10.5px}
+.gx-slot-vis{position:absolute;right:3px;top:3px;z-index:2;font-size:10px;color:#e6dcc3;text-shadow:0 1px 2px #000}
+.gx-slot-wait{position:absolute;left:0;right:0;bottom:14px;z-index:2;font-size:7.5px;text-align:center;color:#c5b0f0;background:#050805c0;padding:1px}
+.gx-slot.fired{animation:gx-fired .5s ease-in-out 4;border-color:#e8c050}
+@keyframes gx-fired{50%{box-shadow:0 0 22px 4px #e8c050;transform:translateY(-4px)}}
+.gx-slot-dot{top:auto;bottom:16px}
+.gx-offer-top{flex-wrap:wrap}
+.app.in-game{--gx-bar:196px}
+.app.in-game .table-feed.gx-log{bottom:calc(var(--gx-bar) + 22px);max-height:150px;justify-content:flex-end;gap:3px}
+@media(max-height:780px){.app.in-game{--gx-bar:176px}.app.in-game .table-feed.gx-log{max-height:110px;font-size:10px}}
+/* Text-free pixel cards: display the complete art, all labels live outside it. */
+.magic-art img{object-fit:contain;image-rendering:pixelated}
+.app.in-game{--gx-bar:242px}
+.app.in-game .gx-market{overflow-y:auto;overscroll-behavior:contain;padding-bottom:4px}
+.app.in-game .gx-offer{display:grid;grid-template-columns:64px minmax(0,1fr);gap:6px 9px;align-items:start}
+.gx-offer-art{grid-column:1;grid-row:1/3;width:64px;height:88px;border:0;background:transparent}
+.gx-offer-top{grid-column:2;grid-row:2;align-self:start;justify-content:flex-start;gap:4px}
+.app.in-game .gx-offer h3{grid-column:2;grid-row:1;font-size:18px;line-height:1.1;overflow-wrap:anywhere}
+.gx-offer .kind-pill{white-space:normal;letter-spacing:.3px;line-height:1.25}
+.gx-offer-text,.gx-offer-timing,.gx-offer-vis,.gx-offer footer{grid-column:1/-1}
+.app.in-game .gx-offer p.gx-offer-text{min-height:0;margin:0;font-size:11.5px}
+.gx-offer footer{align-self:end}
+.gx-offer-timing{line-height:1.4}
+.gx-slot-wrap{position:relative;min-width:0}
+.gx-slot{width:100%;display:flex;flex-direction:column;align-items:center;aspect-ratio:auto;overflow:visible;padding:3px;gap:3px;min-height:164px}
+.gx-slot.empty{min-height:164px}
+.gx-slot .magic-art{position:relative;inset:auto;width:100%;height:70px;flex:none;border-radius:3px;background:transparent}
+.gx-slot-name{position:static;display:block;padding:0;background:none;font-size:10px;line-height:1.2;min-height:24px;overflow-wrap:anywhere}
+.gx-slot-kind{display:block;padding:2px;font-size:8px;letter-spacing:0;line-height:1.2;border-radius:3px;min-height:25px}
+.gx-slot-visibility{font-size:8px;color:#c0c3ad;line-height:1.2}
+.gx-slot-state{font-size:8px;line-height:1.2;color:#9ca38c}
+.gx-slot.ready .gx-slot-state{color:#efd471}
+.gx-slot-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);right:0;width:300px;padding:12px;background:#151c12;border:1px solid var(--gold);border-radius:6px;box-shadow:0 12px 40px #000c;z-index:25;text-align:left;pointer-events:none}
+.gx-slot-wrap:hover .gx-slot-tooltip,.gx-slot-wrap:focus-within .gx-slot-tooltip{display:block}
+.gx-tray:has(.gx-use) .gx-slot-tooltip{display:none}
+.magic-name{display:block;font-family:var(--serif);font-size:19px;line-height:1.2;color:#f0e4c4;margin-bottom:5px}
+.magic-meta{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+.magic-price{font-size:10px;white-space:nowrap;color:#dfc285}
+.magic-details p{margin:5px 0 0;font-size:11.5px;line-height:1.4;color:#d0d2bd}
+.magic-details .magic-timing{font-size:10px;color:#aab19d}
+.magic-details .magic-visibility{font-size:10px;color:#b4c1c9;border-top:1px dashed #ffffff25;padding-top:5px}
+.gx-use{width:390px;max-height:calc(100vh - 300px);overflow-y:auto}
+.gx-use-art{width:64px;height:88px;background:transparent}
+.gx-use-head{grid-template-columns:64px minmax(0,1fr) auto}
+.gx-use .magic-price{font-size:10px}
+.gx-peek-art{width:96px;height:132px;border-radius:4px;background:transparent}
+.gx-peek-card{max-height:calc(100vh - 40px);overflow-y:auto}
+.gx-peek-card .magic-meta{justify-content:center}
+.gx-peek-card .gx-peek-cards{margin-bottom:20px}
+.gx-magic-banner{max-width:min(540px,85vw)}
+.gx-toast.gx-magic-banner{align-items:flex-start;font-size:14px;padding:10px;gap:10px}
+.gx-banner-art{width:64px;height:88px;background:transparent}
+.gx-magic-banner .magic-details{margin-top:6px}
+.gx-magic-banner .magic-details p{font-size:11px}
+.gx-magic-banner .magic-price{font-size:9px}
+.gx-toasts .gx-toast.private{max-width:480px;line-height:1.5}
+@media(max-height:780px){
+ .app.in-game{--gx-bar:224px}
+ .gx-slot,.gx-slot.empty{min-height:150px}
+ .gx-slot .magic-art{height:58px}
+ .gx-use{max-height:calc(100vh - 270px)}
+ .app.in-game .gx-market{top:176px}
+ .app.in-game .gx-offer{padding:8px;gap:5px 7px}
+ .app.in-game .gx-offer h3{font-size:16px}
+ .gx-offer-art{width:56px;height:77px}
+ .app.in-game .gx-offer{grid-template-columns:56px minmax(0,1fr)}
+ .gx-offer-vis{font-size:9.5px}
+}
+
+.gx-offer-price{display:block;font-size:11px;color:#dfc285;margin-bottom:3px}
+.app.in-game:has(.gx-use) .secret-note{display:none}
+
+/* Antique card cabinet: the illustration is the focal point of each offer. */
+.app.in-game .gx-offer{display:flex;flex-direction:column;gap:7px;padding:14px 14px 12px;background:linear-gradient(150deg,#252329f5,#101016f5);border:1px solid #85745070;border-radius:3px;box-shadow:inset 0 1px #d8bc7830,0 12px 24px #0005}
+.app.in-game .gx-offer.kind-active{border-color:#986f6370;background:linear-gradient(150deg,#2d2429f5,#151015f5)}
+.app.in-game .gx-offer.kind-swap{border-color:#b89a6270;background:linear-gradient(150deg,#2c2922f5,#15130ff5)}
+.app.in-game .gx-offer .gx-offer-art{align-self:center;width:100%;height:150px;flex:none;filter:drop-shadow(0 7px 6px #0009);background:transparent;order:0}
+.app.in-game .gx-offer h3{font-family:var(--serif);font-size:20px;line-height:1.1;margin:3px 0 0;color:#e6d4b2;order:1}
+.app.in-game .gx-offer-top{order:2;gap:5px;min-height:26px;align-items:center}
+.gx-offer .kind-pill,.gx-offer .vis-pill{border-radius:2px;font-size:8px;letter-spacing:.4px;background:#0c0c1280}
+.gx-offer .kind-pill.kind-active{color:#cdaa9c;border-color:#986f63}.gx-offer .kind-pill.kind-passive{color:#bca9ce;border-color:#77678e}
+.gx-offer .vis-pill.vis-public{color:#ccaa9a;border-color:#946b5b}.gx-offer .vis-pill.vis-hinted{color:#c9b477;border-color:#9b864b}
+.app.in-game .gx-offer .gx-offer-text{order:3;line-height:1.45;color:#c5c1b5}
+.gx-offer-timing{order:4;color:#989588}.gx-offer-vis{order:5;border-top:1px solid #ac95622b;color:#b6afa1}
+.app.in-game .gx-offer footer{order:6;width:100%;padding-top:5px}
+.app.in-game .gx-buy{border-radius:2px;background:#b89c67;color:#18140d;border:1px solid #d2b57b;box-shadow:inset 0 1px #f7df9b50}
+.gx-buy:hover:not(:disabled){background:#d2b57b}
+.gx-slot{border-radius:3px;background:linear-gradient(145deg,#222229,#101014);border-color:#82714e77}
+.gx-slot.kind-passive{border-color:#796c9077}.gx-slot.kind-active{border-color:#9c766777}.gx-slot.kind-swap{border-color:#b4986677}
+.gx-slot.sel{box-shadow:0 0 0 1px #d6b778,inset 0 0 12px #d6b77812}
+.gx-slot.ready{animation:gx-ready-quiet 2.4s ease-in-out infinite}
+@keyframes gx-ready-quiet{50%{border-color:#d3b370;box-shadow:0 0 8px #c09d4228}}
+.gx-slot-kind{background:#10101599;border-radius:2px}
+.playing-card.mod-trapSuit{--mc:#947ac3;background:repeating-linear-gradient(135deg,#e4ddeb 0 7px,#d2c1de 7px 9px)}
+@media(max-height:780px){
+ .app.in-game .gx-offer{padding:9px 10px;gap:5px}
+ .app.in-game .gx-offer .gx-offer-art{height:105px}
+ .app.in-game .gx-offer h3{font-size:18px}
+ .app.in-game .gx-offer p.gx-offer-text{font-size:11px}
+}
+/* Keep purchases reachable while the short-screen market scrolls. */
+.app.in-game .gx-offer footer{position:sticky;bottom:0;z-index:2;background:#151218;padding-top:6px;box-shadow:0 -8px 12px #151218}
+.app.phase-market .gx-banner{display:none}

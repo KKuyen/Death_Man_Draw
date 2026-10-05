@@ -1,0 +1,22 @@
+appId: com.saloon.deadmansdraw
+productName: Dead Man's Draw
+directories:
+  output: release
+files:
+  - apps/desktop/main.cjs
+  - apps/desktop/preload.cjs
+  - package.json
+extraMetadata:
+  main: apps/desktop/main.cjs
+extraResources:
+  - from: apps/web/dist
+    to: web
+  - from: dist-bundle/server.mjs
+    to: server/server.mjs
+mac:
+  category: public.app-category.games
+  target: [dir]
+win:
+  target: [dir]
+linux:
+  target: [dir]

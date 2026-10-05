@@ -1,0 +1,54 @@
+INFO Draco mesh compression is available, use library at /Volumes/Blender 1/Blender.app/Contents/Resources/4.5/scripts/addons_core/io_scene_gltf2/libextern_draco.dylib
+21:54:09 | INFO: Starting glTF 2.0 export
+21:54:09 | INFO: Extracting primitive: prop_magic_card
+21:54:09 | INFO: Primitives created: 3
+21:54:09 | INFO: Finished glTF 2.0 export in 0.011578798294067383 s
+Blender 4.5.0 (hash 8cb6b388974a built 2025-07-15 01:35:28)
+Fra:1 Mem:78.43M (Peak 78.43M) | Time:00:00.69 | Rendering 1 / 64 samples
+Fra:1 Mem:78.72M (Peak 78.72M) | Time:00:00.71 | Rendering 25 / 64 samples
+Fra:1 Mem:78.67M (Peak 78.72M) | Time:00:00.98 | Rendering 50 / 64 samples
+Fra:1 Mem:78.80M (Peak 78.80M) | Time:00:00.99 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/cards-pixel-sheet-1.png'
+Time: 00:01.20 (Saving: 00:00.06)
+
+Fra:1 Mem:78.46M (Peak 78.73M) | Time:00:00.00 | Rendering 1 / 64 samples
+Fra:1 Mem:78.59M (Peak 78.73M) | Time:00:00.00 | Rendering 25 / 64 samples
+Fra:1 Mem:78.53M (Peak 78.73M) | Time:00:00.26 | Rendering 50 / 64 samples
+Fra:1 Mem:78.65M (Peak 78.73M) | Time:00:00.46 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/cards-pixel-sheet-2.png'
+Time: 00:00.59 (Saving: 00:00.11)
+
+Fra:1 Mem:61.41M (Peak 61.41M) | Time:00:00.00 | Rendering 1 / 64 samples
+Fra:1 Mem:61.60M (Peak 61.60M) | Time:00:00.00 | Rendering 25 / 64 samples
+Fra:1 Mem:61.54M (Peak 61.60M) | Time:00:00.15 | Rendering 50 / 64 samples
+Fra:1 Mem:61.66M (Peak 61.66M) | Time:00:00.15 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/cards-pixel-sheet-twins.png'
+Time: 00:00.28 (Saving: 00:00.02)
+
+Fra:1 Mem:69.71M (Peak 70.00M) | Time:00:00.00 | Rendering 1 / 64 samples
+Fra:1 Mem:69.65M (Peak 70.00M) | Time:00:00.00 | Rendering 25 / 64 samples
+Fra:1 Mem:69.59M (Peak 70.00M) | Time:00:00.19 | Rendering 50 / 64 samples
+Fra:1 Mem:69.71M (Peak 70.00M) | Time:00:00.19 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/cards-pixel-sheet-overlays.png'
+Time: 00:00.37 (Saving: 00:00.03)
+
+Fra:1 Mem:68.20M (Peak 68.20M) | Time:00:00.00 | Rendering 1 / 64 samples
+Fra:1 Mem:68.38M (Peak 68.38M) | Time:00:00.01 | Rendering 25 / 64 samples
+Fra:1 Mem:68.32M (Peak 68.38M) | Time:00:00.15 | Rendering 50 / 64 samples
+Fra:1 Mem:68.45M (Peak 68.45M) | Time:00:00.16 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/magic-card-front.png'
+Time: 00:00.32 (Saving: 00:00.04)
+
+Fra:1 Mem:68.45M (Peak 68.45M) | Time:00:00.00 | Rendering 1 / 64 samples
+Fra:1 Mem:68.38M (Peak 68.45M) | Time:00:00.00 | Rendering 25 / 64 samples
+Fra:1 Mem:68.38M (Peak 68.45M) | Time:00:00.16 | Rendering 50 / 64 samples
+Fra:1 Mem:68.20M (Peak 68.45M) | Time:00:00.28 | Rendering 64 / 64 samples
+Saved: '/Users/quyen.tran5/lairgame/assets/previews/cards-pixel/magic-card-back.png'
+Time: 00:00.37 (Saving: 00:00.08)
+
+
+Info: Saved as "magic_cards_pixel.blend"
+Info: Saved as "magic_cards_preview.blend"
+PIXEL_CARDS_OK: 22 faces, back, 6 overlays; GLB, packed blend sources and Blender previews
+
+Blender quit

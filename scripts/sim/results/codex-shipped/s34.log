@@ -1,0 +1,265 @@
+{
+ "config": {
+  "measurementVersion": 2,
+  "blindEveryHands": 16,
+  "blindGrowth": 1.5,
+  "priceGrowthPerLevel": 0.1,
+  "maxHands": 200
+ },
+ "seed": 34,
+ "catalog": [
+  {
+   "id": "N01",
+   "name": "Túi tiền",
+   "price": 70
+  },
+  {
+   "id": "N02",
+   "name": "Chống phá sản",
+   "price": 90
+  },
+  {
+   "id": "N03",
+   "name": "Kính lúp may",
+   "price": 80
+  },
+  {
+   "id": "N04",
+   "name": "Áo giáp bẫy",
+   "price": 65
+  },
+  {
+   "id": "N05",
+   "name": "Hạt giống vàng",
+   "price": 75
+  },
+  {
+   "id": "N06",
+   "name": "Áo phao",
+   "price": 55
+  },
+  {
+   "id": "N07",
+   "name": "Thầm lặng",
+   "price": 85
+  },
+  {
+   "id": "N08",
+   "name": "Bài giả",
+   "price": 70
+  },
+  {
+   "id": "N09",
+   "name": "Màn sương",
+   "price": 50
+  },
+  {
+   "id": "K01",
+   "name": "Lá soi",
+   "price": 100
+  },
+  {
+   "id": "K10",
+   "name": "Lá soi phép",
+   "price": 60
+  },
+  {
+   "id": "K02",
+   "name": "Ép lộ bài",
+   "price": 110
+  },
+  {
+   "id": "K03",
+   "name": "Đổi bài chung",
+   "price": 90
+  },
+  {
+   "id": "K04",
+   "name": "Nâng buff",
+   "price": 80
+  },
+  {
+   "id": "K05",
+   "name": "Phá bẫy",
+   "price": 45
+  },
+  {
+   "id": "K06",
+   "name": "Làm mới chợ",
+   "price": 30
+  },
+  {
+   "id": "K07",
+   "name": "Quả cầu soi",
+   "price": 70
+  },
+  {
+   "id": "K08",
+   "name": "Bùa bẫy",
+   "price": 90
+  },
+  {
+   "id": "K09",
+   "name": "Mồi nhử",
+   "price": 40
+  },
+  {
+   "id": "X01",
+   "name": "Bộ Hoàng gia",
+   "price": 110
+  },
+  {
+   "id": "X02",
+   "name": "Bộ Muôn sắc",
+   "price": 95
+  },
+  {
+   "id": "X03",
+   "name": "Bộ Cược mù",
+   "price": 60
+  }
+ ],
+ "games": 400,
+ "finished": 400,
+ "capped": 0,
+ "violations": 0,
+ "seconds": 662,
+ "handsMean": 25,
+ "handsP10": 5,
+ "handsMedian": 20,
+ "handsP90": 50,
+ "winRateByPolicy": {
+  "all": 0.145,
+  "cheap": 0.245,
+  "none": 0.338,
+  "smart": 0.273
+ },
+ "winsByPolicy": {
+  "smart": 109,
+  "none": 135,
+  "cheap": 98,
+  "all": 58
+ },
+ "seatsPerPolicy": {
+  "all": 400,
+  "cheap": 400,
+  "none": 400,
+  "smart": 400
+ },
+ "burnedPerPlayerPerHandAsFractionOfStartWallet": 0.031,
+ "rescues": 232,
+ "publicMagicEvents": 786,
+ "usage": {
+  "N01": {
+   "bought": 449,
+   "used": 0,
+   "heldHands": 6997
+  },
+  "N02": {
+   "bought": 334,
+   "used": 0,
+   "heldHands": 4684
+  },
+  "N03": {
+   "bought": 476,
+   "used": 0,
+   "heldHands": 6036
+  },
+  "N04": {
+   "bought": 853,
+   "used": 0,
+   "heldHands": 8439
+  },
+  "N05": {
+   "bought": 469,
+   "used": 0,
+   "heldHands": 6253
+  },
+  "N06": {
+   "bought": 885,
+   "used": 0,
+   "heldHands": 9926
+  },
+  "N07": {
+   "bought": 149,
+   "used": 0,
+   "heldHands": 446
+  },
+  "N08": {
+   "bought": 138,
+   "used": 0,
+   "heldHands": 374
+  },
+  "N09": {
+   "bought": 363,
+   "used": 0,
+   "heldHands": 1977
+  },
+  "K01": {
+   "bought": 72,
+   "used": 69,
+   "heldHands": 73
+  },
+  "K10": {
+   "bought": 465,
+   "used": 449,
+   "heldHands": 528
+  },
+  "K02": {
+   "bought": 53,
+   "used": 42,
+   "heldHands": 59
+  },
+  "K03": {
+   "bought": 151,
+   "used": 100,
+   "heldHands": 242
+  },
+  "K04": {
+   "bought": 1169,
+   "used": 1160,
+   "heldHands": 1211
+  },
+  "K05": {
+   "bought": 1517,
+   "used": 628,
+   "heldHands": 10633
+  },
+  "K06": {
+   "bought": 750,
+   "used": 545,
+   "heldHands": 1432
+  },
+  "K07": {
+   "bought": 213,
+   "used": 210,
+   "heldHands": 216
+  },
+  "K08": {
+   "bought": 147,
+   "used": 147,
+   "heldHands": 147
+  },
+  "K09": {
+   "bought": 590,
+   "used": 434,
+   "heldHands": 928
+  },
+  "X01": {
+   "bought": 599,
+   "used": 589,
+   "heldHands": 705
+  },
+  "X02": {
+   "bought": 1159,
+   "used": 1084,
+   "heldHands": 2263
+  },
+  "X03": {
+   "bought": 1482,
+   "used": 872,
+   "heldHands": 7798
+  }
+ }
+}
+CARDSTUDY [{"id":"N01","name":"Túi tiền","price":70,"bought":449,"used":0,"heldHands":6997,"usedPerBuy":0,"holders":127,"winDeltaPts":-2.4,"seDelta":3.6,"realisedChipsPerBuy":142.6,"flags":""},{"id":"N02","name":"Chống phá sản","price":90,"bought":334,"used":0,"heldHands":4684,"usedPerBuy":0,"holders":70,"winDeltaPts":-7.9,"seDelta":4.5,"realisedChipsPerBuy":62.9,"flags":"delta>5(noisy)"},{"id":"N03","name":"Kính lúp may","price":80,"bought":476,"used":0,"heldHands":6036,"usedPerBuy":0,"holders":137,"winDeltaPts":-0.9,"seDelta":3.7,"realisedChipsPerBuy":null,"flags":""},{"id":"N04","name":"Áo giáp bẫy","price":65,"bought":853,"used":0,"heldHands":8439,"usedPerBuy":0,"holders":252,"winDeltaPts":6.2,"seDelta":3,"realisedChipsPerBuy":null,"flags":"DELTA>5"},{"id":"N05","name":"Hạt giống vàng","price":75,"bought":469,"used":0,"heldHands":6253,"usedPerBuy":0,"holders":126,"winDeltaPts":-1.8,"seDelta":3.8,"realisedChipsPerBuy":null,"flags":""},{"id":"N06","name":"Áo phao","price":55,"bought":885,"used":0,"heldHands":9926,"usedPerBuy":0,"holders":278,"winDeltaPts":2.9,"seDelta":2.9,"realisedChipsPerBuy":51.8,"flags":""},{"id":"N07","name":"Thầm lặng","price":85,"bought":149,"used":0,"heldHands":446,"usedPerBuy":0,"holders":72,"winDeltaPts":-2.4,"seDelta":4.4,"realisedChipsPerBuy":null,"flags":""},{"id":"N08","name":"Bài giả","price":70,"bought":138,"used":0,"heldHands":374,"usedPerBuy":0,"holders":64,"winDeltaPts":-0.5,"seDelta":4.8,"realisedChipsPerBuy":null,"flags":""},{"id":"N09","name":"Màn sương","price":50,"bought":363,"used":0,"heldHands":1977,"usedPerBuy":0,"holders":138,"winDeltaPts":3.5,"seDelta":3.9,"realisedChipsPerBuy":null,"flags":""},{"id":"K01","name":"Lá soi","price":100,"bought":72,"used":69,"heldHands":73,"usedPerBuy":0.96,"holders":33,"winDeltaPts":-2.6,"seDelta":6,"realisedChipsPerBuy":null,"flags":""},{"id":"K10","name":"Lá soi phép","price":60,"bought":465,"used":449,"heldHands":528,"usedPerBuy":0.97,"holders":147,"winDeltaPts":6.2,"seDelta":3.8,"realisedChipsPerBuy":null,"flags":"delta>5(noisy)"},{"id":"K02","name":"Ép lộ bài","price":110,"bought":53,"used":42,"heldHands":59,"usedPerBuy":0.79,"holders":34,"winDeltaPts":3.4,"seDelta":6.8,"realisedChipsPerBuy":null,"flags":""},{"id":"K03","name":"Đổi bài chung","price":90,"bought":151,"used":100,"heldHands":242,"usedPerBuy":0.66,"holders":74,"winDeltaPts":-4.5,"seDelta":4.1,"realisedChipsPerBuy":null,"flags":""},{"id":"K04","name":"Nâng buff","price":80,"bought":1169,"used":1160,"heldHands":1211,"usedPerBuy":0.99,"holders":143,"winDeltaPts":0,"seDelta":3.6,"realisedChipsPerBuy":null,"flags":""},{"id":"K05","name":"Phá bẫy","price":45,"bought":1517,"used":628,"heldHands":10633,"usedPerBuy":0.41,"holders":288,"winDeltaPts":-3.3,"seDelta":2.7,"realisedChipsPerBuy":null,"flags":""},{"id":"K06","name":"Làm mới chợ","price":30,"bought":750,"used":545,"heldHands":1432,"usedPerBuy":0.73,"holders":213,"winDeltaPts":-4,"seDelta":3,"realisedChipsPerBuy":null,"flags":""},{"id":"K07","name":"Quả cầu soi","price":70,"bought":213,"used":210,"heldHands":216,"usedPerBuy":0.99,"holders":93,"winDeltaPts":0.7,"seDelta":4.2,"realisedChipsPerBuy":null,"flags":""},{"id":"K08","name":"Bùa bẫy","price":90,"bought":147,"used":147,"heldHands":147,"usedPerBuy":1,"holders":74,"winDeltaPts":-1.2,"seDelta":4.4,"realisedChipsPerBuy":null,"flags":""},{"id":"K09","name":"Mồi nhử","price":40,"bought":590,"used":434,"heldHands":928,"usedPerBuy":0.74,"holders":197,"winDeltaPts":0.5,"seDelta":3.3,"realisedChipsPerBuy":null,"flags":""},{"id":"X01","name":"Bộ Hoàng gia","price":110,"bought":599,"used":589,"heldHands":705,"usedPerBuy":0.98,"holders":78,"winDeltaPts":1.5,"seDelta":5,"realisedChipsPerBuy":null,"flags":""},{"id":"X02","name":"Bộ Muôn sắc","price":95,"bought":1159,"used":1084,"heldHands":2263,"usedPerBuy":0.94,"holders":136,"winDeltaPts":6,"seDelta":4,"realisedChipsPerBuy":null,"flags":"delta>5(noisy)"},{"id":"X03","name":"Bộ Cược mù","price":60,"bought":1482,"used":872,"heldHands":7798,"usedPerBuy":0.59,"holders":281,"winDeltaPts":1.6,"seDelta":2.8,"realisedChipsPerBuy":null,"flags":""}]

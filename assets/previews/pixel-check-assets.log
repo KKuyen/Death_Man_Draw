@@ -1,0 +1,6 @@
+
+> dead-mans-draw@0.1.0 check:assets
+> node scripts/check-assets.mjs
+
+check:assets manifest entries=19, glb files in public/models=20
+check:assets OK

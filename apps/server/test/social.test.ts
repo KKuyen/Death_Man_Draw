@@ -1,0 +1,4 @@
+import {it,expect} from 'vitest';
+import {cleanChat,cleanSignal} from '../src/social';
+it('chat rejects nontext, empty and oversized input; HTML stays plain text',()=>{expect(cleanChat('  hello\nworld  ')).toBe('hello world');expect(cleanChat('<script>x</script>')).toBe('<script>x</script>');for(const input of [null,{},'', ' '.repeat(5),'a'.repeat(301)])expect(cleanChat(input)).toBeNull();});
+it('voice accepts only bounded SDP/candidates and strips forged sender identity',()=>{expect(cleanSignal({toPlayerId:'b',fromPlayerId:'forged',description:{type:'offer',sdp:'m=audio'}})).toEqual({toPlayerId:'b',description:{type:'offer',sdp:'m=audio'}});for(const x of [{toPlayerId:'b',description:{type:'offer',sdp:'m=video'}},{toPlayerId:'b',description:{type:'rollback',sdp:''}},{toPlayerId:'b',candidate:{candidate:'x',sdpMLineIndex:-1}},{toPlayerId:'b',description:{type:'answer',sdp:'x'.repeat(16001)}}])expect(cleanSignal(x)).toBeNull();});

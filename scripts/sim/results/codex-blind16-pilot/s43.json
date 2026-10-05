@@ -1,0 +1,266 @@
+{
+ "summary": {
+  "config": {
+   "blindEveryHands": 16,
+   "blindGrowth": 1.5,
+   "priceGrowthPerLevel": 0.1,
+   "maxHands": 200
+  },
+  "seed": 43,
+  "catalog": [
+   {
+    "id": "N01",
+    "name": "Túi tiền",
+    "price": 70
+   },
+   {
+    "id": "N02",
+    "name": "Chống phá sản",
+    "price": 90
+   },
+   {
+    "id": "N03",
+    "name": "Kính lúp may",
+    "price": 80
+   },
+   {
+    "id": "N04",
+    "name": "Áo giáp bẫy",
+    "price": 65
+   },
+   {
+    "id": "N05",
+    "name": "Hạt giống vàng",
+    "price": 75
+   },
+   {
+    "id": "N06",
+    "name": "Áo phao",
+    "price": 55
+   },
+   {
+    "id": "N07",
+    "name": "Thầm lặng",
+    "price": 85
+   },
+   {
+    "id": "N08",
+    "name": "Bài giả",
+    "price": 70
+   },
+   {
+    "id": "N09",
+    "name": "Màn sương",
+    "price": 50
+   },
+   {
+    "id": "K01",
+    "name": "Lá soi",
+    "price": 100
+   },
+   {
+    "id": "K10",
+    "name": "Lá soi phép",
+    "price": 60
+   },
+   {
+    "id": "K02",
+    "name": "Ép lộ bài",
+    "price": 110
+   },
+   {
+    "id": "K03",
+    "name": "Đổi bài chung",
+    "price": 90
+   },
+   {
+    "id": "K04",
+    "name": "Nâng buff",
+    "price": 80
+   },
+   {
+    "id": "K05",
+    "name": "Phá bẫy",
+    "price": 45
+   },
+   {
+    "id": "K06",
+    "name": "Làm mới chợ",
+    "price": 30
+   },
+   {
+    "id": "K07",
+    "name": "Quả cầu soi",
+    "price": 70
+   },
+   {
+    "id": "K08",
+    "name": "Bùa bẫy",
+    "price": 90
+   },
+   {
+    "id": "K09",
+    "name": "Mồi nhử",
+    "price": 40
+   },
+   {
+    "id": "X01",
+    "name": "Bộ Hoàng gia",
+    "price": 110
+   },
+   {
+    "id": "X02",
+    "name": "Bộ Muôn sắc",
+    "price": 95
+   },
+   {
+    "id": "X03",
+    "name": "Bộ Cược mù",
+    "price": 60
+   }
+  ],
+  "games": 50,
+  "finished": 50,
+  "capped": 0,
+  "violations": 0,
+  "seconds": 70,
+  "handsMean": 27.1,
+  "handsP10": 8,
+  "handsMedian": 25,
+  "handsP90": 52,
+  "winRateByPolicy": {
+   "all": 0.18,
+   "cheap": 0.2,
+   "none": 0.36,
+   "smart": 0.26
+  },
+  "winsByPolicy": {
+   "all": 9,
+   "none": 18,
+   "smart": 13,
+   "cheap": 10
+  },
+  "seatsPerPolicy": {
+   "all": 50,
+   "cheap": 50,
+   "none": 50,
+   "smart": 50
+  },
+  "burnedPerPlayerPerHandAsFractionOfStartWallet": 0.03,
+  "rescues": 41,
+  "publicMagicEvents": 106,
+  "usage": {
+   "N01": {
+    "bought": 67,
+    "used": 0,
+    "heldHands": 1094
+   },
+   "N02": {
+    "bought": 57,
+    "used": 0,
+    "heldHands": 693
+   },
+   "N03": {
+    "bought": 61,
+    "used": 0,
+    "heldHands": 1000
+   },
+   "N04": {
+    "bought": 120,
+    "used": 0,
+    "heldHands": 1188
+   },
+   "N05": {
+    "bought": 65,
+    "used": 0,
+    "heldHands": 871
+   },
+   "N06": {
+    "bought": 115,
+    "used": 0,
+    "heldHands": 1374
+   },
+   "N07": {
+    "bought": 15,
+    "used": 0,
+    "heldHands": 49
+   },
+   "N08": {
+    "bought": 22,
+    "used": 0,
+    "heldHands": 64
+   },
+   "N09": {
+    "bought": 52,
+    "used": 0,
+    "heldHands": 222
+   },
+   "K01": {
+    "bought": 0,
+    "used": 0,
+    "heldHands": 0
+   },
+   "K10": {
+    "bought": 56,
+    "used": 55,
+    "heldHands": 59
+   },
+   "K02": {
+    "bought": 5,
+    "used": 4,
+    "heldHands": 5
+   },
+   "K03": {
+    "bought": 16,
+    "used": 12,
+    "heldHands": 25
+   },
+   "K04": {
+    "bought": 162,
+    "used": 162,
+    "heldHands": 167
+   },
+   "K05": {
+    "bought": 220,
+    "used": 84,
+    "heldHands": 1582
+   },
+   "K06": {
+    "bought": 95,
+    "used": 76,
+    "heldHands": 192
+   },
+   "K07": {
+    "bought": 36,
+    "used": 36,
+    "heldHands": 36
+   },
+   "K08": {
+    "bought": 20,
+    "used": 20,
+    "heldHands": 20
+   },
+   "K09": {
+    "bought": 81,
+    "used": 49,
+    "heldHands": 116
+   },
+   "X01": {
+    "bought": 91,
+    "used": 90,
+    "heldHands": 115
+   },
+   "X02": {
+    "bought": 161,
+    "used": 153,
+    "heldHands": 308
+   },
+   "X03": {
+    "bought": 171,
+    "used": 112,
+    "heldHands": 987
+   }
+  }
+ },
+ "violations": []
+}

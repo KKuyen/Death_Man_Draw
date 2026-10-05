@@ -1,0 +1,64 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * *'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run bundle:server
+      - run: npm run check:assets
+  e2e-fast:
+    runs-on: ubuntu-latest
+    needs: verify
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build -w @saloon/web
+      - run: npm run test:e2e:fast
+        env: { E2E_PREVIEW: '1' }
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: playwright-fast, path: test-results }
+  # Full Bài Phép multiplayer/bot specs (needs the real server). Slow: nightly + manual only.
+  e2e-full:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build -w @saloon/web
+      - run: npm run bundle:server
+      - run: |
+          CORS_ORIGIN=http://localhost:5199 node dist-bundle/server.mjs &
+          for i in $(seq 1 30); do curl -sf localhost:2567/health && break; sleep 1; done
+          npm run test:e2e:full
+        env: { E2E_PREVIEW: '1' }
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with: { name: playwright-full, path: test-results }
+  docker:
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f infra/Dockerfile --target server -t saloon-server .
+      - run: docker build -f infra/Dockerfile --target web -t saloon-web .

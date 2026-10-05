@@ -1,0 +1,163 @@
+{
+  "style": "wordless-antique-engraved-pixel-art",
+  "nativeSize": [
+    64,
+    88
+  ],
+  "size": [
+    256,
+    352
+  ],
+  "scale": 4,
+  "sampling": "NEAREST",
+  "authoring": "Blender bpy deterministic grid; scripts/blender/pixel_cards.py + arcane_finish.py",
+  "cards": [
+    {
+      "id": "N01",
+      "file": "N01.png",
+      "plain": "plain/N01.png"
+    },
+    {
+      "id": "N02",
+      "file": "N02.png",
+      "plain": "plain/N02.png"
+    },
+    {
+      "id": "N03",
+      "file": "N03.png",
+      "plain": "plain/N03.png"
+    },
+    {
+      "id": "N04",
+      "file": "N04.png",
+      "plain": "plain/N04.png"
+    },
+    {
+      "id": "N05",
+      "file": "N05.png",
+      "plain": "plain/N05.png"
+    },
+    {
+      "id": "N06",
+      "file": "N06.png",
+      "plain": "plain/N06.png"
+    },
+    {
+      "id": "N07",
+      "file": "N07.png",
+      "plain": "plain/N07.png"
+    },
+    {
+      "id": "N08",
+      "file": "N08.png",
+      "plain": "plain/N08.png"
+    },
+    {
+      "id": "N09",
+      "file": "N09.png",
+      "plain": "plain/N09.png"
+    },
+    {
+      "id": "K01",
+      "file": "K01.png",
+      "plain": "plain/K01.png"
+    },
+    {
+      "id": "K02",
+      "file": "K02.png",
+      "plain": "plain/K02.png"
+    },
+    {
+      "id": "K03",
+      "file": "K03.png",
+      "plain": "plain/K03.png"
+    },
+    {
+      "id": "K04",
+      "file": "K04.png",
+      "plain": "plain/K04.png"
+    },
+    {
+      "id": "K05",
+      "file": "K05.png",
+      "plain": "plain/K05.png"
+    },
+    {
+      "id": "K07",
+      "file": "K07.png",
+      "plain": "plain/K07.png"
+    },
+    {
+      "id": "K08",
+      "file": "K08.png",
+      "plain": "plain/K08.png"
+    },
+    {
+      "id": "K09",
+      "file": "K09.png",
+      "plain": "plain/K09.png"
+    },
+    {
+      "id": "K10",
+      "file": "K10.png",
+      "plain": "plain/K10.png"
+    },
+    {
+      "id": "K11",
+      "file": "K11.png",
+      "plain": "plain/K11.png"
+    },
+    {
+      "id": "K12",
+      "file": "K12.png",
+      "plain": "plain/K12.png"
+    },
+    {
+      "id": "K13",
+      "file": "K13.png",
+      "plain": "plain/K13.png"
+    },
+    {
+      "id": "X01",
+      "file": "X01.png",
+      "plain": "plain/X01.png"
+    },
+    {
+      "id": "X02",
+      "file": "X02.png",
+      "plain": "plain/X02.png"
+    },
+    {
+      "id": "X03",
+      "file": "X03.png",
+      "plain": "plain/X03.png"
+    }
+  ],
+  "back": "back.png",
+  "overlays": {
+    "gold": {
+      "file": "overlays/gold.png",
+      "badge": "badges/gold.png"
+    },
+    "wild": {
+      "file": "overlays/wild.png",
+      "badge": "badges/wild.png"
+    },
+    "lucky": {
+      "file": "overlays/lucky.png",
+      "badge": "badges/lucky.png"
+    },
+    "trapRank": {
+      "file": "overlays/trapRank.png",
+      "badge": "badges/trapRank.png"
+    },
+    "trapSuit": {
+      "file": "overlays/trapSuit.png",
+      "badge": "badges/trapSuit.png"
+    },
+    "cursed": {
+      "file": "overlays/cursed.png",
+      "badge": "badges/cursed.png"
+    }
+  }
+}

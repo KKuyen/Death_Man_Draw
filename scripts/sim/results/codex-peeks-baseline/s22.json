@@ -1,0 +1,244 @@
+{
+ "summary": {
+  "config": {
+   "blindEveryHands": 14,
+   "blindGrowth": 1.5,
+   "priceGrowthPerLevel": 0.1,
+   "maxHands": 200
+  },
+  "seed": 22,
+  "catalog": [
+   {
+    "id": "N01",
+    "name": "Túi tiền",
+    "price": 70
+   },
+   {
+    "id": "N02",
+    "name": "Chống phá sản",
+    "price": 90
+   },
+   {
+    "id": "N03",
+    "name": "Kính lúp may",
+    "price": 80
+   },
+   {
+    "id": "N04",
+    "name": "Áo giáp bẫy",
+    "price": 65
+   },
+   {
+    "id": "N05",
+    "name": "Hạt giống vàng",
+    "price": 75
+   },
+   {
+    "id": "N06",
+    "name": "Áo phao",
+    "price": 55
+   },
+   {
+    "id": "N07",
+    "name": "Thầm lặng",
+    "price": 85
+   },
+   {
+    "id": "N08",
+    "name": "Bài giả",
+    "price": 70
+   },
+   {
+    "id": "N09",
+    "name": "Màn sương",
+    "price": 50
+   },
+   {
+    "id": "K01",
+    "name": "Lá soi",
+    "price": 100
+   },
+   {
+    "id": "K10",
+    "name": "Lá soi phép",
+    "price": 60
+   },
+   {
+    "id": "K02",
+    "name": "Ép lộ bài",
+    "price": 110
+   },
+   {
+    "id": "K03",
+    "name": "Đổi bài chung",
+    "price": 90
+   },
+   {
+    "id": "K04",
+    "name": "Nâng buff",
+    "price": 80
+   },
+   {
+    "id": "K05",
+    "name": "Phá bẫy",
+    "price": 45
+   },
+   {
+    "id": "K06",
+    "name": "Làm mới chợ",
+    "price": 30
+   },
+   {
+    "id": "K07",
+    "name": "Quả cầu soi",
+    "price": 70
+   },
+   {
+    "id": "K08",
+    "name": "Bùa bẫy",
+    "price": 90
+   },
+   {
+    "id": "K09",
+    "name": "Mồi nhử",
+    "price": 40
+   },
+   {
+    "id": "X01",
+    "name": "Bộ Hoàng gia",
+    "price": 110
+   },
+   {
+    "id": "X02",
+    "name": "Bộ Muôn sắc",
+    "price": 95
+   },
+   {
+    "id": "X03",
+    "name": "Bộ Cược mù",
+    "price": 60
+   }
+  ],
+  "games": 200,
+  "finished": 200,
+  "capped": 0,
+  "violations": 0,
+  "seconds": 182,
+  "handsMean": 24.8,
+  "handsP10": 7,
+  "handsMedian": 22,
+  "handsP90": 51,
+  "winRateByPolicy": {
+   "all": 0.11,
+   "cheap": 0.235,
+   "none": 0.36,
+   "smart": 0.295
+  },
+  "winsByPolicy": {
+   "smart": 59,
+   "cheap": 47,
+   "none": 72,
+   "all": 22
+  },
+  "seatsPerPolicy": {
+   "all": 200,
+   "cheap": 200,
+   "none": 200,
+   "smart": 200
+  },
+  "burnedPerPlayerPerHandAsFractionOfStartWallet": 0.03,
+  "rescues": 129,
+  "publicMagicEvents": 374,
+  "usage": {
+   "N01": {
+    "bought": 215,
+    "used": 0
+   },
+   "N02": {
+    "bought": 180,
+    "used": 0
+   },
+   "N03": {
+    "bought": 235,
+    "used": 0
+   },
+   "N04": {
+    "bought": 461,
+    "used": 0
+   },
+   "N05": {
+    "bought": 233,
+    "used": 0
+   },
+   "N06": {
+    "bought": 431,
+    "used": 0
+   },
+   "N07": {
+    "bought": 67,
+    "used": 0
+   },
+   "N08": {
+    "bought": 64,
+    "used": 0
+   },
+   "N09": {
+    "bought": 155,
+    "used": 0
+   },
+   "K01": {
+    "bought": 44,
+    "used": 44
+   },
+   "K10": {
+    "bought": 198,
+    "used": 188
+   },
+   "K02": {
+    "bought": 27,
+    "used": 22
+   },
+   "K03": {
+    "bought": 61,
+    "used": 40
+   },
+   "K04": {
+    "bought": 608,
+    "used": 604
+   },
+   "K05": {
+    "bought": 752,
+    "used": 270
+   },
+   "K06": {
+    "bought": 331,
+    "used": 238
+   },
+   "K07": {
+    "bought": 101,
+    "used": 101
+   },
+   "K08": {
+    "bought": 64,
+    "used": 64
+   },
+   "K09": {
+    "bought": 271,
+    "used": 191
+   },
+   "X01": {
+    "bought": 296,
+    "used": 291
+   },
+   "X02": {
+    "bought": 632,
+    "used": 588
+   },
+   "X03": {
+    "bought": 772,
+    "used": 452
+   }
+  }
+ },
+ "violations": []
+}

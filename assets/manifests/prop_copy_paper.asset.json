@@ -1,0 +1,43 @@
+{
+  "assetId": "prop_copy_paper",
+  "assetVersion": "1.0.0",
+  "contractVersion": "1.0.0",
+  "source": "assets/blender/props/prop_gameplay_set.blend",
+  "file": "public/models/props/copy_paper.glb",
+  "blenderVersion": "4.5.0",
+  "exporter": "Blender bundled Khronos glTF 2.0",
+  "units": "meters",
+  "sourceUp": "+Z",
+  "sourceForward": "-Y",
+  "exportedUp": "+Y",
+  "exportedForward": "+Z",
+  "engineHandedness": "right",
+  "sourceRoot": [
+    0,
+    0,
+    0
+  ],
+  "provenance": "Original geometry authored by scripts/blender/generate.py; no third-party art.",
+  "statistics": {
+    "bytes": 1408,
+    "triangles": 12,
+    "vertices": 8,
+    "meshes": 1,
+    "nodes": 1,
+    "materials": 1,
+    "textures": 0,
+    "skins": 0,
+    "primitives": 1
+  },
+  "lods": [
+    "LOD0"
+  ],
+  "textures": "None; portable Principled PBR colors",
+  "contentIds": [
+    "I06",
+    "T06"
+  ],
+  "notes": [
+    "Shared prop centered at origin; attach to a runtime socket."
+  ]
+}

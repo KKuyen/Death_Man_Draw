@@ -1,0 +1,1492 @@
+{
+  "passed": true,
+  "blenderVersion": "4.5.0",
+  "results": [
+    {
+      "file": "public/models/characters/badger.glb",
+      "meshes": 32,
+      "armatures": 1,
+      "bones": 51,
+      "modularSkinChecks": [
+        {
+          "node": "finger_thumb_l_real",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_cap",
+          "influencingBones": [
+            "finger_thumb_01_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_real",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_prosthetic",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_cap",
+          "influencingBones": [
+            "finger_index_01_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_real",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_cap",
+          "influencingBones": [
+            "finger_middle_01_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_real",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_cap",
+          "influencingBones": [
+            "finger_ring_01_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_real",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_cap",
+          "influencingBones": [
+            "finger_pinky_01_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_real",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_cap",
+          "influencingBones": [
+            "finger_thumb_01_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_real",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_prosthetic",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_cap",
+          "influencingBones": [
+            "finger_index_01_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_real",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_cap",
+          "influencingBones": [
+            "finger_middle_01_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_real",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_cap",
+          "influencingBones": [
+            "finger_ring_01_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_real",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_cap",
+          "influencingBones": [
+            "finger_pinky_01_r"
+          ]
+        }
+      ],
+      "sockets": {
+        "socket_eye": [
+          6.92502810650808e-09,
+          -0.1549101024866104,
+          1.3300845623016357
+        ],
+        "socket_card_l": [
+          -0.2588665187358856,
+          -0.5999941825866699,
+          0.889963686466217
+        ],
+        "socket_card_r": [
+          0.2597692012786865,
+          -0.6001636981964111,
+          0.8898911476135254
+        ]
+      },
+      "actions": [
+        "accuse",
+        "accuse_wrong_react",
+        "accused_react",
+        "copy_mark",
+        "cover_cards",
+        "eliminated",
+        "fit_prosthetic",
+        "flip_coin",
+        "fold_cards",
+        "idle_seated",
+        "look_cards",
+        "look_left",
+        "look_right",
+        "lose_react",
+        "mark_contact",
+        "mark_interrupt",
+        "mark_prepare",
+        "mark_recover",
+        "mirror_hold",
+        "mirror_prepare",
+        "mirror_recover",
+        "place_bet",
+        "receive_item",
+        "sell_item",
+        "show_hand",
+        "sleeve_finish",
+        "sleeve_fumble",
+        "sleeve_hold",
+        "sleeve_prepare",
+        "sleeve_two_finish",
+        "sleeve_two_hold",
+        "sleeve_two_prepare",
+        "tap_joint",
+        "win_react",
+        "wipe_mark"
+      ]
+    },
+    {
+      "file": "public/models/characters/coyote.glb",
+      "meshes": 32,
+      "armatures": 1,
+      "bones": 51,
+      "modularSkinChecks": [
+        {
+          "node": "finger_thumb_l_real",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_cap",
+          "influencingBones": [
+            "finger_thumb_01_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_real",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_prosthetic",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_cap",
+          "influencingBones": [
+            "finger_index_01_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_real",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_cap",
+          "influencingBones": [
+            "finger_middle_01_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_real",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_cap",
+          "influencingBones": [
+            "finger_ring_01_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_real",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_cap",
+          "influencingBones": [
+            "finger_pinky_01_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_real",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_cap",
+          "influencingBones": [
+            "finger_thumb_01_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_real",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_prosthetic",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_cap",
+          "influencingBones": [
+            "finger_index_01_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_real",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_cap",
+          "influencingBones": [
+            "finger_middle_01_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_real",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_cap",
+          "influencingBones": [
+            "finger_ring_01_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_real",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_cap",
+          "influencingBones": [
+            "finger_pinky_01_r"
+          ]
+        }
+      ],
+      "sockets": {
+        "socket_eye": [
+          6.92502810650808e-09,
+          -0.1549101024866104,
+          1.3300845623016357
+        ],
+        "socket_card_l": [
+          -0.2588665187358856,
+          -0.5999941825866699,
+          0.889963686466217
+        ],
+        "socket_card_r": [
+          0.2597692012786865,
+          -0.6001636981964111,
+          0.8898911476135254
+        ]
+      },
+      "actions": [
+        "accuse",
+        "accuse_wrong_react",
+        "accused_react",
+        "copy_mark",
+        "cover_cards",
+        "eliminated",
+        "fit_prosthetic",
+        "flip_coin",
+        "fold_cards",
+        "idle_seated",
+        "look_cards",
+        "look_left",
+        "look_right",
+        "lose_react",
+        "mark_contact",
+        "mark_interrupt",
+        "mark_prepare",
+        "mark_recover",
+        "mirror_hold",
+        "mirror_prepare",
+        "mirror_recover",
+        "place_bet",
+        "receive_item",
+        "sell_item",
+        "show_hand",
+        "sleeve_finish",
+        "sleeve_fumble",
+        "sleeve_hold",
+        "sleeve_prepare",
+        "sleeve_two_finish",
+        "sleeve_two_hold",
+        "sleeve_two_prepare",
+        "tap_joint",
+        "win_react",
+        "wipe_mark"
+      ]
+    },
+    {
+      "file": "public/models/characters/dealer.glb",
+      "meshes": 32,
+      "armatures": 1,
+      "bones": 51,
+      "modularSkinChecks": [
+        {
+          "node": "finger_thumb_l_real",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_cap",
+          "influencingBones": [
+            "finger_thumb_01_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_real",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_prosthetic",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_cap",
+          "influencingBones": [
+            "finger_index_01_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_real",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_cap",
+          "influencingBones": [
+            "finger_middle_01_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_real",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_cap",
+          "influencingBones": [
+            "finger_ring_01_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_real",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_cap",
+          "influencingBones": [
+            "finger_pinky_01_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_real",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_cap",
+          "influencingBones": [
+            "finger_thumb_01_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_real",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_prosthetic",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_cap",
+          "influencingBones": [
+            "finger_index_01_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_real",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_cap",
+          "influencingBones": [
+            "finger_middle_01_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_real",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_cap",
+          "influencingBones": [
+            "finger_ring_01_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_real",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_cap",
+          "influencingBones": [
+            "finger_pinky_01_r"
+          ]
+        }
+      ],
+      "sockets": {
+        "socket_eye": [
+          6.92502810650808e-09,
+          -0.1549101024866104,
+          1.3300845623016357
+        ],
+        "socket_card_l": [
+          -0.2588665187358856,
+          -0.5999941825866699,
+          0.889963686466217
+        ],
+        "socket_card_r": [
+          0.2597692012786865,
+          -0.6001636981964111,
+          0.8898911476135254
+        ]
+      },
+      "actions": [
+        "accuse",
+        "accuse_wrong_react",
+        "accused_react",
+        "copy_mark",
+        "cover_cards",
+        "dealer_cut",
+        "dealer_deal",
+        "dealer_distract",
+        "dealer_idle",
+        "dealer_reveal",
+        "dealer_signal",
+        "eliminated",
+        "fit_prosthetic",
+        "flip_coin",
+        "fold_cards",
+        "idle_seated",
+        "look_cards",
+        "look_left",
+        "look_right",
+        "lose_react",
+        "mark_contact",
+        "mark_interrupt",
+        "mark_prepare",
+        "mark_recover",
+        "mirror_hold",
+        "mirror_prepare",
+        "mirror_recover",
+        "place_bet",
+        "receive_item",
+        "sell_item",
+        "show_hand",
+        "sleeve_finish",
+        "sleeve_fumble",
+        "sleeve_hold",
+        "sleeve_prepare",
+        "sleeve_two_finish",
+        "sleeve_two_hold",
+        "sleeve_two_prepare",
+        "tap_joint",
+        "win_react",
+        "wipe_mark"
+      ]
+    },
+    {
+      "file": "public/models/characters/lynx.glb",
+      "meshes": 32,
+      "armatures": 1,
+      "bones": 51,
+      "modularSkinChecks": [
+        {
+          "node": "finger_thumb_l_real",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_cap",
+          "influencingBones": [
+            "finger_thumb_01_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_real",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_prosthetic",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_cap",
+          "influencingBones": [
+            "finger_index_01_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_real",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_cap",
+          "influencingBones": [
+            "finger_middle_01_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_real",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_cap",
+          "influencingBones": [
+            "finger_ring_01_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_real",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_cap",
+          "influencingBones": [
+            "finger_pinky_01_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_real",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_cap",
+          "influencingBones": [
+            "finger_thumb_01_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_real",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_prosthetic",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_cap",
+          "influencingBones": [
+            "finger_index_01_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_real",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_cap",
+          "influencingBones": [
+            "finger_middle_01_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_real",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_cap",
+          "influencingBones": [
+            "finger_ring_01_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_real",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_cap",
+          "influencingBones": [
+            "finger_pinky_01_r"
+          ]
+        }
+      ],
+      "sockets": {
+        "socket_eye": [
+          6.92502810650808e-09,
+          -0.1549101024866104,
+          1.3300845623016357
+        ],
+        "socket_card_l": [
+          -0.2588665187358856,
+          -0.5999941825866699,
+          0.889963686466217
+        ],
+        "socket_card_r": [
+          0.2597692012786865,
+          -0.6001636981964111,
+          0.8898911476135254
+        ]
+      },
+      "actions": [
+        "accuse",
+        "accuse_wrong_react",
+        "accused_react",
+        "copy_mark",
+        "cover_cards",
+        "eliminated",
+        "fit_prosthetic",
+        "flip_coin",
+        "fold_cards",
+        "idle_seated",
+        "look_cards",
+        "look_left",
+        "look_right",
+        "lose_react",
+        "mark_contact",
+        "mark_interrupt",
+        "mark_prepare",
+        "mark_recover",
+        "mirror_hold",
+        "mirror_prepare",
+        "mirror_recover",
+        "place_bet",
+        "receive_item",
+        "sell_item",
+        "show_hand",
+        "sleeve_finish",
+        "sleeve_fumble",
+        "sleeve_hold",
+        "sleeve_prepare",
+        "sleeve_two_finish",
+        "sleeve_two_hold",
+        "sleeve_two_prepare",
+        "tap_joint",
+        "win_react",
+        "wipe_mark"
+      ]
+    },
+    {
+      "file": "public/models/characters/rabbit.glb",
+      "meshes": 32,
+      "armatures": 1,
+      "bones": 51,
+      "modularSkinChecks": [
+        {
+          "node": "finger_thumb_l_real",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_l",
+            "finger_thumb_02_l",
+            "finger_thumb_03_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_l_cap",
+          "influencingBones": [
+            "finger_thumb_01_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_real",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_prosthetic",
+          "influencingBones": [
+            "finger_index_01_l",
+            "finger_index_02_l",
+            "finger_index_03_l"
+          ]
+        },
+        {
+          "node": "finger_index_l_cap",
+          "influencingBones": [
+            "finger_index_01_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_real",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_l",
+            "finger_middle_02_l",
+            "finger_middle_03_l"
+          ]
+        },
+        {
+          "node": "finger_middle_l_cap",
+          "influencingBones": [
+            "finger_middle_01_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_real",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_l",
+            "finger_ring_02_l",
+            "finger_ring_03_l"
+          ]
+        },
+        {
+          "node": "finger_ring_l_cap",
+          "influencingBones": [
+            "finger_ring_01_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_real",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_l",
+            "finger_pinky_02_l",
+            "finger_pinky_03_l"
+          ]
+        },
+        {
+          "node": "finger_pinky_l_cap",
+          "influencingBones": [
+            "finger_pinky_01_l"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_real",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_prosthetic",
+          "influencingBones": [
+            "finger_thumb_01_r",
+            "finger_thumb_02_r",
+            "finger_thumb_03_r"
+          ]
+        },
+        {
+          "node": "finger_thumb_r_cap",
+          "influencingBones": [
+            "finger_thumb_01_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_real",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_prosthetic",
+          "influencingBones": [
+            "finger_index_01_r",
+            "finger_index_02_r",
+            "finger_index_03_r"
+          ]
+        },
+        {
+          "node": "finger_index_r_cap",
+          "influencingBones": [
+            "finger_index_01_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_real",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_prosthetic",
+          "influencingBones": [
+            "finger_middle_01_r",
+            "finger_middle_02_r",
+            "finger_middle_03_r"
+          ]
+        },
+        {
+          "node": "finger_middle_r_cap",
+          "influencingBones": [
+            "finger_middle_01_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_real",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_prosthetic",
+          "influencingBones": [
+            "finger_ring_01_r",
+            "finger_ring_02_r",
+            "finger_ring_03_r"
+          ]
+        },
+        {
+          "node": "finger_ring_r_cap",
+          "influencingBones": [
+            "finger_ring_01_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_real",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_prosthetic",
+          "influencingBones": [
+            "finger_pinky_01_r",
+            "finger_pinky_02_r",
+            "finger_pinky_03_r"
+          ]
+        },
+        {
+          "node": "finger_pinky_r_cap",
+          "influencingBones": [
+            "finger_pinky_01_r"
+          ]
+        }
+      ],
+      "sockets": {
+        "socket_eye": [
+          6.92502810650808e-09,
+          -0.1549101024866104,
+          1.3300845623016357
+        ],
+        "socket_card_l": [
+          -0.2588665187358856,
+          -0.5999941825866699,
+          0.889963686466217
+        ],
+        "socket_card_r": [
+          0.2597692012786865,
+          -0.6001636981964111,
+          0.8898911476135254
+        ]
+      },
+      "actions": [
+        "accuse",
+        "accuse_wrong_react",
+        "accused_react",
+        "copy_mark",
+        "cover_cards",
+        "eliminated",
+        "fit_prosthetic",
+        "flip_coin",
+        "fold_cards",
+        "idle_seated",
+        "look_cards",
+        "look_left",
+        "look_right",
+        "lose_react",
+        "mark_contact",
+        "mark_interrupt",
+        "mark_prepare",
+        "mark_recover",
+        "mirror_hold",
+        "mirror_prepare",
+        "mirror_recover",
+        "place_bet",
+        "receive_item",
+        "sell_item",
+        "show_hand",
+        "sleeve_finish",
+        "sleeve_fumble",
+        "sleeve_hold",
+        "sleeve_prepare",
+        "sleeve_two_finish",
+        "sleeve_two_hold",
+        "sleeve_two_prepare",
+        "tap_joint",
+        "win_react",
+        "wipe_mark"
+      ]
+    },
+    {
+      "file": "public/models/environment.glb",
+      "meshes": 2,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/cards.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/chips.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/cloth.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/coin.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/copy_paper.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/cup.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/deck.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/lighter.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/magic_card.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/mark.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/mirror.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/prosthetics.glb",
+      "meshes": 1,
+      "armatures": 0
+    },
+    {
+      "file": "public/models/props/sleeve.glb",
+      "meshes": 1,
+      "armatures": 0
+    }
+  ]
+}

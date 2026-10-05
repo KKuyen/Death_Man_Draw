@@ -1,0 +1,212 @@
+01:38:59 | INFO: Data are loaded, start creating Blender stuff
+01:38:59 | INFO: Blender create Mesh node char_badger_body_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_real_mesh
+01:38:59 | INFO: glTF import finished in 0.16s
+01:38:59 | INFO: Data are loaded, start creating Blender stuff
+01:38:59 | INFO: Blender create Mesh node char_coyote_body_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_index_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_middle_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_pinky_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_ring_r_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_l_real_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_cap_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_prosthetic_mesh
+01:38:59 | INFO: Blender create Mesh node finger_thumb_r_real_mesh
+01:38:59 | INFO: glTF import finished in 0.16s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node char_dealer_body_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_real_mesh
+01:39:00 | INFO: glTF import finished in 0.16s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node char_lynx_body_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_real_mesh
+01:39:00 | INFO: glTF import finished in 0.15s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node char_rabbit_body_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_index_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_middle_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_pinky_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_ring_r_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_l_real_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_cap_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_prosthetic_mesh
+01:39:00 | INFO: Blender create Mesh node finger_thumb_r_real_mesh
+01:39:00 | INFO: glTF import finished in 0.15s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node env_saloon_mesh
+01:39:00 | INFO: Blender create Mesh node saloon_sign
+01:39:00 | INFO: glTF import finished in 0.07s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_cards_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_chips_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_cloth_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_coin_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_copy_paper_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_cup_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_deck_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_lighter_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_magic_card_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_mark_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:00 | INFO: Data are loaded, start creating Blender stuff
+01:39:00 | INFO: Blender create Mesh node prop_mirror_mesh
+01:39:00 | INFO: glTF import finished in 0.00s
+01:39:01 | INFO: Data are loaded, start creating Blender stuff
+01:39:01 | INFO: Blender create Mesh node prop_prosthetics_mesh
+01:39:01 | INFO: glTF import finished in 0.00s
+01:39:01 | INFO: Data are loaded, start creating Blender stuff
+01:39:01 | INFO: Blender create Mesh node prop_sleeve_mesh
+01:39:01 | INFO: glTF import finished in 0.00s
+Blender round-trip passed for 19 GLBs; all modular variants use actual exported skin weights.
+Blender 4.5.0 (hash 8cb6b388974a built 2025-07-15 01:35:28)
+
+Blender quit

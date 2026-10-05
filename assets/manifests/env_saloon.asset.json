@@ -1,0 +1,108 @@
+{
+  "assetId": "env_saloon",
+  "assetVersion": "1.0.0",
+  "contractVersion": "1.0.0",
+  "source": "assets/blender/environments/env_saloon.blend",
+  "file": "public/models/environment.glb",
+  "blenderVersion": "4.5.0",
+  "exporter": "Blender bundled Khronos glTF 2.0",
+  "units": "meters",
+  "sourceUp": "+Z",
+  "sourceForward": "-Y",
+  "exportedUp": "+Y",
+  "exportedForward": "+Z",
+  "engineHandedness": "right",
+  "sourceRoot": [
+    0,
+    0,
+    0
+  ],
+  "provenance": "Original geometry authored by scripts/blender/generate.py; no third-party art.",
+  "statistics": {
+    "bytes": 3800312,
+    "triangles": 74760,
+    "vertices": 136738,
+    "meshes": 2,
+    "nodes": 18,
+    "materials": 16,
+    "textures": 0,
+    "skins": 0,
+    "primitives": 17
+  },
+  "lods": [
+    "LOD0"
+  ],
+  "textures": "None; portable Principled PBR colors",
+  "table": {
+    "center": [
+      0,
+      0.78,
+      0
+    ],
+    "width": 2.4,
+    "depth": 1.65,
+    "railHeight": 0.838
+  },
+  "seatPositions": [
+    [
+      -1.35,
+      0,
+      0.55
+    ],
+    [
+      -1,
+      0,
+      -1.15
+    ],
+    [
+      1,
+      0,
+      -1.15
+    ],
+    [
+      1.35,
+      0,
+      0.55
+    ]
+  ],
+  "dealerPosition": [
+    0,
+    0,
+    -1.55
+  ],
+  "anchors": [
+    "anchor_seat_01",
+    "anchor_cards_01",
+    "anchor_chips_01",
+    "anchor_seat_02",
+    "anchor_cards_02",
+    "anchor_chips_02",
+    "anchor_seat_03",
+    "anchor_cards_03",
+    "anchor_chips_03",
+    "anchor_seat_04",
+    "anchor_cards_04",
+    "anchor_chips_04",
+    "anchor_dealer",
+    "anchor_board",
+    "anchor_deck",
+    "anchor_pot"
+  ],
+  "bounds": {
+    "min": [
+      -5.05,
+      -0.12,
+      -4.05
+    ],
+    "max": [
+      5.05,
+      4.6,
+      4.05
+    ]
+  },
+  "notes": [
+    "No characters, camera or preview lights are in the runtime GLB.",
+    "Lamp mesh emission is visual; frontend owns actual lighting and shadows.",
+    "Front (opposite bar) and left walls with windows, painting, posters, sconces and a wagon-wheel chandelier added; no ceiling on purpose (web sun/shadow light is above the room). Node names and anchors unchanged."
+  ]
+}

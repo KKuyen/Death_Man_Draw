@@ -1,0 +1,268 @@
+{
+ "summary": {
+  "config": {
+   "measurementVersion": 2,
+   "botSourceSha256": "df230ebc705bf5b5449d4e42aeb1c053e794e481099c0594c36e84180adebca4",
+   "blindEveryHands": 16,
+   "blindGrowth": 1.5,
+   "priceGrowthPerLevel": 0.1,
+   "maxHands": 200
+  },
+  "seed": 33,
+  "catalog": [
+   {
+    "id": "N01",
+    "name": "Túi tiền",
+    "price": 70
+   },
+   {
+    "id": "N02",
+    "name": "Chống phá sản",
+    "price": 90
+   },
+   {
+    "id": "N03",
+    "name": "Kính lúp may",
+    "price": 80
+   },
+   {
+    "id": "N04",
+    "name": "Áo giáp bẫy",
+    "price": 65
+   },
+   {
+    "id": "N05",
+    "name": "Hạt giống vàng",
+    "price": 75
+   },
+   {
+    "id": "N06",
+    "name": "Áo phao",
+    "price": 55
+   },
+   {
+    "id": "N07",
+    "name": "Thầm lặng",
+    "price": 85
+   },
+   {
+    "id": "N08",
+    "name": "Bài giả",
+    "price": 70
+   },
+   {
+    "id": "N09",
+    "name": "Màn sương",
+    "price": 50
+   },
+   {
+    "id": "K01",
+    "name": "Lá soi",
+    "price": 100
+   },
+   {
+    "id": "K10",
+    "name": "Lá soi phép",
+    "price": 60
+   },
+   {
+    "id": "K02",
+    "name": "Ép lộ bài",
+    "price": 110
+   },
+   {
+    "id": "K03",
+    "name": "Đổi bài chung",
+    "price": 90
+   },
+   {
+    "id": "K04",
+    "name": "Nâng buff",
+    "price": 80
+   },
+   {
+    "id": "K05",
+    "name": "Phá bẫy",
+    "price": 45
+   },
+   {
+    "id": "K06",
+    "name": "Làm mới chợ",
+    "price": 30
+   },
+   {
+    "id": "K07",
+    "name": "Quả cầu soi",
+    "price": 70
+   },
+   {
+    "id": "K08",
+    "name": "Bùa bẫy",
+    "price": 90
+   },
+   {
+    "id": "K09",
+    "name": "Mồi nhử",
+    "price": 40
+   },
+   {
+    "id": "X01",
+    "name": "Bộ Hoàng gia",
+    "price": 110
+   },
+   {
+    "id": "X02",
+    "name": "Bộ Muôn sắc",
+    "price": 95
+   },
+   {
+    "id": "X03",
+    "name": "Bộ Cược mù",
+    "price": 60
+   }
+  ],
+  "games": 50,
+  "finished": 50,
+  "capped": 0,
+  "violations": 0,
+  "seconds": 37,
+  "handsMean": 24.8,
+  "handsP10": 5,
+  "handsMedian": 18,
+  "handsP90": 55,
+  "winRateByPolicy": {
+   "all": 0.08,
+   "cheap": 0.34,
+   "none": 0.28,
+   "smart": 0.3
+  },
+  "winsByPolicy": {
+   "cheap": 17,
+   "smart": 15,
+   "none": 14,
+   "all": 4
+  },
+  "seatsPerPolicy": {
+   "all": 50,
+   "cheap": 50,
+   "none": 50,
+   "smart": 50
+  },
+  "burnedPerPlayerPerHandAsFractionOfStartWallet": 0.03,
+  "rescues": 35,
+  "publicMagicEvents": 98,
+  "usage": {
+   "N01": {
+    "bought": 56,
+    "used": 0,
+    "heldHands": 885
+   },
+   "N02": {
+    "bought": 43,
+    "used": 0,
+    "heldHands": 649
+   },
+   "N03": {
+    "bought": 62,
+    "used": 0,
+    "heldHands": 891
+   },
+   "N04": {
+    "bought": 96,
+    "used": 0,
+    "heldHands": 1022
+   },
+   "N05": {
+    "bought": 54,
+    "used": 0,
+    "heldHands": 809
+   },
+   "N06": {
+    "bought": 119,
+    "used": 0,
+    "heldHands": 1388
+   },
+   "N07": {
+    "bought": 16,
+    "used": 0,
+    "heldHands": 53
+   },
+   "N08": {
+    "bought": 7,
+    "used": 0,
+    "heldHands": 35
+   },
+   "N09": {
+    "bought": 48,
+    "used": 0,
+    "heldHands": 225
+   },
+   "K01": {
+    "bought": 10,
+    "used": 10,
+    "heldHands": 10
+   },
+   "K10": {
+    "bought": 113,
+    "used": 111,
+    "heldHands": 127
+   },
+   "K02": {
+    "bought": 3,
+    "used": 2,
+    "heldHands": 3
+   },
+   "K03": {
+    "bought": 21,
+    "used": 12,
+    "heldHands": 30
+   },
+   "K04": {
+    "bought": 132,
+    "used": 131,
+    "heldHands": 136
+   },
+   "K05": {
+    "bought": 202,
+    "used": 87,
+    "heldHands": 1434
+   },
+   "K06": {
+    "bought": 80,
+    "used": 58,
+    "heldHands": 124
+   },
+   "K07": {
+    "bought": 21,
+    "used": 21,
+    "heldHands": 21
+   },
+   "K08": {
+    "bought": 13,
+    "used": 13,
+    "heldHands": 13
+   },
+   "K09": {
+    "bought": 72,
+    "used": 52,
+    "heldHands": 107
+   },
+   "X01": {
+    "bought": 69,
+    "used": 68,
+    "heldHands": 84
+   },
+   "X02": {
+    "bought": 144,
+    "used": 137,
+    "heldHands": 275
+   },
+   "X03": {
+    "bought": 162,
+    "used": 90,
+    "heldHands": 946
+   }
+  }
+ },
+ "violations": []
+}

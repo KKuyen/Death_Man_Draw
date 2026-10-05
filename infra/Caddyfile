@@ -1,0 +1,20 @@
+# SITE_ADDRESS examples: "game.example.com" (automatic Let's Encrypt TLS), "localhost" (Caddy internal CA),
+# ":80" (plain HTTP, no TLS; local fallback).
+{$SITE_ADDRESS::80} {
+	encode gzip
+
+	# Colyseus: matchmaking HTTP, health, rooms API
+	@api path /matchmake/* /health /api/*
+	reverse_proxy @api server:2567
+
+	# Colyseus WebSocket connections (path /<processId>/<roomId>?sessionId=...)
+	# case-insensitive: Node's native WebSocket (undici) sends `Connection: upgrade`, browsers send `Upgrade`
+	@ws header_regexp conn Connection (?i)upgrade
+	reverse_proxy @ws server:2567
+
+	# Static web app
+	root * /srv
+	@models path *.glb
+	header @models Cache-Control "public, max-age=86400"
+	file_server
+}

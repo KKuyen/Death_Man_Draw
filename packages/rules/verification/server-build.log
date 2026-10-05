@@ -1,0 +1,9 @@
+
+> @saloon/server@0.1.0 build
+> esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --packages=external --alias:@saloon/rules=../../packages/rules/src/index.ts --alias:@saloon/content=../../packages/content/src/index.ts --alias:@saloon/protocol=../../packages/protocol/src/index.ts --alias:@saloon/bots=../../packages/bots/src/index.ts --sourcemap
+
+
+  dist/index.js       90.2kb
+  dist/index.js.map  179.6kb
+
+⚡ Done in 42ms

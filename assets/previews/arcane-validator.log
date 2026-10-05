@@ -1,0 +1,13 @@
+{
+  passed: true,
+  cards: 22,
+  artFiles: 29,
+  native: [ 64, 88 ],
+  exported: [ 256, 352 ],
+  nearestBlocks: true,
+  plainCopiesIdentical: true,
+  fallbackDecodedRGBAIdentical: true,
+  maxChannelDifference: 0,
+  nodeNames: [ 'prop_magic_card' ],
+  samplers: [ { magFilter: 9728, minFilter: 9984 } ]
+}

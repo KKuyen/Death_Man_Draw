@@ -1,0 +1,17 @@
+
+ RUN  v3.2.7 /Users/quyen.tran5/lairgame
+
+ ✓ packages/rules/test/poker.test.ts (8 tests) 14ms
+ ✓ packages/content/test/catalog.test.ts (4 tests) 7ms
+ ✓ packages/bots/test/peeks.test.ts (8 tests) 15ms
+ ✓ packages/rules/test/magic.test.ts (21 tests) 73ms
+ ✓ packages/rules/test/modifiers.test.ts (9 tests) 228ms
+ ✓ apps/server/test/unit.test.ts (6 tests) 4ms
+ ✓ packages/bots/test/bots.test.ts (3 tests) 5035ms
+   ✓ bots > four bots (all policies) buy, use, finish matches and conserve chips  4833ms
+
+ Test Files  7 passed (7)
+      Tests  59 passed (59)
+   Start at  22:02:07
+   Duration  6.20s (transform 337ms, setup 0ms, collect 1.21s, tests 5.38s, environment 1ms, prepare 1.18s)
+

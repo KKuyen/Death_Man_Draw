@@ -1,0 +1,74 @@
+{
+  "assetId": "prop_magic_card",
+  "assetVersion": "2.0.0",
+  "contractVersion": "1.0.0",
+  "source": "assets/blender/cards/magic_cards_pixel.blend",
+  "file": "public/models/props/magic_card.glb",
+  "blenderVersion": "5.2.2 LTS",
+  "exporter": "Blender bundled Khronos glTF 2.0",
+  "units": "meters",
+  "sourceUp": "+Z",
+  "sourceForward": "-Y",
+  "exportedUp": "+Y",
+  "exportedForward": "+Z",
+  "engineHandedness": "right",
+  "sourceRoot": [
+    0,
+    0,
+    0
+  ],
+  "provenance": "Original wordless deterministic pixel art and rounded prism authored in Blender by scripts/blender/pixel_cards.py",
+  "statistics": {
+    "bytes": 24116,
+    "triangles": 64,
+    "nodes": 1,
+    "meshes": 1,
+    "materials": 3,
+    "textures": 2
+  },
+  "lods": [
+    "LOD0"
+  ],
+  "textures": "Embedded 256x352 RGBA PNG; Closest interpolation; correct mirrored back UV",
+  "contentIds": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06",
+    "N07",
+    "N08",
+    "N09",
+    "K01",
+    "K02",
+    "K03",
+    "K04",
+    "K05",
+    "K07",
+    "K08",
+    "K09",
+    "K10",
+    "K11",
+    "K12",
+    "K13",
+    "X01",
+    "X02",
+    "X03"
+  ],
+  "notes": [
+    "Root prop_magic_card centered at origin; no new anchors. Same attachment convention as prop_cards.",
+    "64x88 native pixels, nearest x4; no text/price/kind/visibility glyphs.",
+    "Dimensions 0.064 x 0.088 x 0.0008 m; radius 0.003 m."
+  ],
+  "preview": "assets/previews/cards-pixel/magic-card-front.png",
+  "nodeNames": [
+    "prop_magic_card"
+  ],
+  "samplers": [
+    {
+      "magFilter": 9728,
+      "minFilter": 9984
+    }
+  ]
+}
