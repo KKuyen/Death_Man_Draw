@@ -36,7 +36,7 @@
 .gx-hand .playing-card.big{width:58px;height:84px}
 .gx-hand .playing-card.big .card-corner{font-size:17px}
 .gx-hand .playing-card.big .card-suit{font-size:30px}
-.gx-hand.folded .playing-card{opacity:.5!important}
+.gx-hand.folded .playing-card{opacity:.5}
 .gx-hand.empty{align-items:flex-start;justify-content:center}.gx-hand-none{font-size:12px;color:#8f9380}
 
 /* right column: tray + 3D-look button */
@@ -67,8 +67,8 @@
 .gx-use-art{width:54px;height:72px;border-radius:4px}
 .gx-use h4{margin:3px 0 2px;font-family:var(--serif);font-size:19px;color:#f0e4c4}.gx-use p{margin:0;font-size:11.5px;line-height:1.45;color:#c0c3ad}
 .gx-x{background:none;border:0;color:#a79f8d;font-size:20px;line-height:1;padding:0 4px}
-.gx-use-timing{margin-top:8px!important;padding:5px 8px;border-left:2px solid #8f9380;background:#0006;color:#d7cfb4!important}.gx-use-timing.ok{border-color:#8fd08a;color:#bfe9b8!important}
-.gx-use-warn{margin-top:6px!important;color:#f0a58f!important}
+.gx-use-timing{margin-top:8px;padding:5px 8px;border-left:2px solid #8f9380;background:#0006;color:#d7cfb4}.gx-use-timing.ok{border-color:#8fd08a;color:#bfe9b8}
+.gx-use-warn{margin-top:6px;color:#f0a58f}
 .gx-use-row{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;font-size:11px;color:#a9ad93}.gx-use-row>span:first-child{min-width:62px;font-family:var(--condensed);letter-spacing:1px}
 .gx-use-row .playing-card{margin-bottom:12px}
 .chip{background:#1a251a;border:1px solid var(--line);color:#d9d3b9;padding:4px 10px;border-radius:999px;font-size:11px}.chip.on{background:var(--gold);color:#241f12;border-color:var(--gold)}
@@ -76,7 +76,7 @@
 
 /* private market */
 .app.in-game .gx-market{left:370px;right:28px;top:var(--gx-top);display:flex;flex-direction:column;gap:8px;overflow:visible;max-height:calc(100% - var(--gx-top) - var(--gx-bar) - 12px)}
-.gx-market-note{font-size:12px;color:#c9cbb4;padding:6px 12px;background:#0c110bcc;border-left:3px solid #8a6fc0;border-radius:0 5px 5px 0;align-self:flex-start}
+.gx-market-note{font-size:12px;color:#c9cbb4;padding:6px 12px;background:#0c110bcc;border-left:3px solid #8a6fc0;border-radius:0 5px 5px 0;align-self:flex-start;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .gx-market-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-content:start}
 .app.in-game .gx-offer{min-height:0;padding:10px 11px 10px;gap:5px;background:linear-gradient(170deg,#2a2438f5,#130f1af0);border-color:#9a82d055}
 .gx-offer.kind-active{background:linear-gradient(170deg,#3a2128f5,#180e11f0);border-color:#d9694f66}.gx-offer.kind-swap{background:linear-gradient(170deg,#3a3220f5,#17130af0);border-color:#d7b77988}
@@ -106,10 +106,15 @@
   .app.in-game .gx-board{top:174px;padding:5px 10px}
   .gx-board-slot,.gx-board .playing-card{width:42px;height:60px}.gx-board .card-corner{font-size:13px}.gx-board .card-suit{font-size:22px}
   .gx-hand .playing-card.big{width:48px;height:70px}.gx-hand-cards{gap:6px}
-  .gx-offer-art{height:clamp(70px,13vh,110px)}
+  .gx-offer-art{height:clamp(56px,10vh,90px)}
   .app.in-game .gx-offer h3{font-size:16px}
   .app.in-game .gx-market{left:350px}
   .app.in-game .gx-toasts{top:250px}
+  .app.in-game .gx-offer{padding:10px 12px 9px;gap:5px}
+  .app.in-game .gx-offer p.gx-offer-text{font-size:10.5px;line-height:1.32;min-height:0}
+  .gx-offer p.gx-offer-timing{font-size:8.5px}
+  .gx-offer-vis{font-size:9px;line-height:1.25;padding-top:3px}
+  .app.in-game .gx-buy{padding:8px 10px;min-height:0}
 }
 @media(max-width:1350px){.app.in-game .gx-bottom{grid-template-columns:290px minmax(0,1fr) 320px;gap:14px}.app.in-game .gx-market{left:350px}.gx-use{width:320px}}
 
@@ -127,7 +132,7 @@
 .vis-pill{font-family:var(--condensed);font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:999px;border:1px solid #ffffff33;white-space:nowrap}
 .vis-pill.vis-public{color:#f0a58f;border-color:#d9694f88}.vis-pill.vis-hinted{color:#e8c050;border-color:#e8c05088}.vis-pill.vis-hidden{color:#9fb0c8;border-color:#9fb0c888}
 .gx-offer-vis{margin:0;font-size:10px;line-height:1.35;color:#b3b69f;border-top:1px dashed #ffffff22;padding-top:4px}
-.gx-use-warn.vis-note{color:#b3b69f!important;font-size:10.5px}
+.gx-use-warn.vis-note{color:#b3b69f;font-size:10.5px}
 .gx-slot-vis{position:absolute;right:3px;top:3px;z-index:2;font-size:10px;color:#e6dcc3;text-shadow:0 1px 2px #000}
 .gx-slot-wait{position:absolute;left:0;right:0;bottom:14px;z-index:2;font-size:7.5px;text-align:center;color:#c5b0f0;background:#050805c0;padding:1px}
 .gx-slot.fired{animation:gx-fired .5s ease-in-out 4;border-color:#e8c050}
@@ -230,3 +235,5 @@
 /* Keep purchases reachable while the short-screen market scrolls. */
 .app.in-game .gx-offer footer{position:sticky;bottom:0;z-index:2;background:#151218;padding-top:6px;box-shadow:0 -8px 12px #151218}
 .app.phase-market .gx-banner{display:none}
+/* Card names must stay on one line, truncating with an ellipsis rather than wrapping and pushing the price/buy button off-screen. */
+.app.in-game .gx-offer h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

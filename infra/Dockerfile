@@ -15,6 +15,8 @@ COPY scripts/bundle-server.mjs scripts/
 # Public WebSocket/HTTP endpoint the browser uses to reach the server (baked into the web bundle by Vite).
 ARG VITE_SERVER_URL=
 ENV VITE_SERVER_URL=$VITE_SERVER_URL
+# Default Node heap sizing guesses low on memory-constrained build hosts (e.g. small cloud VMs) and OOMs mid-build; raise the ceiling explicitly.
+ENV NODE_OPTIONS=--max-old-space-size=3072
 RUN npm run build -w @saloon/web && node scripts/bundle-server.mjs
 
 FROM node:22-alpine AS server

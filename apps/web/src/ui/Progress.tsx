@@ -3,6 +3,9 @@ import {createPortal} from 'react-dom';
 import type {LogEntry,PrivateSnapshot,PublicPlayer,RoomSnapshot} from '@saloon/protocol';
 import {DEFAULTS,getMagic} from '@saloon/content';
 import {Icon,MagicDetails,fmt} from './common';
+import {PlayersList} from './Players';
+import {useDialog} from './useDialog';
+import type {CommandInput} from '../network';
 
 /** Where are we? Chợ -> Preflop -> Flop -> Turn -> River -> Showdown (current highlighted, done ticked, next named). */
 const STEPS=['Chợ','Preflop','Flop','Turn','River','Showdown'] as const;
@@ -27,10 +30,10 @@ export function MatchStrip({snapshot}:{snapshot:RoomSnapshot}){
   const alive=snapshot.players.filter(p=>!p.eliminated).length;
   const nb=snapshot.nextBlinds,n=snapshot.nextBlindInHands;
   return <div className="gx-pot gx-match" aria-label="Thông tin trận">
-    <span className="gx-m"><i>TRÊN BÀN</i><strong><small>$</small>{fmt(snapshot.pot)}</strong></span>
-    <span className="gx-m"><i>VÁN</i><b>{snapshot.handId}</b></span>
-    <span className="gx-m"><i>BLIND</i><b>{fmt(snapshot.smallBlind)}/{fmt(snapshot.bigBlind)}</b>{nb&&n!=null&&<em title="Blind tăng theo số ván">tăng sau {n} ván → {fmt(nb.smallBlind)}/{fmt(nb.bigBlind)}</em>}</span>
-    <span className="gx-m"><i>CÒN CHƠI</i><b>{alive}/{snapshot.players.length}</b></span>
+    <span className="gx-m"><i>Pot</i><strong><small>$</small>{fmt(snapshot.pot)}</strong></span>
+    <span className="gx-m"><i>Ván</i><b>{snapshot.handId}</b></span>
+    <span className="gx-m"><i>Blind</i><b>{fmt(snapshot.smallBlind)}/{fmt(snapshot.bigBlind)}</b>{nb&&n!=null&&<em title="Blind tăng theo số ván">tăng sau {n} ván → {fmt(nb.smallBlind)}/{fmt(nb.bigBlind)}</em>}</span>
+    <span className="gx-m"><i>Còn chơi</i><b>{alive}/{snapshot.players.filter(p=>!p.kicked).length}</b></span>
   </div>;
 }
 
@@ -41,13 +44,12 @@ export function TurnBanner({snapshot,own,selfId,seconds}:{snapshot:RoomSnapshot;
   if(snapshot.phase==='playing'){
     total=DEFAULTS.turnMs/1000;
     const t=snapshot.players.find(p=>p.id===snapshot.turnPlayerId);mine=t?.id===selfId;
-    const canUse=!!own?.magic.some(m=>m.usable);
-    if(me?.folded){who='BẠN ĐÃ BỎ BÀI';line='Xem tiếp ván.';total=0;}
-    else if(mine&&own){const l=own.legal;who='ĐẾN LƯỢT BẠN';line=`Bạn cần: ${l.canCheck?'CHECK':`THEO $${fmt(l.callAmount)}`} · TỐ · hoặc BỎ BÀI${canUse?' · hoặc dùng phép':''}`;}
-    else if(t){who=`ĐANG CHỜ ${t.name.toUpperCase()}`;line='Bài chung ở thanh trên bàn, bài của bạn ở khay dưới.';}
-    else{who='ĐANG CHIA BÀI';line='';total=0;}
-  }else if(snapshot.phase==='market'){who='CHỢ BÀI PHÉP';line='Chọn lá muốn mua rồi bấm XONG.';total=DEFAULTS.marketMs/1000;}
-  else if(snapshot.phase==='showdown'){who='LẬT BÀI';line='';total=DEFAULTS.showdownMs/1000;}
+    if(me?.folded){who='Bạn đã bỏ bài';line='';total=0;}
+    else if(mine&&own){who='Đến lượt bạn';line='';}
+    else if(t){who=`Lượt của ${t.name}`;line='';}
+    else{who='Đang chia bài';line='';total=0;}
+  }else if(snapshot.phase==='market'){who='Chợ bài phép';line='';total=DEFAULTS.marketMs/1000;}
+  else if(snapshot.phase==='showdown'){who='Lật bài';line='';total=DEFAULTS.showdownMs/1000;}
   else return null;
   const R=19,C=2*Math.PI*R,frac=total?Math.max(0,Math.min(1,seconds/total)):0;
   return <div className={`gx-turn ${mine?'mine':''}`} role="status">
@@ -102,16 +104,25 @@ export function usePhaseBanner(snapshot:RoomSnapshot|null,seconds:number){
 
 const COACH=[
   {icon:'cards',title:'Mục tiêu',body:'Texas Hold’em tại saloon: ghép bộ năm lá mạnh nhất từ 2 lá riêng và 5 lá chung để thắng pot. Thanh tiến trình trên cùng cho biết đang ở bước nào: Chợ, Preflop, Flop, Turn, River, Showdown.'},
-  {icon:'coin',title:'Cách hành động',body:'Đến lượt bạn, dùng 4 nút lớn ở dưới: BỎ BÀI, CHECK/THEO, TỐ, ALL-IN. Dòng gợi ý phía trên nút luôn nói bạn cần làm gì tiếp theo.'},
-  {icon:'bag',title:'Chợ bài phép',body:'Chợ riêng có 4 ô, mỗi ô ngẫu nhiên là bài phép hoặc bài tây dự trữ, giữ cùng lô hàng trong 2 ván. Mua tối đa 5 ô. Bài dự trữ chỉ đổi được một lần rồi mất. Nội tại có tác dụng khi đang giữ; Kích hoạt thì bấm dùng đúng lúc và mất sau khi dùng. Đối thủ không thấy bạn mua gì.'},
+  {icon:'coin',title:'Cách hành động',body:'Đến lượt bạn, khung hành động chuyển xanh. Chọn Bỏ bài, Check/Theo, Tố hoặc All-in ở dưới bàn.'},
+  {icon:'bag',title:'Chợ bài phép',body:`Chợ riêng có 4 ô, gồm bài phép và bài tây dự trữ. Lô hàng giữ ${DEFAULTS.marketRefreshHands} ván; lá đã mua không bù lại. Khay giữ tối đa 5 lá. Chọn một lá để đọc hiệu ứng và cách dùng. Đối thủ không thấy bạn mua gì.`},
   {icon:'eye',title:'Xem bài',body:'Bài chung nằm ở thanh trên bàn, bài của bạn ở khay phía dưới. Lá bài có thể mang dấu: Vàng, Muôn chất, Hạnh vận (buff) hoặc Bẫy, Nguyền (debuff). Phím S chỉ để cúi xuống nhìn 3D cho vui.'}
 ] as const;
+/** Toggleable player list with host management, also accessible on mobile. */
+export function RosterPeek({snapshot,selfId,send,onClose,mutedPlayers,onMute}:{snapshot:RoomSnapshot;selfId:string;send:(c:CommandInput)=>void;onClose:()=>void;mutedPlayers:string[];onMute:(id:string,muted:boolean)=>void}){
+  const root=useRef<HTMLDivElement>(null);useDialog(root,onClose);
+  return createPortal(<div className="gx-roster-peek"><button type="button" className="surface-backdrop" onClick={onClose} aria-label="Đóng danh sách người chơi" tabIndex={-1}/><div ref={root} className="gx-roster-peek-card" role="dialog" aria-modal="true" aria-label="Người chơi" tabIndex={-1}>
+    <header className="surface-heading"><h2>Người chơi</h2><button type="button" onClick={onClose} aria-label="Đóng danh sách"><Icon name="close"/></button></header>
+    <PlayersList snapshot={snapshot} selfId={selfId} send={send} mutedPlayers={mutedPlayers} onMute={onMute}/>
+  </div></div>,document.body);
+}
 export function Coach({onClose}:{onClose:()=>void}){
   const [i,setI]=useState(0);const step=COACH[i];const last=i===COACH.length-1;
-  return <div className="gx-coach" role="dialog" aria-label="Hướng dẫn nhanh"><div className="gx-coach-card">
+  const root=useRef<HTMLDivElement>(null);useDialog(root,onClose);
+  return <div className="gx-coach"><div ref={root} className="gx-coach-card" role="dialog" aria-modal="true" aria-label="Hướng dẫn nhanh" tabIndex={-1}>
     <span className="eyebrow">HƯỚNG DẪN NHANH · {i+1}/{COACH.length}</span>
     <h2><Icon name={step.icon} size={26}/> {step.title}</h2><p>{step.body}</p>
     <div className="gx-coach-dots">{COACH.map((_,k)=><i key={k} className={k===i?'on':''}/>)}</div>
-    <div className="dialog-actions"><button className="btn outline" onClick={onClose}>BỎ QUA</button>{i>0&&<button className="btn outline" onClick={()=>setI(i-1)}>QUAY LẠI</button>}<button className="btn gold" onClick={()=>last?onClose():setI(i+1)}>{last?'ĐÃ HIỂU, CHƠI THÔI':'TIẾP'}</button></div>
+    <div className="dialog-actions"><button className="btn outline" onClick={onClose}>Bỏ qua</button>{i>0&&<button className="btn outline" onClick={()=>setI(i-1)}>Quay lại</button>}<button className="btn gold" onClick={()=>last?onClose():setI(i+1)}>{last?'Bắt đầu':'Tiếp'}</button></div>
   </div></div>;
 }

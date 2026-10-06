@@ -1,5 +1,6 @@
 import {Client, type Room} from '@colyseus/sdk';
 import {OfflineRoom} from './offline';
+import {uuid} from './uuid';
 import type {SocialState,VoiceSignal, CharacterId, Command, GameEvent, PrivateSnapshot, RoomSnapshot} from '@saloon/protocol';
 
 export interface ConnectionState {social:SocialState;status:'offline'|'connecting'|'connected'|'reconnecting'; snapshot:RoomSnapshot|null; own:PrivateSnapshot|null; selfId:string; error:string; event:GameEvent|null}
@@ -35,7 +36,7 @@ export class GameConnection {
   sendVoiceSignal(signal:VoiceSignal){if(this.isOnlineRoom)this.room?.send('voiceSignal',signal);}
   voiceReady(){if(this.isOnlineRoom)this.room?.send('voiceReady');}
   setMicrophone(on:boolean){if(this.isOnlineRoom)this.room?.send('microphone',on);}
-  sendChat(text:string){const clean=text.trim();if(!clean||clean.length>300)return;if(this.offline){const me=this.state.snapshot?.players.find(p=>p.id===this.state.selfId);this.update({social:{...this.state.social,messages:[...this.state.social.messages,{id:crypto.randomUUID(),playerId:this.state.selfId,name:me?.name||'Bạn',text:clean,at:Date.now()}].slice(-50)}});}else if(this.isOnlineRoom)this.room?.send('chat',clean);}
+  sendChat(text:string){const clean=text.trim();if(!clean||clean.length>300)return;if(this.offline){const me=this.state.snapshot?.players.find(p=>p.id===this.state.selfId);this.update({social:{...this.state.social,messages:[...this.state.social.messages,{id:uuid(),playerId:this.state.selfId,name:me?.name||'Bạn',text:clean,at:Date.now()}].slice(-50)}});}else if(this.isOnlineRoom)this.room?.send('chat',clean);}
   private bind(room:Room){
     this.room=room; this.update({status:'connected',selfId:room.sessionId,error:''});
     localStorage.setItem('saloon.reconnect',room.reconnectionToken);
@@ -47,17 +48,25 @@ export class GameConnection {
     room.onMessage('event',(event:GameEvent)=>this.update({event}));
     room.onMessage('error',(data:{message?:string;error?:string}|string)=>this.update({error:typeof data==='string'?data:data.message||data.error||'Thao tác chưa hợp lệ.'}));
     room.onError((_code:number,message?:string)=>this.update({error:message||'Mất liên lạc với bàn chơi.'}));
-    room.onLeave((code:number)=>{if(this.room!==room)return;if(code===1000){this.update({...initial});}else{this.update({status:'reconnecting',error:'Đang nối lại bàn chơi…'});void this.reconnect();}});
+    room.onLeave((code:number)=>{if(this.room!==room)return;if(code===1000){localStorage.removeItem('saloon.reconnect');localStorage.removeItem('saloon.rejoinKey');this.room=null;this.update({...initial,error:this.state.error.includes('đã đuổi')?this.state.error:''});}else{this.update({status:'reconnecting',error:'Đang nối lại bàn chơi…'});void this.reconnect();}});
   }
-  async create(name:string,character:CharacterId,demo=false){
+  async create(name:string,character:CharacterId,demo=false,isPublic=false){
     if(demo){this.startOffline(name,character);return;}
     const my=++this.epoch;
     this.update({status:'connecting',error:''});
     try{
-      const room=await this.client.create('saloon',{name:name.trim()||'Kẻ lạ mặt',character});
+      const room=await this.client.create('saloon',{name:name.trim()||'Kẻ lạ mặt',character,public:isPublic});
       if(my!==this.epoch)return void room.leave();
       this.bind(room);
     }catch(error){if(my===this.epoch)this.update({status:'offline',error:this.formatError(error)});}
+  }
+  setVisibility(isPublic:boolean){if(this.isOnlineRoom)this.send({type:'setVisibility',public:isPublic});}
+  /** World list: rooms whose host opted into public listing. Polled by the browse-rooms UI. */
+  async listPublicRooms():Promise<{roomId:string;code:string;players:number;maxClients:number;phase:string}[]>{
+    const res=await fetch(`${this.httpEndpoint}/api/public-rooms`);
+    if(!res.ok)throw new Error('Không tải được danh sách bàn.');
+    const data=await res.json();
+    return Array.isArray(data.rooms)?data.rooms:[];
   }
   /** Local prototype: rules engine + bots in the browser, no server needed. */
   startOffline(name:string,character:CharacterId){
@@ -123,7 +132,7 @@ export class GameConnection {
   }
   leave(){++this.epoch;this.offline?.dispose();this.offline=null;localStorage.removeItem('saloon.reconnect');localStorage.removeItem('saloon.rejoinKey');const room=this.room;this.room=null;this.update({...initial});void room?.leave();}
   send(input:CommandInput){
-    const command={...input,commandId:crypto.randomUUID(),handId:this.state.snapshot?.handId} as Command;
+    const command={...input,commandId:uuid(),handId:this.state.snapshot?.handId} as Command;
     if(this.offline){this.offline.send(command);return;}
     if(!this.room)return;
     this.room.send('command',command);

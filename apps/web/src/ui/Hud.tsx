@@ -5,10 +5,9 @@ import {PlayingCard} from './common';
 export function BoardStrip({snapshot}:{snapshot:RoomSnapshot}){
   if(snapshot.phase!=='playing'&&snapshot.phase!=='showdown')return null;
   const slots:(Card|undefined)[]=Array.from({length:5},(_,i)=>snapshot.board[i]);
-  const names=['FLOP','FLOP','FLOP','TURN','RIVER'];
   return <section className="gx-board" aria-label="Bài chung" data-count={snapshot.board.length}>
-    <span className="gx-hud-label">BÀI CHUNG</span>
-    <div className="gx-board-cards">{slots.map((c,i)=><div key={i} className="gx-board-slot">{c?<PlayingCard card={c}/>:<span className="card-slot-empty" aria-label="Chưa mở">{names[i]}</span>}</div>)}</div>
+    <span className="gx-hud-label">Bài chung</span>
+    <div className="gx-board-cards">{slots.map((c,i)=><div key={i} className="gx-board-slot">{c?<PlayingCard card={c}/>:<span className="card-slot-empty" aria-label="Chưa mở"><span aria-hidden="true">♠</span></span>}</div>)}</div>
   </section>;
 }
 /** Own hole cards, large and readable, with the modifier named under the card. Replaces the old sr-only list. */

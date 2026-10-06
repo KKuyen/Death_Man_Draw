@@ -40,7 +40,7 @@ export class SaloonRoom extends Room {
   /** Public summary for GET /api/rooms. No cards, wallets or secrets. */
   summary() {
     const pub = this.engine.publicSnapshot(Date.now());
-    return { roomId: this.roomId, code: this.code, players: pub.players.length, maxClients: config.maxClients, phase: pub.phase };
+    return { roomId: this.roomId, code: this.code, players: pub.players.length, maxClients: config.maxClients, phase: pub.phase, public: !!this.social.public };
   }
 
   /** Human whose secret key matches. The key proves ownership, so it may take over a seat whose old socket has not been noticed as dead yet (refresh race). */
@@ -85,6 +85,7 @@ export class SaloonRoom extends Room {
     } else {
       do this.code = newCode(); while ([...registry.values()].some(r => r.code === this.code));
     }
+    this.social.public = !!options?.public;
     const gameOptions = { roomId: this.roomId, code: this.code, now: Date.now(), random: cryptoRandom };
     if (restore) {
       this.engine = restoreGame(restore.engine, gameOptions);
@@ -229,11 +230,21 @@ export class SaloonRoom extends Room {
       if (pub.phase !== 'finished' || pub.hostId !== seat.playerId) return reject('Chỉ chủ phòng giải tán được bàn sau khi trận kết thúc.');
       for (const cl of [...this.clients]) cl.leave(1000);
       return;
+    } else if (c.type === 'setVisibility') {
+      const pub = this.engine.publicSnapshot(now);
+      if (pub.hostId !== seat.playerId) return reject('Chỉ chủ phòng đổi được chế độ công khai.');
+      this.social.public = !!(c as { public?: unknown }).public;
+      this.broadcast('social', this.social);
     } else if (c.type === 'kick') {
       const result = this.engine.applyCommand(seat.playerId, c as unknown as Command, now);
       if (!result.ok) { reject(result.error ?? 'Không thể đuổi người chơi.'); }
       else {
         const targetId = (c as { targetPlayerId?: unknown }).targetPlayerId;
+        if (typeof targetId === 'string') {
+          this.rejoinHashes.delete(targetId); this.names.delete(targetId); this.botMem.delete(targetId);
+          const timer = this.removalTimers.get(targetId); if (timer) clearTimeout(timer); this.removalTimers.delete(targetId);
+          delete this.social.microphones[targetId]; delete this.social.voiceSessions![targetId]; this.broadcast('social', this.social);
+        }
         for (const [sid, s] of [...this.seats]) {
           if (s.playerId !== targetId) continue;
           this.seats.delete(sid);
@@ -249,7 +260,7 @@ export class SaloonRoom extends Room {
 
   private addBot(requesterId: string, now: number) {
     const pub = this.engine.publicSnapshot(now);
-    const host = pub.players.find(p => !p.bot);
+    const host = pub.players.find(p => p.id === pub.hostId);
     if (pub.phase !== 'lobby') return { ok: false, error: 'Chỉ thêm bot ở sảnh.' };
     if (!host || host.id !== requesterId) return { ok: false, error: 'Chỉ chủ phòng được thêm bot.' };
     const bots = pub.players.filter(p => p.bot).length;

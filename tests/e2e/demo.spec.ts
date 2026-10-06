@@ -9,6 +9,8 @@ test('offline demo (Bài Phép): market first, board strip, own hand, tray, show
   await page.goto('/');
   await expect(page.getByText('SALOON N° 04 · OPEN').or(page.getByText('SALOO N° 04 · OPEN'))).toBeVisible({timeout:60_000});
   await shot(page,'lobby');
+  // Screenshots can take longer than the real market timer on software rendering.
+  const marketTime=Date.now();await page.clock.setFixedTime(marketTime);
   await page.locator('.demo-link').click();
 
   // coach (first game): 4 steps
@@ -26,19 +28,22 @@ test('offline demo (Bài Phép): market first, board strip, own hand, tray, show
   await expect(page.locator('.gx-tray .gx-slot')).toHaveCount(5);
   // each offer: art, name, kind tag, visibility, price, effect text
   const first=page.locator('.gx-offer').first();
-  await expect(first.locator('.magic-art')).toBeVisible();
+  await expect(first.locator('.gx-offer-art')).toBeVisible();
   await expect(first.locator('h3')).not.toBeEmpty();
   await expect(first.locator('.kind-pill')).toBeVisible();
   await expect(first.locator('.gx-offer-text')).not.toBeEmpty();
   await expect(first.locator('.vis-pill')).toBeVisible();
   await expect(first.locator('.gx-offer-vis')).toContainText('Khi dùng:');
-  await expect(first.locator('.magic-art img')).toHaveCSS('image-rendering','pixelated');
+  if(await first.locator('.magic-art img').count())await expect(first.locator('.magic-art img')).toHaveCSS('image-rendering','pixelated');
+  else await expect(first.locator('.reserve-art .playing-card')).toBeVisible();
   await expect(first.locator('.price-button')).toContainText('$');
   await shot(page,'market');
   const wallet=async()=>Number((await page.locator('.wallet-block strong').innerText()).replace(/\D/g,''));
   const before=await wallet();
   const buy=page.locator('.gx-offer .gx-buy:not([disabled])').first();
-  if(await buy.count()){await buy.click();await expect.poll(wallet).toBeLessThan(before);await expect(page.locator('.gx-tray .gx-slot:not(.empty)')).toHaveCount(1);await expect(page.locator('.gx-offer.sold .gx-offer-price').first()).toBeVisible();await shot(page,'market-bought');}
+  if(await buy.count()){await buy.click();await expect.poll(wallet).toBeLessThan(before);await expect(page.locator('.gx-tray .gx-slot:not(.empty)')).toHaveCount(1);await expect(page.locator('.gx-market .gx-offer')).toHaveCount(3);await shot(page,'market-bought');}
+  const remainingOffers=await page.locator('.gx-market .gx-offer').count();
+  await page.clock.setSystemTime(marketTime+1000);
   await page.getByRole('button',{name:/^XONG/}).click();
 
   // hand: board strip + own readable hand, no finger/trick/dealer UI
@@ -62,8 +67,8 @@ test('offline demo (Bài Phép): market first, board strip, own hand, tray, show
   await expect(page.locator('.gx-stepper li.now')).toContainText('Showdown');
   await shot(page,'showdown');
 
-  // next hand starts with a market again
-  await expect(page.locator('.gx-market .gx-offer')).toHaveCount(4,{timeout:30_000});
+  // The next market retains the unpurchased offers from the current lot.
+  await expect(page.locator('.gx-market .gx-offer')).toHaveCount(remainingOffers,{timeout:30_000});
   await expect(page.locator('.gx-stepper li.now')).toContainText('Chợ');
   await page.getByRole('button',{name:/^XONG/}).click();
   await expect(page.locator('.bet-buttons')).toBeVisible({timeout:40_000});

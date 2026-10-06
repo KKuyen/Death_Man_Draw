@@ -1,0 +1,178 @@
+/* Portrait phones use a compact table with a fixed action area and optional sheets. */
+@media (max-width:1000px) and (orientation:portrait){
+  .app{--portrait-edge:max(12px,env(safe-area-inset-left));--portrait-right:max(12px,env(safe-area-inset-right))}
+  .topbar nav button[aria-label="Bật âm thanh"],.topbar nav button[aria-label="Tắt âm thanh"]{display:none}
+  .in-game .topbar nav .mobile-fullscreen{display:grid;font-size:24px}
+  .topbar,.app.in-game .topbar{height:48px;min-height:48px}
+  .topbar nav button{width:42px;height:44px}
+  .in-lobby .wordmark{font-size:11px;letter-spacing:.6px}
+
+  /* Entry stays short; it can scroll naturally when the keyboard is open. */
+  .app.in-lobby{height:100dvh;min-height:0;overflow-y:auto}
+  .in-lobby .welcome{padding:16px 0 20px;gap:16px;max-width:440px}
+  .welcome-copy>.eyebrow{font-size:9px;letter-spacing:1.2px}
+  .welcome-copy h1{font-size:48px;line-height:.94;margin:12px 0;letter-spacing:-1.5px}
+  .welcome-copy>p{font-size:12px;line-height:1.5}.welcome-tags,.welcome-footer{display:none}
+  .entry-panel{padding:18px;border-radius:12px}
+  .entry-panel h2{font-size:28px;margin:10px 0 14px}
+  .field-label{font-size:10px;margin:14px 0 7px}
+  .entry-panel input{padding:10px 12px;min-height:44px}
+  .character-picker button{min-height:60px;padding:7px 3px;font-size:9px}.character-glyph{font-size:25px;margin-bottom:3px}
+  .entry-create{min-height:48px;margin-top:18px;font-size:14px}
+  .demo-link{margin-top:8px;min-height:44px;font-size:12px}
+
+  /* The community cards remain above the dock, even on narrow phones. */
+  .app.phase-playing,.app.phase-showdown{height:100dvh;min-height:0;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:48px 26px 48px auto minmax(0,1fr) auto;gap:6px;padding-bottom:env(safe-area-inset-bottom)}
+  .phase-playing .topbar,.phase-showdown .topbar{grid-column:1;grid-row:1}
+  .app.phase-playing .room-label,.app.phase-showdown .room-label{display:none}
+  .app.phase-playing .gx-stepper,.app.phase-showdown .gx-stepper{grid-column:1;grid-row:2;margin:0;align-self:stretch;justify-content:center}
+  .app.phase-playing .gx-match,.app.phase-showdown .gx-match{grid-column:1;grid-row:3;margin:0;padding:7px 12px;min-height:0;align-self:stretch}
+  .gx-match .gx-m{gap:1px}.gx-match strong{font-size:24px}.gx-match i{font-size:9px;letter-spacing:.5px}
+  .phase-playing .gx-plates,.phase-showdown .gx-plates{grid-column:1;grid-row:4;align-self:start;gap:6px;max-height:82px;overflow-y:auto;scrollbar-width:thin}
+  .gx-plate{padding:7px 6px;border-radius:8px}.gx-plate-head{gap:4px;flex-wrap:nowrap}.gx-plate-head strong{font-size:12px}.gx-plate-head small,.gx-plate-head .host-tag,.gx-plate-mic{display:none}
+  .gx-plate-status{font-size:10px;line-height:1.4;letter-spacing:0;gap:3px}.gx-plate-status b{margin-left:auto;white-space:nowrap}
+  .app.phase-playing .gx-board,.app.phase-showdown .gx-board{grid-column:1;grid-row:5;align-self:center;justify-self:center;width:min(100%,350px);min-height:0;padding:8px 12px 18px;gap:5px}
+  .gx-board-cards{gap:8px}.gx-board-slot,.gx-board .playing-card{width:clamp(42px,12vw,56px);height:clamp(60px,17vw,80px)}
+  .gx-board .card-corner{font-size:17px}.gx-board .card-suit{font-size:28px}.gx-board .gx-hud-label{font-size:10px;letter-spacing:1px}
+  .app.phase-playing .gx-log{grid-column:1;grid-row:5;align-self:end;max-height:26px;font-size:11px;padding:0 3px;z-index:5}
+  /* Without an explicit slot, auto-placement can drop this into a 0-height row (e.g. the hidden plates row in showdown) and its content spills over whatever sits below it. */
+  .app.phase-playing .elim-banner,.app.phase-showdown .elim-banner{grid-column:1;grid-row:1/6;align-self:end;justify-self:stretch;position:relative;inset:auto;transform:none;z-index:9;margin:0 0 8px;width:100%}
+  .app.phase-playing .gx-bottom,.app.phase-showdown .gx-bottom{position:relative;inset:auto;grid-column:1;grid-row:6;margin:0 -12px;padding:8px var(--portrait-right) 10px var(--portrait-edge);grid-template-columns:minmax(0,1fr)!important;gap:6px!important;align-items:stretch;box-shadow:0 -8px 26px #0004;background:#0e1611f5;border-top:1px solid #b6a37944}
+  .app.phase-playing .gx-bottom .wallet-block,.app.phase-showdown .gx-bottom .wallet-block{grid-column:1;grid-row:1;min-height:94px;padding-right:132px;align-self:start;grid-template-columns:minmax(0,1fr);grid-template-rows:16px 34px;align-content:start;gap:2px}
+  .app.in-game .gx-bottom .wallet-block>.eyebrow{font-size:11px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.2px}
+  .wallet-block .host-tag,.app.in-game .gx-bottom .wallet-block>.gx-trend{display:none}
+  .app.in-game .gx-bottom .wallet-block>strong{font-size:33px;line-height:1.1}.wallet-block small{font-size:20px}
+  .gx-hand{top:0;right:0;padding-bottom:12px;gap:4px;align-items:center}.gx-hand .gx-hud-label{font-size:10px;letter-spacing:.4px}.gx-hand-cards{gap:10px}
+  .gx-hand .playing-card.big{width:48px;height:68px}.gx-hand .playing-card.big .card-corner{font-size:17px}.gx-hand .playing-card.big .card-suit{font-size:28px}.gx-hand .mod-caption{font-size:8px;bottom:-12px}
+  .phase-playing .mobile-magic-launch,.phase-showdown .mobile-magic-launch{position:absolute;grid-column:auto;grid-row:auto;top:62px;left:var(--portrait-edge);right:calc(var(--portrait-right) + 132px);min-width:0;z-index:1}
+  .mobile-magic-launch>button{min-height:36px;display:block;width:100%;padding:7px 10px;font-size:12px;text-align:left;border-radius:6px}.mobile-magic-launch>button>span:last-child{display:none}
+  .app.phase-playing .gx-center,.app.phase-showdown .gx-center{grid-column:1;grid-row:2;max-width:none;gap:6px;min-width:0;margin:0}
+  .gx-turn{min-height:40px;padding:5px 8px;gap:8px}.gx-ring{width:32px;height:32px}.gx-turn b{font-size:13px;letter-spacing:.5px}.gx-turn span{font-size:11px;line-height:1.4}.gx-turn:not(.mine) span{display:none}
+  .gx-actions{position:relative;padding:0;border:0;border-radius:6px}.gx-actions.is-turn{box-shadow:none}
+  .gx-actions .bet-buttons{gap:6px;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .gx-btn{min-height:52px;padding:6px 3px}.gx-btn b{font-size:16px;letter-spacing:.2px}.gx-btn small{font-size:8px;letter-spacing:0}
+  .mobile-raise-toggle{min-height:36px;padding:5px 8px;margin-top:2px;font-size:12px}
+  .gx-raise.raise-open{position:absolute;inset:auto 0 calc(100% + 8px);z-index:30;margin:0;padding:12px;border:1px solid var(--gold);border-radius:10px;background:#182217;box-shadow:0 12px 36px #000b;grid-template-columns:auto minmax(0,1fr) 76px;gap:8px;max-height:calc(100dvh - 210px);overflow-y:auto}
+  .gx-raise input[type=number]{width:76px;min-height:44px}.gx-raise input[type=range]{height:36px}.gx-raise .gx-chips{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.gx-chips button{min-height:44px;font-size:11px}
+  .app.phase-playing .secret-note{position:absolute;inset:auto var(--portrait-right) 268px var(--portrait-edge);width:auto;max-width:none;max-height:62px;overflow-y:auto;padding:8px 12px;font-size:11px;background:#192519f5;z-index:7}.secret-note .eyebrow{font-size:9px}
+  .app.phase-showdown .gx-plates,.app.phase-showdown .gx-board,.app.phase-showdown .gx-log{display:none}
+  .app.phase-showdown{grid-template-rows:48px 26px 48px 0 minmax(0,1fr) auto}
+  .app.phase-showdown .gx-dialog{grid-column:1;grid-row:5;position:relative;inset:auto;width:100%;height:100%;max-height:none;min-height:0;overflow-y:auto;padding:18px;transform:none;margin:0;border-radius:12px}
+  .phase-showdown .gx-dialog h2{font-size:28px}.phase-showdown .gx-dialog p{font-size:13px}.phase-showdown .result-hands{gap:14px;margin:14px 0}
+  .app.in-game .gx-toasts{top:calc(54px + env(safe-area-inset-top));left:var(--portrait-edge);right:var(--portrait-right);align-items:center}
+  .gx-toasts .gx-toast{max-width:100%;font-size:12px}.gx-banner{top:36%;font-size:26px}
+
+  /* One card at a time; the price and purchase button always have their own row. */
+  .app.phase-market{height:100dvh;min-height:0;display:flex;gap:8px;padding-bottom:calc(104px + env(safe-area-inset-bottom));overflow:hidden}
+  .app.phase-market .topbar{height:48px;min-height:48px}
+  .app.phase-market .gx-market-head{order:1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:6px 2px;flex-shrink:0}
+  .gx-market-head>.eyebrow{font-size:10px;letter-spacing:1px}.app.phase-market .gx-market-head h2{font-size:29px;margin:0}.gx-market-head .gx-countdown{grid-column:2;grid-row:1/3;flex-direction:column;gap:0}.gx-market-head .gx-countdown b{font-size:30px}
+  .app.phase-market .gx-market{order:2;display:flex;flex-direction:column;flex:1;min-height:0;height:auto;max-height:none;gap:8px;padding:0;overflow:visible}
+  .mobile-market-nav{flex-shrink:0;min-height:44px;order:0;gap:8px}.mobile-market-nav button{width:44px;height:44px;flex-shrink:0}.mobile-market-nav>span{flex:1;min-width:0;justify-content:center;gap:8px;font-size:13px}.mobile-market-nav small{font-size:9px}
+  .app.phase-market .gx-market-grid{order:1;flex:1;min-height:0;height:auto;display:flex;overflow-x:auto;overflow-y:hidden;gap:12px;scroll-snap-type:x mandatory}
+  .app.phase-market .gx-offer{position:relative;flex:0 0 100%;height:100%;min-height:0;display:grid;grid-template-columns:92px minmax(0,1fr);grid-template-rows:minmax(126px,auto) auto minmax(0,1fr) auto auto;gap:8px 14px;align-content:stretch;align-items:start;overflow:hidden;padding:16px}
+  .app.phase-market .gx-offer .gx-offer-art{grid-column:1;grid-row:1/3;order:initial;width:92px;height:126px;align-self:center}
+  .app.phase-market .gx-offer h3{grid-column:2;grid-row:1;order:initial;align-self:end;font-size:29px;line-height:1.1;text-align:left;margin:0}
+  .app.phase-market .gx-offer-top{grid-column:2;grid-row:2;order:initial;align-self:start;justify-content:flex-start;gap:5px;min-height:0}
+  .gx-offer .kind-pill,.gx-offer .vis-pill{font-size:10px;line-height:1.4;padding:3px 5px;white-space:normal}
+  .app.phase-market .gx-offer p.gx-offer-text{grid-column:1/-1;grid-row:3;order:initial;align-self:stretch;min-height:0;overflow-y:auto;font-size:14px;line-height:1.6;text-align:left;margin:0;color:#ddd6c6;overscroll-behavior:contain}
+  .app.phase-market .mobile-offer-details{grid-column:1/-1;grid-row:4;order:initial;max-height:120px;overflow-y:auto;font-size:12px;line-height:1.5}.mobile-offer-details summary{min-height:40px;padding:10px 0;text-align:left}.mobile-offer-details p{font-size:12px;line-height:1.6}
+  .app.phase-market .gx-offer footer{grid-column:1/-1;grid-row:5;order:initial;margin:0;align-self:stretch;position:static;width:100%}
+  .app.phase-market .gx-buy{flex-direction:row;min-height:48px;padding:10px 14px;font-size:22px;gap:10px}.gx-buy>span{font-size:12px}
+  .phase-market .reserve-art .playing-card.big{width:82px;min-width:82px;height:116px}
+  .app.phase-market .gx-bottom{position:fixed;inset:auto 0 0;margin:0;height:calc(96px + env(safe-area-inset-bottom));padding:8px var(--portrait-right) calc(10px + env(safe-area-inset-bottom)) var(--portrait-edge);grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:26px 44px;gap:6px 12px!important;align-content:start}
+  .app.phase-market .gx-bottom .wallet-block{grid-column:1;grid-row:1;min-height:26px;padding:0;display:flex;gap:8px}.app.phase-market .gx-bottom .wallet-block>strong{font-size:25px}.phase-market .wallet-block small{font-size:16px}
+  .phase-market .mobile-magic-launch{position:static;grid-column:1;grid-row:2;min-width:0;align-self:stretch}.phase-market .mobile-magic-launch>button{min-height:44px;height:100%;padding:8px 10px;font-size:12px}
+  .mobile-market-ready{grid-column:2;grid-row:2;min-height:44px;height:100%;align-self:stretch;font-size:13px;padding:8px 10px}
+  .phase-market .market-refresh{display:none}
+  .phase-market .gx-replace{order:2;flex-shrink:0;max-height:72px;overflow-y:auto;gap:5px;font-size:11px}.phase-market .gx-replace button{min-height:36px;font-size:10px}
+
+  /* Bottom sheet: horizontal card picker, scrolling choices, pinned use actions. */
+  .app.in-game .gx-right{inset:auto var(--portrait-right) calc(8px + env(safe-area-inset-bottom)) var(--portrait-edge);width:auto;max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));padding:14px;border-radius:16px;overflow:hidden}
+  .mobile-sheet-heading{font-size:25px}.mobile-sheet-heading button{width:44px;height:44px}
+  .app.in-game .magic-open .gx-right{gap:10px}
+  .gx-tray{display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden}.gx-tray-head{margin:0;flex-shrink:0}.gx-tray-head .gx-hud-label{font-size:12px}.gx-tray-priv{font-size:10px}
+  .gx-tray-slots{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;max-height:none;padding:2px 2px 8px;flex-shrink:0;scroll-snap-type:x proximity}
+  .gx-slot-wrap,.gx-tray-slots>.gx-slot.empty{flex:0 0 100px;min-width:0}
+  .gx-slot,.gx-slot.empty{display:flex;flex-direction:column;width:100px;height:142px;min-height:142px!important;padding:7px;gap:4px;align-items:center;text-align:center}
+  .gx-slot .magic-art,.gx-slot .tray-reserve{width:100%;height:60px;flex:none}.gx-slot-name{font-size:12px;text-align:center;min-height:30px;line-height:1.25}.gx-slot-state{font-size:10px;text-align:center}.gx-slot-visibility{display:none}
+  .gx-tray:has(.gx-use) .gx-slot,.gx-tray:has(.gx-use) .gx-slot.empty{min-height:104px!important;height:104px}.gx-tray:has(.gx-use) .gx-slot .magic-art,.gx-tray:has(.gx-use) .gx-slot .tray-reserve{height:44px}.gx-tray:has(.gx-use) .gx-slot-state{display:none}
+  .gx-use{position:relative;inset:auto;grid-column:auto;grid-row:auto;width:100%;margin:0;padding:12px;max-height:calc(100dvh - 250px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:0;flex-shrink:1}
+  .gx-use-head{grid-template-columns:44px minmax(0,1fr) 36px;gap:8px;flex-shrink:0}.gx-use-art{width:44px;height:60px}.gx-use .magic-name{font-size:22px}.gx-use .magic-details p{font-size:12px;line-height:1.5}.gx-use .magic-details .magic-timing{display:none}
+  .gx-use-content{min-height:0;overflow-y:auto;overscroll-behavior:contain}.gx-use-actions{flex-shrink:0;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);gap:8px}.gx-use-actions .btn{min-height:44px;padding:8px 12px;flex:1;font-size:13px}.gx-x{min-width:36px;min-height:36px}
+  .gx-use-row{gap:8px;font-size:12px}.chip{min-height:44px;padding:8px 12px;font-size:12px}
+  .app.phase-market:has(.magic-open) .market-refresh{visibility:hidden}
+
+  /* Waiting rooms and results use one scrolling content panel. */
+  .app.phase-lobby,.app.phase-finished{height:100dvh;min-height:0;overflow:hidden;display:flex;gap:10px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .phase-lobby .gx-plates,.phase-lobby .gx-stepper,.phase-lobby .gx-match,.phase-lobby .gx-bottom,.phase-finished .gx-plates,.phase-finished .gx-stepper,.phase-finished .gx-match,.phase-finished .gx-bottom{display:none}
+  .app.phase-lobby .room-label,.app.phase-finished .room-label{min-height:36px;margin:0;flex-shrink:0}
+  .app.phase-lobby .gx-dialog,.app.phase-finished .gx-dialog{flex:1;min-height:0;max-height:none;width:100%;overflow-y:auto;padding:18px;order:2}
+}
+
+@media (max-width:360px) and (orientation:portrait){
+  .mobile-market-nav>span>small{display:none}
+}
+
+@media (max-width:1000px) and (orientation:portrait) and (max-height:700px){
+  .in-lobby .welcome{padding:10px 0 16px;gap:8px}.welcome-copy h1{font-size:32px;line-height:1;margin:8px 0}.welcome-copy>p{display:none}.entry-panel{padding:14px}.entry-panel h2{font-size:25px;margin:8px 0 10px}.field-label{margin:10px 0 6px}.character-picker button{min-height:54px}.entry-create{margin-top:14px}.demo-link{margin-top:6px}
+  .app.phase-playing{grid-template-rows:44px 24px 42px auto minmax(0,1fr) auto;gap:5px}
+  .app.in-game .topbar{height:44px;min-height:44px}.gx-plate{padding:5px 6px}.gx-plate-head strong{font-size:11px}.gx-plate-status{font-size:9px}
+  .app.phase-playing .gx-board{padding:6px 10px 14px;gap:4px}.gx-board-slot,.gx-board .playing-card{width:40px;height:58px}.gx-board .card-corner{font-size:15px}.gx-board .card-suit{font-size:25px}
+  .app.phase-playing .gx-log{display:none}
+  .app.phase-playing .gx-bottom{padding-top:6px;padding-bottom:6px;gap:4px!important}.app.phase-playing .gx-bottom .wallet-block{min-height:82px;padding-right:112px;grid-template-rows:14px 30px}.app.in-game .gx-bottom .wallet-block>strong{font-size:29px}.app.in-game .gx-bottom .wallet-block>.eyebrow{font-size:10px}
+  .gx-hand .playing-card.big{width:44px;height:62px}.gx-hand .gx-hud-label{font-size:9px}.gx-hand .playing-card.big .card-corner{font-size:15px}.gx-hand .playing-card.big .card-suit{font-size:25px}
+  .phase-playing .mobile-magic-launch{top:53px;right:calc(var(--portrait-right) + 112px)}.mobile-magic-launch>button{min-height:34px;font-size:11px}
+  .gx-turn{min-height:34px;padding:4px 8px}.gx-ring{width:28px;height:28px}.gx-turn b{font-size:12px}.gx-turn span{display:none}.gx-btn{min-height:48px}.gx-btn b{font-size:15px}.mobile-raise-toggle{min-height:34px;font-size:11px}
+  .app.phase-playing .secret-note{bottom:232px;font-size:10px;max-height:48px}
+  .app.phase-market{gap:6px}.app.phase-market .gx-market-head{padding:4px 2px}.app.phase-market .gx-market-head>.eyebrow{display:none}.app.phase-market .gx-market-head h2{font-size:26px}.gx-market-head .gx-countdown{grid-row:1;flex-direction:row;gap:8px}.gx-market-head .gx-countdown b{font-size:26px}.gx-market-head .gx-countdown>span{font-size:10px}
+  .app.phase-market .gx-offer{padding:12px;gap:6px 10px;grid-template-columns:64px minmax(0,1fr);grid-template-rows:minmax(88px,auto) auto minmax(0,1fr) auto auto}.app.phase-market .gx-offer .gx-offer-art{width:64px;height:88px}.app.phase-market .gx-offer h3{font-size:25px}.app.phase-market .gx-offer p.gx-offer-text{font-size:13px;line-height:1.5}.phase-market .reserve-art .playing-card.big{width:58px;min-width:58px;height:82px}.mobile-offer-details summary{min-height:36px;padding:8px 0}
+}
+
+/* Lobby actions stay visible while seats and match settings can scroll. */
+.app.phase-lobby .lobby-dialog{display:flex;flex-direction:column;overflow:hidden;max-height:calc(100dvh - 180px)}
+.lobby-heading{flex-shrink:0}.lobby-heading h2{margin:6px 0 12px}
+.lobby-content{min-height:0;overflow-y:auto;overscroll-behavior:contain;flex:1}
+.lobby-invite{margin:0 0 12px;display:flex;gap:8px}.lobby-invite .btn{flex:1;min-width:0;padding:10px 6px;letter-spacing:.5px}
+.lobby-content .gx-roster{margin:0 0 12px}.lobby-content .room-setup{margin:0;border-top:0;padding:0}
+.setup-toggle{width:100%;min-height:44px;white-space:normal;text-align:left;justify-content:space-between;letter-spacing:.4px}
+.lobby-controls{flex-shrink:0;padding-top:12px;border-top:1px solid var(--line);margin-top:12px}
+.lobby-add-bot{width:100%;min-height:44px}.lobby-dialog .lobby-status{font-size:12px;line-height:1.4;margin:8px 0;color:var(--muted)}
+.lobby-start{display:flex;gap:8px;margin:0}.lobby-start .btn{flex:1;min-height:48px;padding:10px 6px}
+@media(max-width:1000px),(pointer:coarse) and (max-height:600px){
+ .app.phase-lobby{height:100dvh;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+ .phase-lobby .gx-plates,.phase-lobby .gx-board,.phase-lobby .gx-log{display:none}
+ .app.phase-lobby .room-label{position:relative;inset:auto;flex-shrink:0;min-height:30px;margin:0}
+ .app.phase-lobby .lobby-dialog{position:relative;inset:auto;transform:none;order:2;flex:1;min-height:0;max-height:none;width:100%;padding:14px;margin:0}
+ .lobby-heading h2{font-size:28px}.lobby-heading .eyebrow{font-size:10px}.lobby-content .gx-roster>div{min-height:38px;padding:7px 8px}
+ .lobby-content .setup-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.lobby-content .setup-fields input{min-height:44px;font-size:16px}
+}
+@media(max-width:1000px) and (orientation:landscape){
+ .app.phase-lobby .room-label{display:none}
+ .app.phase-lobby .lobby-dialog{display:grid;grid-template-columns:minmax(0,1fr) 240px;grid-template-rows:auto minmax(0,1fr);gap:8px 16px}
+ .lobby-heading{grid-column:1;grid-row:1}.lobby-heading h2{font-size:25px;margin-bottom:0}
+ .lobby-content{grid-column:1;grid-row:2}.lobby-controls{grid-column:2;grid-row:1/3;display:flex;flex-direction:column;justify-content:flex-end;margin:0;padding:0 0 0 16px;border-top:0;border-left:1px solid var(--line)}
+}
+
+.lobby-content .room-setup .btn{min-height:44px!important;font-size:12px!important}
+@media(max-width:1000px){.lobby-content .setup-fields label{flex-direction:column;align-items:stretch;gap:5px}.lobby-content .setup-fields input{width:100%}}
+
+.app.in-game.phase-lobby .lobby-dialog .setup-toggle,.app.in-game.phase-lobby .lobby-dialog .lobby-add-bot{width:100%;font-size:13px;letter-spacing:.5px}
+
+.chat-icon{position:relative}
+.chat-launch .chat-unread{border-left:0;padding:0 4px;right:-5px;top:-5px}
+.chat-unread{position:absolute;right:0;top:1px;display:grid;place-items:center;min-width:16px;height:16px;padding:0 4px;border-radius:9px;background:#d74343;color:#fff;font:700 10px/1 sans-serif;border:1px solid #291713;pointer-events:none}
+.chat-notice{position:fixed;z-index:70;top:calc(58px + env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));width:280px;max-width:calc(100vw - 24px);display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--gold-dark);border-radius:10px;background:#192119;color:var(--gold);box-shadow:0 8px 24px #0008;text-align:left}
+.chat-notice>span{min-width:0;display:grid;gap:4px}.chat-notice b{font-size:12px}.chat-notice span span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e6dbc5;font-size:12px}
+@media(max-width:1000px),(pointer:coarse) and (max-height:600px){
+ .room-chat{position:fixed;inset:8px 12px auto;z-index:90;width:auto;max-width:none;height:min(360px,calc(100dvh - 16px));display:flex;flex-direction:column;overflow:hidden;border-radius:12px;overscroll-behavior:contain}
+ .room-chat header{flex-shrink:0;align-items:center;padding:4px 12px;min-height:48px}.room-chat header button{width:44px;height:44px;font-size:24px}
+ .room-chat .chat-messages{flex:1;min-height:0;height:auto;overflow-y:auto;overscroll-behavior:contain}
+ .room-chat form{flex-shrink:0;margin:0;padding:8px;gap:6px}.room-chat input{min-height:44px;font-size:16px;min-width:0}.room-chat form button{min-height:44px;min-width:48px}
+}
+
+/* Keep card art out of filtered compositing layers inside the mobile scroll strip.
+   WebKit can stop painting those layers after a swipe until another layout change. */
+@media(max-width:1000px),(max-height:600px) and (pointer:coarse){
+ .app.in-game.phase-market .gx-offer .gx-offer-art{filter:none}
+}

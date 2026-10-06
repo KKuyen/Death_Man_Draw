@@ -39,7 +39,7 @@ export function MagicTray({snapshot,own,others,send,mine,flash}:{flash?:{magicId
   const canUseNow=!!slot?.usable&&(!needsTarget||!!target)&&(!needsBoard||snapshot.board.length>0);
   const discardable=snapshot.phase==='market';
   return <div className="gx-tray" onMouseEnter={cancelClose} onMouseLeave={()=>{cancelClose();if(!pinned)closeTimer.current=setTimeout(close,220);}} aria-label="Khay bài phép (chỉ bạn thấy)">
-    <div className="gx-tray-head"><span className="gx-hud-label">BÀI PHÉP · {own.magic.length}/{DEFAULTS.magicSlots}</span><span className="gx-tray-priv">chỉ bạn thấy</span></div>
+    <div className="gx-tray-head"><span className="gx-hud-label">BÀI PHÉP · {own.magic.length}/{DEFAULTS.magicSlots}</span></div>
     <div className="gx-tray-slots">{Array.from({length:DEFAULTS.magicSlots},(_,i)=>{const m=bySlot.get(i);const d=m?getMagic(m.magicId):undefined;
       if(!m||!d)return <div key={i} className="gx-slot empty" aria-label={`Ô ${i+1} trống`}><span>{i+1}</span></div>;
       const ready=m.usable&&d.kind==='active';const fam=famOf(d.kind,d.swap);const glow=flash?.magicId===m.magicId;
@@ -52,14 +52,15 @@ export function MagicTray({snapshot,own,others,send,mine,flash}:{flash?:{magicId
       </div>;})}</div>
     {open&&<div className={`gx-use kind-${famOf(def.kind,def.swap)}`} role="dialog" aria-label={`Lá ${def.name}`}>
       <div className="gx-use-head"><MagicArt magicId={slot.magicId} fam={famOf(def.kind,def.swap)} className="gx-use-art"/><MagicDetails def={def} heading/><button type="button" className="gx-x" onClick={close} aria-label="Đóng">×</button></div>
-      <p className={`gx-use-timing ${slot.usable?'ok':''}`}>{timingText(slot,snapshot,mine)}</p>
+      <div className="gx-use-content"><p className="magic-effect">{def.description}</p><p className={`gx-use-timing ${slot.usable?'ok':''}`}>{timingText(slot,snapshot,mine)}</p>
       {def.swap&&slot.spare&&<div className="gx-use-row"><span>Lá dự trữ</span><PlayingCard card={slot.spare} small caption/></div>}
       {slot.usable&&needsTarget&&<div className="gx-use-row"><span>Đối thủ</span>{targets.map(p=><button key={p.id} type="button" className={`chip ${target===p.id?'on':''}`} onClick={()=>setTarget(p.id)}>{p.name}</button>)}</div>}
       {slot.usable&&needsHand&&<div className="gx-use-row"><span>{def.swap?'Thay lá':'Lá tay'}</span>{own.hand.map((c,i)=><PlayingCard key={c.id} card={c} small caption selected={hi===i} onClick={()=>setHi(i as 0|1)}/>)}</div>}
       {slot.usable&&magicInputs(def).modifier&&<div className="gx-use-row"><span>Thành</span>{(['gold','wild'] as const).map(m=><button key={m} type="button" className={`chip ${mod===m?'on':''}`} onClick={()=>setMod(m)}>{m==='gold'?'Vàng':'Muôn chất'}</button>)}</div>}
       {slot.usable&&needsBoard&&<div className="gx-use-row"><span>Lá chung</span>{snapshot.board.map((c,i)=><PlayingCard key={c.id} card={c} small selected={bi===i} onClick={()=>setBi(i)}/>)}</div>}
+      </div>
       <div className="gx-use-actions">
-        {def.kind==='active'&&<button type="button" className="btn gold gx-use-go" disabled={!canUseNow} onClick={use}>{def.swap?'ĐỔI HAI LÁ':'DÙNG LÁ NÀY'}</button>}
+        {def.kind==='active'&&<button type="button" className="btn gold gx-use-go" disabled={!canUseNow} onClick={use}>{def.swap?'Đổi lá':'Dùng phép'}</button>}
         {discardable&&<button type="button" className="btn outline" onClick={()=>{send({type:'discardMagic',slot:slot.slot});close();}} title="Bỏ lá (không hoàn tiền)">BỎ LÁ</button>}
       </div>
     </div>}

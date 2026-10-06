@@ -27,6 +27,7 @@ export async function startServer(overrides: Partial<typeof config> = {}) {
       });
       app.get('/health', (_req: any, res: any) => { res.json({ ok: true, rooms: registry.size, persistence: store.kind, uptime: Math.round(process.uptime()) }); });
       app.get('/api/rooms', (_req: any, res: any) => { res.json({ rooms: [...registry.values()].map(r => r.summary()) }); });
+      app.get('/api/public-rooms', (_req: any, res: any) => { res.json({ rooms: [...registry.values()].map(r => r.summary()).filter(r => r.public) }); });
     },
   });
   matchMaker.controller.getCorsHeaders = (headers: Headers): Record<string, string> => {

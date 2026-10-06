@@ -32,6 +32,7 @@ function validateCommand(c: Record<string, unknown>): void {
       if (!integer(c.slot) || c.slot >= MAGIC_SLOTS || !optional(c.targetPlayerId, v => isText(v, 128)) || !optional(c.handIndex, hand01) || !optional(c.boardIndex, v => integer(v) && Number(v) < 5) || !optional(c.modifier, v => v === 'gold' || v === 'wild')) bad(); break;
     case 'swap': if (!integer(c.slot) || c.slot >= MAGIC_SLOTS || !hand01(c.handIndex)) bad(); break;
     case 'kick': if (!isText(c.targetPlayerId, 128)) bad(); break;
+    case 'transferHost': if (!isText(c.targetPlayerId, 128)) bad(); break;
     default: bad();
   }
 }
@@ -225,6 +226,7 @@ class Engine implements GameEngine {
       case 'useMagic': this.useMagic(p, c); break;
       case 'swap': this.swap(p, c); break;
       case 'kick': this.kick(p, c); break;
+      case 'transferHost': this.transferHost(p, c); break;
       case 'addBot': fail('Máy chủ quản lý người chơi máy.');
       case 'rematch': this.rematch(p); break;
       case 'disband': fail('Máy chủ xử lý giải tán.');
@@ -383,15 +385,34 @@ class Engine implements GameEngine {
     this.s.winnerId = active.length === 1 ? active[0].id : null;
     this.log(this.s.winnerId ? `${this.player(this.s.winnerId).name} thắng trận.` : 'Trận đấu hòa.', 'win');
   }
-  /** Host-only, phase 'lobby' or 'finished' only: removes a seat and frees it. */
+  /** Keep live-hand contributions available to side-pot settlement after removing a client. */
   private kick(p: Player, c: Extract<Command, { type: 'kick' }>) {
     if (p.id !== this.s.hostId) fail('Chỉ chủ phòng được đuổi người chơi.');
-    if (!['lobby', 'finished'].includes(this.s.phase)) fail('Chỉ đuổi được ở sảnh hoặc sau khi trận kết thúc.');
     if (c.targetPlayerId === p.id) fail('Không thể tự đuổi chính mình.');
     const target = this.s.players.find(q => q.id === c.targetPlayerId) ?? fail('Không tìm thấy người chơi.');
-    this.s.players = this.s.players.filter(q => q.id !== target.id);
-    if (this.s.hostId === target.id) this.s.hostId = this.s.players.find(q => !q.bot)?.id ?? this.s.players[0]?.id ?? null;
+    if (target.kicked) fail('Người chơi đã rời bàn.');
+    if (['lobby', 'finished'].includes(this.s.phase)) this.s.players = this.s.players.filter(q => q.id !== target.id);
+    else {
+      target.kicked = true; target.connected = false; target.folded = true; target.eliminated = true;
+      target.ready = false; target.slots = Array(MAGIC_SLOTS).fill(null);
+      if (this.s.turnPlayerId === target.id) {
+        const next = this.clockwise(this.contenders().filter(q => !q.allIn && (q.actedBet === null || q.bet < this.s.currentBet)), target.seat)[0];
+        this.setTurn(next?.id ?? null);
+      }
+      this.advance(); this.checkFinished();
+      if (this.s.phase === 'market') this.checkAllReady();
+    }
     this.log(`Chủ phòng đuổi ${target.name} khỏi bàn.`);
+  }
+  /** Host-only, any phase: hands host control to another connected human player. */
+  private transferHost(p: Player, c: Extract<Command, { type: 'transferHost' }>) {
+    if (p.id !== this.s.hostId) fail('Chỉ chủ phòng chuyển được quyền.');
+    if (c.targetPlayerId === p.id) fail('Bạn đã là chủ phòng.');
+    const target = this.s.players.find(q => q.id === c.targetPlayerId) ?? fail('Không tìm thấy người chơi.');
+    if (target.bot) fail('Không thể trao quyền cho máy.');
+    if (!target.connected || target.eliminated || target.kicked) fail('Chỉ trao quyền cho người đang chơi và có kết nối.');
+    this.s.hostId = target.id;
+    this.log(`${p.name} trao quyền chủ phòng cho ${target.name}.`);
   }
   /** Host-only, mid-match: aborts early. Whoever has the most chips among non-eliminated players wins; ties/empty table have no winner. */
   private endMatch(p: Player) {
@@ -405,6 +426,7 @@ class Engine implements GameEngine {
   /** Host-only, phase 'finished' only: fresh match, same seats/names/characters/host, everyone back to the lobby. */
   private rematch(p: Player) {
     if (p.id !== this.s.hostId || this.s.phase !== 'finished') fail('Chỉ chủ phòng bắt đầu ván mới sau khi trận kết thúc.');
+    this.s.players = this.s.players.filter(q => !q.kicked);
     for (const q of this.s.players) {
       q.wallet = this.s.setup.startingWallet; q.eliminated = false; q.folded = false; q.allIn = false; q.bet = 0; q.contribution = 0;
       q.hand = []; q.revealed = []; q.slots = Array(MAGIC_SLOTS).fill(null); q.offers = []; q.marketStartHand = undefined;
@@ -575,7 +597,7 @@ class Engine implements GameEngine {
     const s = this.s;
     const players: PublicPlayer[] = s.players.map(p => ({
       id: p.id, name: p.name, seat: p.seat, character: p.character, connected: p.connected, ready: p.ready, bot: p.bot, folded: p.folded, eliminated: p.eliminated, allIn: p.allIn,
-      bet: p.bet, contribution: p.contribution, handSize: p.hand.length, revealedCards: p.revealed.map(r => clone(r.shown)),
+      bet: p.bet, contribution: p.contribution, handSize: p.hand.length, revealedCards: p.revealed.map(r => clone(r.shown)), ...(p.kicked ? {kicked:true} : {}),
     }));
     const paid = s.phase === 'showdown' || s.phase === 'finished' || s.phase === 'market';
     return {

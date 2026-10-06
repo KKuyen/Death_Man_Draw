@@ -4,16 +4,18 @@ import {connection,type CommandInput} from './network';
 import type {SaloonScene} from './scene';
 import {playCue,playCountdownTick,playTurnCue} from './audio';
 import {remainingSeconds} from './clock';
+import {copyText} from './clipboard';
 import {voice} from './voice';
 import {music} from './music';
 import {setEffectsVolume,setSoundOutput,unlockAudio} from './soundBus';
 import {SettingsDrawer,readPreferences} from './ui/Settings';
 import {RoomSetup} from './ui/RoomSetup';
-import {RoomSocial} from './ui/Social';
+import {RoomSocial,useChatNotifications} from './ui/Social';
 import {playMagicCategory,playHintCue} from './magicSound';
 import {getMagic} from '@saloon/content';
 import {Icon,PlayingCard,characters,fmt,streetName} from './ui/common';
 import {Nameplates} from './ui/Nameplates';
+import {enterMobileFullscreen} from './ui/mobileFullscreen';
 import {ActionBar} from './ui/ActionBar';
 import {HelpDrawer} from './ui/Help';
 import {PrivateMarket,ReadyRoster,Countdown} from './ui/Market';
@@ -21,10 +23,8 @@ import {BoardStrip,OwnHand} from './ui/Hud';
 import {MagicTray} from './ui/MagicTray';
 import {Toasts,PeekModal,peekIsCrystal,peekNote} from './ui/Toasts';
 import {nextStepHint} from './ui/hint';
-import {PhaseStepper,MatchStrip,TurnBanner,EventLog,Coach,usePhaseBanner} from './ui/Progress';
-import './game.css';
-import './magic.css';
-import './social.css';
+import {PhaseStepper,MatchStrip,TurnBanner,EventLog,Coach,RosterPeek} from './ui/Progress';
+import {WorldList} from './ui/WorldList';
 
 /** Optional scene hooks (held cards / look-down camera); no-ops until the scene implements them. */
 interface SceneHooks {showMagicUse?:(seat:number,magicId:string,opts?:{name?:string;targetSeat?:number})=>void;showMagicPeek?:(seat:number,magicId:string)=>void;setHoldCards?:(cards:Card[]|null)=>void}
@@ -35,14 +35,35 @@ const safe=(f:()=>void)=>{try{f();}catch(e){console.warn('scene',e);}};
 export function App(){
  const state=useSyncExternalStore(connection.subscribe,connection.getSnapshot);const {snapshot,own,selfId}=state;
  const canvas=useRef<HTMLCanvasElement>(null),scene=useRef<SaloonScene|null>(null);
- const [loaded,setLoaded]=useState(false),[sceneTick,setSceneReady]=useState(0),[name,setName]=useState(localStorage.getItem('saloon.name')||''),[character,setCharacter]=useState<CharacterId>('coyote'),[roomCode,setRoomCode]=useState(()=>new URLSearchParams(location.search).get('join')?.trim().toUpperCase()||'');
+ const [loaded,setLoaded]=useState(false),[bootDone,setBootDone]=useState(false),[sceneTick,setSceneReady]=useState(0),[name,setName]=useState(localStorage.getItem('saloon.name')||''),[character,setCharacter]=useState<CharacterId>('coyote'),[roomCode,setRoomCode]=useState(()=>new URLSearchParams(location.search).get('join')?.trim().toUpperCase()||'');
  const [prefs,setPrefs]=useState(readPreferences),[settings,setSettings]=useState(false),[micOn,setMicOn]=useState(false),[micError,setMicError]=useState(''),[chatOpen,setChatOpen]=useState(false),[mutedPlayers,setMutedPlayers]=useState<string[]>([]);
+ useEffect(()=>setChatOpen(false),[snapshot?.roomId]);
+ const {unread:chatUnread,notice:chatNotice}=useChatNotifications(state,chatOpen);
  const [help,setHelp]=useState(false),[raiseTo,setRaiseTo]=useState(40),[muted,setMuted]=[prefs.muted,(v:boolean)=>setPrefs(p=>({...p,muted:v}))],[lowQuality,setLowQuality]=[prefs.lowQuality,(v:boolean)=>setPrefs(p=>({...p,lowQuality:v}))];
  const [now,setNow]=useState(Date.now()),[copied,setCopied]=useState(false),[copiedLink,setCopiedLink]=useState(false),[coach,setCoach]=useState(false);
  useEffect(()=>{if(location.search.includes('join='))history.replaceState(null,'',location.pathname);},[]);
+ const [isPublic,setIsPublic]=useState(false),[worldOpen,setWorldOpen]=useState(false);
+ const [rosterPeek,setRosterPeek]=useState(false);
+ useEffect(()=>{
+  if(!snapshot)return;
+  const down=(e:KeyboardEvent)=>{if(e.key!=='Tab'||e.repeat)return;const el=e.target as HTMLElement|null;if(el?.closest('input,textarea,select,[contenteditable="true"],[role="dialog"],.drawer,.gx-right'))return;e.preventDefault();setRosterPeek(v=>!v);};
+  window.addEventListener('keydown',down);return()=>{window.removeEventListener('keydown',down);};
+ },[!!snapshot]);
+ useEffect(()=>setRosterPeek(false),[snapshot?.roomId]);
  const [flash,setFlash]=useState<{magicId:string;n:string}|null>(null);
+ const [magicOpen,setMagicOpen]=useState(false);
+ const magicLaunch=useRef<HTMLButtonElement>(null),magicClose=useRef<HTMLButtonElement>(null);
+ useEffect(()=>{
+  if(!magicOpen)return;
+  magicClose.current?.focus();
+  const key=(e:KeyboardEvent)=>{if(e.key==='Escape'){setMagicOpen(false);magicLaunch.current?.focus();}};
+  window.addEventListener('keydown',key);
+  return()=>window.removeEventListener('keydown',key);
+ },[magicOpen]);
+ useEffect(()=>setMagicOpen(false),[snapshot?.phase]);
+ const closeMagic=()=>{setMagicOpen(false);magicLaunch.current?.focus();};
  const handStart=useRef({hand:-1,wallet:0});
- const me=snapshot?.players.find(p=>p.id===selfId),others=snapshot?.players.filter(p=>p.id!==selfId&&!p.eliminated)||[];
+ const me=snapshot?.players.find(p=>p.id===selfId),others=snapshot?.players.filter(p=>p.id!==selfId&&!p.eliminated&&!p.kicked)||[];
  const spectating=!!me?.eliminated;
  const clockAnchor=useRef({snapshot:null as typeof snapshot,at:Date.now()});
  if(clockAnchor.current.snapshot!==snapshot)clockAnchor.current={snapshot,at:Date.now()};
@@ -109,52 +130,71 @@ export function App(){
  const musicMode=snapshot&&snapshot.phase!=='lobby'?'game':'lobby';
  useEffect(()=>{setEffectsVolume(prefs.muted?0:prefs.effects);music.set(prefs.musicOn,prefs.music,musicMode);voice.setVolume(prefs.voice);voice.setOutput(prefs.output);void setSoundOutput(prefs.output);if(voice.inputId!==prefs.input)void voice.setInput(prefs.input);localStorage.setItem('saloon.settings',JSON.stringify(prefs));},[prefs,musicMode]);
  useEffect(()=>{voice.onChange=(on,error)=>{setMicOn(on);setMicError(error||'');};const unlock=()=>{unlockAudio();voice.unlock();};window.addEventListener('pointerdown',unlock);window.addEventListener('keydown',unlock);return()=>{voice.onChange=null;window.removeEventListener('pointerdown',unlock);window.removeEventListener('keydown',unlock);};},[]);
+ const mutePlayer=(id:string,muted:boolean)=>{voice.mutePlayer(id,muted);setMutedPlayers(ids=>muted?[...new Set([...ids,id])]:ids.filter(x=>x!==id));};
  const toggleMic=()=>{setMicError('');if(voice.enabled)voice.stop();else void voice.start(prefs.input);};
+ useEffect(()=>{if(!loaded)return;const t=setTimeout(()=>setBootDone(true),450);return()=>clearTimeout(t);},[loaded]);
  const busy=state.status==='connecting';
- async function copy(){if(!snapshot)return;await navigator.clipboard.writeText(snapshot.code);setCopied(true);setTimeout(()=>setCopied(false),1800);}
- async function copyLink(){if(!snapshot)return;await navigator.clipboard.writeText(`${location.origin}${location.pathname}?join=${snapshot.code}`);setCopiedLink(true);setTimeout(()=>setCopiedLink(false),1800);}
+ async function copy(){if(!snapshot)return;await copyText(snapshot.code);setCopied(true);setTimeout(()=>setCopied(false),1800);}
+ async function copyLink(){if(!snapshot)return;await copyText(`${location.origin}${location.pathname}?join=${snapshot.code}`);setCopiedLink(true);setTimeout(()=>setCopiedLink(false),1800);}
  function bet(action:'check'|'call'|'raise'|'fold'|'allIn'){send({type:'bet',action,amount:action==='raise'?raiseTo:undefined});}
  const phase=snapshot?.phase;
  const phaseLabel=!snapshot?'SALOON N° 04':phase==='lobby'?'SẢNH CHỜ':phase==='market'?'CHỢ BÀI PHÉP':phase==='showdown'?'KẾT QUẢ VÁN':phase==='finished'?'HẠ MÀN':streetName[snapshot.street];
  const hint=snapshot?nextStepHint(snapshot,own,selfId,seconds,host):'';
- const banner=usePhaseBanner(snapshot,seconds);
  const trend=own&&handStart.current.hand===snapshot?.handId?own.wallet-handStart.current.wallet:0;
  const inHand=phase==='playing'&&!me?.eliminated;
- return <div className={`app ${snapshot?'in-game':'in-lobby'} ${snapshot?`phase-${snapshot.phase}`:''} ${spectating?'is-spectating':''}`}>
+ return <div className={`app ${snapshot?'in-game':'in-lobby'} ${snapshot?`phase-${snapshot.phase}`:''} ${spectating?'is-spectating':''} ${chatOpen?'has-chat':''}`}>
   <canvas ref={canvas} className="world" aria-label="Quán saloon 3D"/><div className="vignette"/><div className="grain"/>
-  <header className="topbar"><a className="wordmark" href="#" onClick={e=>e.preventDefault()}><span className="logo-spade">♠</span><span>DEAD MAN’S <b>DRAW</b></span></a><div className="top-center"><span className="live-dot"/>{phaseLabel}{snapshot&&<span className="hand-count">VÁN {snapshot.handId}</span>}</div><nav><button onClick={()=>setSettings(v=>!v)} aria-label="Cài đặt" title="Cài đặt"><Icon name="settings"/></button>{snapshot&&<><button className={micOn?'mic-on':'dim'} onClick={toggleMic} aria-label={micOn?'Tắt mic':'Bật mic'} title={micOn?'Tắt mic':'Bật mic'}><Icon name={micOn?'mic':'micOff'}/></button><button onClick={()=>setChatOpen(v=>!v)} aria-label="Mở chat" title="Chat · Enter"><Icon name="chat"/></button></>}<button className={muted?'dim':''} onClick={()=>setMuted(!muted)} aria-label={muted?'Bật âm thanh':'Tắt âm thanh'} title={muted?'Bật âm thanh':'Tắt âm thanh'}><Icon name="sound"/></button><button onClick={()=>setHelp(h=>!h)} aria-label="Cách chơi" title="Cách chơi"><Icon name="help"/></button>{snapshot&&<button onClick={()=>connection.leave()} aria-label="Rời bàn" title="Rời bàn"><Icon name="exit"/></button>}</nav></header>
+  {!bootDone&&<div className={`boot-screen ${loaded?'fade-out':''}`} role="status" aria-label="Đang tải"><span className="logo-spade">♠</span><span className="boot-title">DEAD MAN’S <b>DRAW</b></span><span className="boot-spinner" aria-hidden="true"/><span className="boot-text">ĐANG DỰNG SALOON…</span></div>}
+  <header className="topbar"><a className="wordmark" href="#" onClick={e=>e.preventDefault()}><span className="logo-spade">♠</span><span>DEAD MAN’S <b>DRAW</b></span></a><div className="top-center"><span className="live-dot"/>{phaseLabel}{snapshot&&<span className="hand-count">VÁN {snapshot.handId}</span>}</div><nav><button className="mobile-fullscreen" onClick={()=>void enterMobileFullscreen()} aria-label="Chơi toàn màn hình" title="Toàn màn hình"><span aria-hidden="true">⛶</span></button><button onClick={()=>setSettings(v=>!v)} aria-label="Cài đặt" title="Cài đặt"><Icon name="settings"/></button>{snapshot&&<><button className={micOn?'mic-on':'dim'} onClick={toggleMic} aria-label={micOn?'Tắt mic':'Bật mic'} title={micOn?'Tắt mic':'Bật mic'}><Icon name={micOn?'mic':'micOff'}/></button><button className="chat-icon" onClick={()=>setChatOpen(v=>!v)} aria-label="Mở chat" aria-expanded={chatOpen} title={chatUnread?`Chat · ${chatUnread} tin chưa đọc`:"Chat · Enter"}><Icon name="chat"/>{chatUnread>0&&<span className="chat-unread" aria-label={`${chatUnread} tin nhắn chưa đọc`}>{chatUnread>99?'99+':chatUnread}</span>}</button></>}<button className={muted?'dim':''} onClick={()=>setMuted(!muted)} aria-label={muted?'Bật âm thanh':'Tắt âm thanh'} title={muted?'Bật âm thanh':'Tắt âm thanh'}><Icon name="sound"/></button><button onClick={()=>setHelp(h=>!h)} aria-label="Cách chơi" title="Cách chơi"><Icon name="help"/></button></nav></header>
   {!snapshot?<>
-   <main className="welcome"><div className="welcome-copy"><div className="eyebrow"><span className="rule-line"/>THE LAST HONEST SALOON<span className="rule-line"/></div><h1>BÀI ĐẸP.<br/><em>TAY KÍN.</em></h1><p>Bốn tay chơi. Một bàn poker.<br/>Mua bài phép trong bóng tối — dùng đúng lúc.</p><div className="welcome-tags"><span><i>♠</i> TEXAS HOLD’EM</span><span><Icon name="users" size={14}/> MULTIPLAYER</span><span><Icon name="eye" size={14}/> BÀI PHÉP</span></div></div>
-   <section className="entry-panel"><div className="entry-heading"><span className="eyebrow">MỘT CHỖ Ở BÀN</span><span className="entry-number">01 — 04</span></div><h2>Người lạ, tên gì?</h2><label className="field-label" htmlFor="player-name">TÊN TAY CHƠI</label><input id="player-name" maxLength={24} value={name} onChange={e=>setName(e.target.value)} placeholder="Kẻ lạ mặt" autoComplete="nickname"/><label className="field-label">CHỌN NHÂN VẬT</label><div className="character-picker">{characters.map(c=><button key={c.id} className={character===c.id?'chosen':''} onClick={()=>setCharacter(c.id)} aria-label={c.label}><span className="character-glyph" style={{color:c.color}}>{c.glyph}</span><span>{c.name}</span></button>)}</div><button className="btn gold entry-create" disabled={busy} onClick={()=>void connection.create(name,character)}>{busy?'ĐANG MỞ CỬA…':'MỞ BÀN MỚI'}<Icon name="chevron"/></button><div className="join-row"><input aria-label="Mã bàn" placeholder="MÃ BÀN" maxLength={8} value={roomCode} onChange={e=>setRoomCode(e.target.value.toUpperCase())}/><button className="btn outline" disabled={busy||!roomCode.trim()} onClick={()=>void connection.join(roomCode,name,character)}>VÀO BÀN</button></div><button className="demo-link" disabled={busy} onClick={()=>void connection.create(name,character,true)}>Chơi thử với 3 đối thủ máy <span>↗</span></button></section></main>
+   <main className="welcome"><div className="welcome-copy"><h1>Dead Man’s Draw</h1><p>Poker và bài phép. Một bàn, tối đa bốn người.</p><div className="welcome-tags"><span><i>♠</i> TEXAS HOLD’EM</span><span><Icon name="users" size={14}/> MULTIPLAYER</span><span><Icon name="eye" size={14}/> BÀI PHÉP</span></div></div>
+   <section className="entry-panel"><h2>Vào bàn chơi</h2><label className="field-label" htmlFor="player-name">Tên của bạn</label><input id="player-name" maxLength={24} value={name} onChange={e=>setName(e.target.value)} placeholder="Kẻ lạ mặt" autoComplete="nickname"/><label className="field-label" id="character-label">Nhân vật</label><div className="character-picker" role="group" aria-labelledby="character-label">{characters.map(c=><button key={c.id} className={character===c.id?'chosen':''} aria-pressed={character===c.id} onClick={()=>setCharacter(c.id)} aria-label={c.label}><span className="character-glyph" style={{color:c.color}}>{c.glyph}</span><span>{c.name}</span></button>)}</div><div className="visibility-picker" role="group" aria-label="Chế độ bàn mới"><button type="button" className={isPublic?'':'on'} aria-pressed={!isPublic} onClick={()=>setIsPublic(false)}>RIÊNG TƯ</button><button type="button" className={isPublic?'on':''} aria-pressed={isPublic} onClick={()=>setIsPublic(true)}>CÔNG KHAI</button></div><button className="btn gold entry-create" disabled={busy} onClick={()=>void connection.create(name,character,false,isPublic)}>{busy?'ĐANG MỞ CỬA…':'MỞ BÀN MỚI'}<Icon name="chevron"/></button><div className="join-row"><input spellCheck={false} inputMode="text" autoComplete="off" aria-label="Mã bàn" placeholder="MÃ BÀN" maxLength={8} value={roomCode} onChange={e=>setRoomCode(e.target.value.toUpperCase())}/><button className="btn outline" disabled={busy||!roomCode.trim()} onClick={()=>void connection.join(roomCode,name,character)}>VÀO BÀN</button></div><button className="demo-link" disabled={busy} onClick={()=>void connection.create(name,character,true)}>Chơi thử với 3 đối thủ máy <span>↗</span></button><button className="world-link" disabled={busy} onClick={()=>setWorldOpen(true)}>Duyệt phòng công khai <span>↗</span></button></section></main>
    <footer className="welcome-footer"><span>WESTERN POKER · KHÔNG CÓ TAY CHƠI VÔ TỘI</span><span>{loaded?'SALOO N° 04 · OPEN':'ĐANG DỰNG SALOON…'}</span></footer>
+   {worldOpen&&<WorldList name={name} character={character} busy={busy} onClose={()=>setWorldOpen(false)}/>}
   </>:<>
-   <div className="room-label"><button onClick={()=>void copy()} title="Sao chép mã bàn"><span className="eyebrow">MÃ BÀN</span><strong>{copied?'ĐÃ CHÉP':snapshot.code}</strong></button><button className="room-label-copy-link" onClick={()=>void copyLink()} aria-label="Sao chép link mời" title={copiedLink?'Đã chép link':'Sao chép link mời'}><Icon name="copy" size={13}/></button><span><Icon name="users" size={14}/>{snapshot.players.length}/4</span>{host&&!['lobby','finished'].includes(phase||'')&&<button className="text-button danger" onClick={()=>{if(confirm('Kết thúc trận đang chơi sớm?'))send({type:'endMatch'});}}>Kết thúc trận</button>}</div>
-   <RoomSocial state={state} open={chatOpen} setOpen={setChatOpen}/>
-   <PhaseStepper snapshot={snapshot}/>
-   <MatchStrip snapshot={snapshot}/>
-   {banner&&<div className="gx-banner" key={banner}>{banner}</div>}
+   <div className="room-label"><button onClick={()=>void copy()} title="Sao chép mã bàn"><span className="eyebrow">MÃ BÀN</span><strong>{copied?'ĐÃ CHÉP':snapshot.code}</strong></button><button className="room-label-copy-link" onClick={()=>void copyLink()} aria-label="Sao chép link mời" title={copiedLink?'Đã chép link':'Sao chép link mời'}><Icon name="copy" size={13}/></button><button className="room-players" onClick={()=>setRosterPeek(v=>!v)} aria-label="Người chơi" aria-expanded={rosterPeek} title="Người chơi · Tab"><Icon name="users" size={18}/>{snapshot.players.filter(p=>!p.kicked).length}/4</button>{host?<button className={`visibility-toggle ${state.social.public?'on':''}`} onClick={()=>connection.setVisibility(!state.social.public)} title={state.social.public?'Đang công khai — bấm để chuyển riêng tư':'Đang riêng tư — bấm để công khai'}>{state.social.public?'CÔNG KHAI':'RIÊNG TƯ'}</button>:<span className={`visibility-badge ${state.social.public?'on':''}`}>{state.social.public?'CÔNG KHAI':'RIÊNG TƯ'}</span>}</div>
+   <RoomSocial state={state} open={chatOpen} setOpen={setChatOpen} unread={chatUnread} notice={chatNotice}/>
+   {rosterPeek&&<RosterPeek snapshot={snapshot} selfId={selfId} send={send} onClose={()=>setRosterPeek(false)} mutedPlayers={mutedPlayers} onMute={mutePlayer}/>}
+   {phase!=='lobby'&&<PhaseStepper snapshot={snapshot}/>}
+   {phase!=='lobby'&&<MatchStrip snapshot={snapshot}/>}
    <BoardStrip snapshot={snapshot}/>
    <Nameplates snapshot={snapshot} selfId={selfId} scene={scene.current} sceneTick={sceneTick} seconds={seconds} microphones={state.social.microphones}/>
 
-   {phase==='lobby'&&<section className="table-dialog gx-dialog"><span className="eyebrow">CHỜ TAY CHƠI</span><h2>Bàn đã mở</h2><p className="lobby-code-line">MÃ BÀN <b>{snapshot.code}</b></p><div className="dialog-actions"><button className="btn outline" onClick={()=>void copy()}>{copied?'ĐÃ CHÉP MÃ':'SAO CHÉP MÃ'}</button><button className="btn outline" onClick={()=>void copyLink()}>{copiedLink?'ĐÃ CHÉP LINK':'SAO CHÉP LINK MỜI'}</button></div><p>Gửi mã bàn hoặc link mời cho bạn bè. Ai cũng bấm SẴN SÀNG thì chủ bàn BẮT ĐẦU — vào trận là có chợ bài phép ngay.</p><RoomSetup snapshot={snapshot} host={host} send={send}/><ReadyRoster snapshot={snapshot} selfId={selfId} host={host} send={send}/><div className="dialog-actions"><button className="btn outline" onClick={()=>send({type:'ready',ready:!me?.ready})}>{me?.ready?'HỦY SẴN SÀNG':'SẴN SÀNG'}</button>{host&&<button className="btn gold" disabled={snapshot.players.length<2||snapshot.players.some(p=>!p.ready)} onClick={()=>send({type:'start'})} title="Cần ít nhất 2 người, tất cả sẵn sàng">BẮT ĐẦU</button>}</div>{host&&snapshot.players.length<4&&<button className="text-button" onClick={()=>send({type:'addBot'})}>+ Thêm đối thủ máy</button>}</section>}
+   {phase==='lobby'&&<section className="table-dialog gx-dialog lobby-dialog" aria-label="Sảnh chờ">
+    <header className="lobby-heading"><span className="eyebrow">SẢNH CHỜ · {snapshot.players.length}/4 TAY CHƠI</span><div className="lobby-heading-row"><h2>Bàn đã mở</h2>{host?<button className={`visibility-toggle ${state.social.public?'on':''}`} onClick={()=>connection.setVisibility(!state.social.public)} title={state.social.public?'Đang công khai — bấm để chuyển riêng tư':'Đang riêng tư — bấm để công khai'}>{state.social.public?'CÔNG KHAI':'RIÊNG TƯ'}</button>:<span className={`visibility-badge ${state.social.public?'on':''}`}>{state.social.public?'CÔNG KHAI':'RIÊNG TƯ'}</span>}</div></header>
+    <div className="lobby-content">
+     <div className="dialog-actions lobby-invite"><button className="btn outline" onClick={()=>void copy()} title="Sao chép mã bàn">{copied?'ĐÃ CHÉP MÃ':<>MÃ {snapshot.code} <Icon name="copy" size={13}/></>}</button><button className="btn outline" onClick={()=>void copyLink()}>{copiedLink?'ĐÃ CHÉP LINK':'LINK MỜI'}</button></div>
+     <ReadyRoster snapshot={snapshot} selfId={selfId} host={host} send={send}/>
+     <RoomSetup snapshot={snapshot} host={host} send={send}/>
+    </div>
+    <footer className="lobby-controls">
+     {host&&snapshot.players.length<4&&<button className="btn outline lobby-add-bot" onClick={()=>send({type:'addBot'})}>+ THÊM BOT</button>}
+     <p className="lobby-status" role="status">{snapshot.players.length<2?'Mời bạn bè hoặc thêm bot để chơi.':snapshot.players.some(p=>!p.ready)?'Mọi người bấm Sẵn sàng để chủ bàn bắt đầu.':host?'Đã đủ người sẵn sàng. Bắt đầu thôi!':'Đang chờ chủ bàn bắt đầu.'}</p>
+     <div className="dialog-actions lobby-start"><button className="btn outline" onClick={()=>send({type:'ready',ready:!me?.ready})}>{me?.ready?'HỦY SẴN SÀNG':'SẴN SÀNG'}</button>{host&&<button className="btn gold" disabled={snapshot.players.length<2||snapshot.players.some(p=>!p.ready)} onClick={()=>send({type:'start'})} title="Cần ít nhất 2 người, tất cả sẵn sàng">BẮT ĐẦU</button>}</div>
+    </footer>
+   </section>}
 
    {phase==='market'&&own&&!spectating&&<>
-    <section className="gx-market-head"><span className="eyebrow">ĐẦU VÁN {snapshot.handId||1}</span><h2>Chợ bài phép</h2><Countdown seconds={seconds} label="Còn lại"/><ReadyRoster snapshot={snapshot} selfId={selfId} doneLabel="XONG"/><button className="btn gold" onClick={()=>send({type:'ready',ready:!me?.ready})}>{me?.ready?'HỦY — TÔI CHƯA XONG':'XONG · VÀO VÁN'}</button></section>
+    <section className="gx-market-head"><span className="eyebrow">ĐẦU VÁN {snapshot.handId||1}</span><h2>Chợ bài phép</h2><Countdown seconds={seconds} label="Còn lại"/><ReadyRoster snapshot={snapshot} selfId={selfId} doneLabel="XONG"/><button className="btn gold" onClick={()=>send({type:'ready',ready:!me?.ready})}>{me?.ready?'Chưa xong':'Xong'}</button></section>
     <PrivateMarket snapshot={snapshot} own={own} send={send}/>
    </>}
 
    {(phase==='showdown'||phase==='finished')&&<section className={`table-dialog result-dialog gx-dialog ${phase==='finished'?(me?.id===snapshot.winnerId?'won':'lost'):''}`}><span className="eyebrow">{phase==='finished'?(me?.id===snapshot.winnerId?'BẠN THẮNG TRẬN':'TRẬN ĐÃ KẾT THÚC'):'LẬT BÀI'}</span><h2>{phase==='finished'?(me?.id===snapshot.winnerId?'Bạn là người cuối cùng!':`${snapshot.players.find(p=>p.id===snapshot.winnerId)?.name||'?'} thắng trận`):snapshot.result?.summary||'Ván đã kết thúc'}</h2><div className="result-hands">{snapshot.result?.revealed.map(r=><div key={r.playerId}><span>{snapshot.players.find(p=>p.id===r.playerId)?.name}</span><div>{r.cards.map(c=><PlayingCard key={c.id} card={c} small/>)}</div></div>)}</div>{snapshot.result?.winners.map(w=><p key={w.playerId}>{snapshot.players.find(p=>p.id===w.playerId)?.name} nhận <b>${fmt(w.amount)}</b>{w.handName?` · ${w.handName}`:''}</p>)}{phase==='finished'?<div className="dialog-actions result-actions">{host?<><button className="btn gold" onClick={()=>send({type:'rematch'})}>BẮT ĐẦU VÁN MỚI</button><button className="btn outline danger" onClick={()=>send({type:'disband'})}>GIẢI TÁN BÀN</button></>:<p className="waiting-host">Đang chờ chủ phòng bắt đầu ván mới hoặc giải tán…</p>}<button className="btn outline" onClick={()=>connection.leave()}>{host?'RỜI BÀN':'VỀ SẢNH'}</button></div>:<p className="waiting-host">Sang chợ ván sau trong {seconds}s…</p>}</section>}
-   {spectating&&phase!=='finished'&&<div className="elim-banner" role="status"><span className="eyebrow">BẠN ĐANG QUAN SÁT</span><p>Hết tiền hoặc vào bàn sau khi ván đã bắt đầu — xem các tay chơi còn lại chơi tiếp. Sẵn sàng lại khi chủ phòng bắt đầu ván mới.</p></div>}
+   {spectating&&phase!=='finished'&&<div className="elim-banner" role="status"><span className="eyebrow">BẠN ĐANG QUAN SÁT</span><p>Bạn có thể tham gia khi trận mới bắt đầu.</p></div>}
 
    <EventLog log={snapshot.log} priv={spectating?undefined:own?.privateLog.slice(-3)} me={me}/>
 
-   {own&&!spectating&&<div className="gx-bottom">
-    <section className="wallet-block"><div className="eyebrow">{me?.name||'BẠN'}{host&&<em className="host-tag" title="Chủ phòng">CHỦ PHÒNG</em>} <span>· VÍ RIÊNG (chỉ bạn thấy)</span></div><strong><small>$</small>{fmt(own.wallet)}</strong>{inHand&&<span className={`gx-trend ${trend>0?'up':trend<0?'down':''}`} title="So với đầu ván">{trend>0?'▲':trend<0?'▼':'■'} {trend>0?'+':''}{fmt(trend)} trong ván này</span>}<OwnHand own={own} me={me} snapshot={snapshot}/></section>
+   {own&&!spectating&&phase!=='lobby'&&<div className={`gx-bottom ${magicOpen?'magic-open':''}`}>
+    <section className="wallet-block"><div className="eyebrow"><span>Ví của bạn</span></div><strong><small>$</small>{fmt(own.wallet)}</strong>{inHand&&<span className={`gx-trend ${trend>0?'up':trend<0?'down':''}`} title="So với đầu ván">{trend>0?'▲':trend<0?'▼':'■'} {trend>0?'+':''}{fmt(trend)} trong ván này</span>}{(phase==='playing'||phase==='showdown')&&<OwnHand own={own} me={me} snapshot={snapshot}/>}</section>
     <section className="gx-center">
-     {phase==="lobby"||phase==="finished"?<div className="gx-hint" role="status"><Icon name="chevron" size={14}/><span>{hint}</span></div>:<TurnBanner snapshot={snapshot} own={own} selfId={selfId} seconds={seconds}/>}
-     {inHand?<ActionBar snapshot={snapshot} own={own} me={me} turn={turn} raiseTo={raiseTo} setRaiseTo={setRaiseTo} onBet={bet}/>:<div className="gx-idle">{phase==='showdown'||phase==='market'||phase==='lobby'?<span>{phaseLabel}</span>:null}</div>}
+     {phase==="finished"?<div className="gx-hint" role="status"><Icon name="chevron" size={14}/><span>{hint}</span></div>:<TurnBanner snapshot={snapshot} own={own} selfId={selfId} seconds={seconds}/>}
+     {inHand&&!me?.folded?<ActionBar snapshot={snapshot} own={own} me={me} turn={turn} raiseTo={raiseTo} setRaiseTo={setRaiseTo} onBet={bet}/>:<div className="gx-idle">{phase==='showdown'||phase==='market'?<span>{phaseLabel}</span>:null}</div>}
     </section>
-    <aside className="gx-right">
+    <div className="mobile-magic-launch"><button ref={magicLaunch} type="button" onClick={()=>setMagicOpen(v=>!v)} aria-expanded={magicOpen} aria-controls="own-magic-tray"><span>✦ Bài phép · {own.magic.length}/5</span></button></div>
+    {phase==='market'&&<button className="btn gold mobile-market-ready" onClick={()=>send({type:'ready',ready:!me?.ready})}>{me?.ready?'Chưa xong':'Xong'}</button>}
+    {magicOpen&&<button type="button" className="mobile-sheet-backdrop" onClick={closeMagic} aria-label="Đóng nền bài phép"/>}
+    <aside id="own-magic-tray" className="gx-right">
+     <div className="mobile-sheet-heading"><span>Bài phép của bạn</span><button ref={magicClose} type="button" onClick={closeMagic} aria-label="Đóng khay bài phép">×</button></div>
      <MagicTray snapshot={snapshot} own={own} others={others} send={send} mine={turn} flash={flash}/>
     </aside>
    </div>}
@@ -164,7 +204,7 @@ export function App(){
    {own&&!spectating&&own.peeks.length>0&&<div className="secret-note" aria-label="Thông tin riêng"><span className="eyebrow">CHỈ BẠN BIẾT</span>{own.peeks.slice(-2).map((p,i)=><div key={i} title={peekNote(p,snapshot)}><span>{p.label}{peekIsCrystal(p)?' · lúc soi':''}</span> {p.card?<PlayingCard card={p.card} small caption/>:<b>{p.text}</b>}</div>)}</div>}
   </>}
   {help&&<HelpDrawer settings={{lowQuality,setLowQuality,muted,setMuted,onCoach:()=>{setHelp(false);setCoach(true);}}} onClose={()=>setHelp(false)}/>}
-  {settings&&<SettingsDrawer prefs={prefs} setPrefs={setPrefs} micOn={micOn} toggleMic={toggleMic} players={snapshot?.players||[]} selfId={selfId} mutedPlayers={mutedPlayers} setMutedPlayers={setMutedPlayers} onClose={()=>setSettings(false)}/>}
+  {settings&&<SettingsDrawer prefs={prefs} setPrefs={setPrefs} micOn={micOn} toggleMic={toggleMic} snapshot={snapshot} send={send} selfId={selfId} mutedPlayers={mutedPlayers} onMute={mutePlayer} onClose={()=>setSettings(false)}/>}
   {micError&&<div className="toast error-toast" role="alert">{micError}<button onClick={()=>setMicError('')} aria-label="Đóng lỗi mic">×</button></div>}
   {coach&&!spectating&&<Coach onClose={closeCoach}/>}
   {state.error&&<div className="toast error-toast" role="alert"><span>!</span>{state.error}<button onClick={()=>connection.clearError()} aria-label="Bỏ qua"><Icon name="close" size={14}/></button></div>}

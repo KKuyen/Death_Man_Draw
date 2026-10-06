@@ -1,0 +1,28 @@
+import {test,expect} from '@playwright/test';
+test.use({hasTouch:true,isMobile:true});
+test('lobby chat: unread badge, notice and keyboard stay separate from game layout',async({page,browser})=>{
+ await page.setViewportSize({width:390,height:844});
+ const initialize=()=>{localStorage.setItem('saloon.coach.done','1');localStorage.setItem('saloon.settings',JSON.stringify({muted:true,musicOn:false,lowQuality:true}));};
+ await page.addInitScript(initialize);await page.goto('/');await page.locator('#player-name').fill('Chủ bàn');await page.getByRole('button',{name:'MỞ BÀN MỚI'}).click();await expect(page.locator('.lobby-dialog')).toBeVisible();
+ const code=await page.locator('.room-label strong').innerText();
+ const guestContext=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});
+ const guest=await guestContext.newPage();await guest.addInitScript(initialize);await guest.goto(page.url());await guest.locator('#player-name').fill('Bạn cùng bàn');await guest.getByRole('textbox',{name:'Mã bàn',exact:true}).fill(code);await guest.getByRole('button',{name:'VÀO BÀN',exact:true}).click();await expect(guest.locator('.lobby-dialog')).toBeVisible();
+ await guest.getByRole('button',{name:'Mở chat',exact:true}).click();
+ const send=async(text:string)=>{await guest.getByRole('textbox',{name:'Tin nhắn',exact:true}).fill(text);await guest.getByRole('button',{name:'Gửi',exact:true}).click();};
+ await send('Xin chào trong sảnh!');await expect(page.locator('.chat-icon .chat-unread')).toHaveText('1');await expect(page.locator('.chat-notice')).toContainText('Bạn cùng bàn');
+ await send('Bạn đã sẵn sàng chưa?');await expect(page.locator('.chat-icon .chat-unread')).toHaveText('2');
+ await page.locator('.chat-notice').click();await expect(page.locator('.chat-icon .chat-unread')).toHaveCount(0);await expect(page.locator('.chat-notice')).toHaveCount(0);await expect(page.locator('.chat-messages')).toContainText('Xin chào trong sảnh!');
+ const height=await page.locator('.app').evaluate(el=>el.getBoundingClientRect().height);
+ await page.getByRole('textbox',{name:'Tin nhắn',exact:true}).focus();
+ await page.evaluate(()=>{const vv=visualViewport!;Object.defineProperty(vv,'height',{configurable:true,value:300});Object.defineProperty(vv,'offsetTop',{configurable:true,value:0});vv.dispatchEvent(new Event('resize'));});
+ await expect.poll(async()=>{const r=await page.locator('.room-chat').boundingBox();return r!.y+r!.height;}).toBeLessThanOrEqual(300);
+ expect(await page.locator('.app').evaluate(el=>el.getBoundingClientRect().height)).toBe(height);
+ expect(await page.evaluate(()=>window.scrollY)).toBe(0);await expect(page.locator('body')).toHaveCSS('position','fixed');
+ await send('Tin nhắn khi đang mở');await expect(page.locator('.chat-messages')).toContainText('Tin nhắn khi đang mở');await expect(page.locator('.chat-icon .chat-unread')).toHaveCount(0);
+ await page.getByRole('textbox',{name:'Tin nhắn',exact:true}).fill('Đã đọc rồi nhé');await page.getByRole('button',{name:'Gửi',exact:true}).click();await expect(guest.locator('.chat-messages')).toContainText('Đã đọc rồi nhé');
+ await page.screenshot({path:'reports/screenshots/mobile-chat-keyboard.png'});
+ await page.getByRole('button',{name:'Đóng chat',exact:true}).click();await expect(page.locator('body')).not.toHaveCSS('position','fixed');
+ await send('Chờ bạn bắt đầu');await expect(page.locator('.chat-icon .chat-unread')).toHaveText('1');await page.screenshot({path:'reports/screenshots/mobile-chat-notification.png'});
+ await guest.getByRole('button',{name:'Đóng chat',exact:true}).click();await guest.getByRole('button',{name:'Rời bàn',exact:true}).click();await page.getByRole('button',{name:'Rời bàn',exact:true}).click();await guestContext.close();
+ await page.getByRole('button',{name:'MỞ BÀN MỚI'}).click();await expect(page.locator('.lobby-dialog')).toBeVisible();await expect(page.locator('.chat-icon .chat-unread')).toHaveCount(0);await page.getByRole('button',{name:'Rời bàn',exact:true}).click();
+});

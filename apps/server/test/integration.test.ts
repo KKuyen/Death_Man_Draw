@@ -43,6 +43,27 @@ beforeAll(async () => { app = await startServer({ port: PORT, host: '127.0.0.1',
 afterAll(async () => { await app?.shutdown(); });
 
 describe('saloon server', () => {
+  it('host transfer controls bots and kick; a mid-hand kick closes the client and revokes rejoin credentials', async () => {
+    const a=tap(await new Client(url).create('saloon',{name:'Host'}));
+    await until(()=>!!a.welcome&&!!a.pub,5000,'host joined');
+    const b=tap(await new Client(url).joinById(a.room.roomId,{name:'Next host',code:a.welcome.code}));
+    const c=tap(await new Client(url).joinById(a.room.roomId,{name:'Guest',code:a.welcome.code}));
+    try {
+      await until(()=>!!b.own&&!!c.welcome&&a.pub?.players.length===3,5000,'all joined');
+      send(c,{type:'kick',targetPlayerId:a.own!.playerId});await until(()=>c.errors.length>0,3000,'guest refused');
+      send(a,{type:'transferHost',targetPlayerId:b.own!.playerId});await until(()=>b.pub?.hostId===b.own?.playerId,3000,'host transferred');
+      send(a,{type:'addBot'});await until(()=>a.errors.length>0,3000,'former host refused');
+      send(b,{type:'addBot'});await until(()=>b.pub?.players.length===4,3000,'new host adds bot');
+      for(const t of [a,b,c])send(t,{type:'ready',ready:true});await until(()=>b.pub!.players.every(p=>p.ready),3000,'ready');
+      send(b,{type:'start'});await until(()=>b.pub?.phase==='market',3000,'market');send(b,{type:'nextHand'});await until(()=>b.pub?.phase==='playing',3000,'hand');
+      let closed=false;c.room.onLeave(()=>{closed=true;});const kickedId=c.own!.playerId;
+      send(b,{type:'kick',targetPlayerId:kickedId});await until(()=>closed&&!!b.pub?.players.find(p=>p.id===kickedId)?.kicked,3000,'client kicked');
+      expect(b.pub!.turnPlayerId).not.toBe(kickedId);
+      const local=matchMaker.getLocalRoomById(a.room.roomId) as any;
+      expect(local.rejoinHashes.has(kickedId)).toBe(false);
+      expect([...local.seats.values()].some((s:any)=>s.playerId===kickedId)).toBe(false);
+    } finally {void c.room.leave();await Promise.allSettled([a.room.leave(),b.room.leave()]);}
+  });
   it('health + rooms endpoints, CORS', async () => {
     const h: any = await (await fetch(`http://127.0.0.1:${PORT}/health`)).json();
     expect(h.ok).toBe(true);

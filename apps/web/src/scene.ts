@@ -84,7 +84,7 @@ export class SaloonScene {
     if(snapshot){
       for(let seat=0;seat<4;seat++){
         const p=snapshot.players.find(p=>p.seat===seat),actor=this.actors[seat];if(!actor)continue;
-        actor.root.setEnabled(!!p&&seat!==this.ownSeat);
+        actor.root.setEnabled(!!p&&!p.kicked&&seat!==this.ownSeat);
         if(p){
           if(actor.character!==p.character){actor.character=p.character;void this.replaceActor(p.character,seat);}
           

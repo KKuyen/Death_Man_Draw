@@ -46,7 +46,7 @@
 .ready-tag{color:#8fd08a;font-family:var(--condensed);letter-spacing:1px;font-size:11px}
 .waiting-tag{color:#8f9380;font-family:var(--condensed);letter-spacing:1px;font-size:11px}
 .app.in-game .gx-dialog .dialog-actions{justify-content:flex-start;flex-wrap:wrap}
-.lobby-code-line{margin:4px 0 14px!important;font-family:var(--condensed);letter-spacing:1.2px;font-size:11px}.lobby-code-line b{font-family:var(--serif);font-size:22px;letter-spacing:2px;margin-left:8px}
+.lobby-code-line{margin:4px 0 14px;font-family:var(--condensed);letter-spacing:1.2px;font-size:11px}.lobby-code-line b{font-family:var(--serif);font-size:22px;letter-spacing:2px;margin-left:8px}
 .gx-dialog .btn,.gx-market-head .btn{min-height:44px;width:auto;padding:10px 18px;font-size:13px}
 .gx-countdown{display:flex;align-items:baseline;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-family:var(--condensed);letter-spacing:1.2px;font-size:11px;color:#a9ad93}
 .gx-countdown b{font-family:var(--serif);font-size:30px;font-weight:600;color:var(--gold);letter-spacing:0}
@@ -192,3 +192,49 @@
   .app.in-game .gx-log{font-size:11px;width:280px}
 }
 @media(max-width:1350px){.gx-stepper li:not(.now) .gx-step-name{display:none}.gx-stepper li:not(.now){padding-right:6px}.gx-match em{display:none}}
+
+.lobby-heading-row{display:flex;align-items:center;gap:12px}
+
+/* First-paint loading screen: shown until the 3D scene finishes initializing. */
+.boot-screen{position:absolute;z-index:100;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#15130f;transition:opacity .45s ease}
+.boot-screen.fade-out{opacity:0;pointer-events:none}
+.boot-screen .logo-spade{font-size:52px;color:var(--gold);line-height:1}
+.boot-title{font-family:var(--condensed);font-weight:500;letter-spacing:2.6px;font-size:22px}
+.boot-title b{font-weight:700}
+.boot-spinner{width:28px;height:28px;border-radius:50%;border:2px solid #3a362a;border-top-color:var(--gold);animation:boot-spin .8s linear infinite;margin-top:6px}
+@keyframes boot-spin{to{transform:rotate(360deg)}}
+.boot-text{font-family:var(--condensed);font-size:11px;letter-spacing:1.6px;color:#a79f8d}
+/* Room visibility (public world list): segmented picker on entry, toggle/badge next to the room code. */
+.visibility-picker{display:flex;gap:6px;margin:16px 0 0}
+.visibility-picker button{flex:1;background:#191f1550;border:1px solid #a9997229;padding:9px 4px;font-family:var(--condensed);font-size:9px;letter-spacing:1px;color:#9aa68e}
+.visibility-picker button.on{border-color:var(--gold);background:#b2915322;color:var(--gold)}
+.visibility-toggle,.visibility-badge{font-family:var(--condensed);font-size:9px;letter-spacing:1px;padding:4px 9px;border:1px solid #76806a66;border-radius:999px;color:#9aa68e;background:none}
+.visibility-toggle{cursor:pointer}
+.visibility-toggle.on,.visibility-badge.on{border-color:#7fae6f;color:#9fe0b5}
+.lobby-invite .visibility-toggle,.lobby-invite .visibility-badge{align-self:center;margin-left:auto}
+
+/* World list: browse + join public rooms from the entry screen. */
+.world-list-backdrop{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:#050805cc;backdrop-filter:blur(3px)}
+.world-list{width:min(460px,90vw);max-height:80vh;display:flex;flex-direction:column;padding:26px 28px;background:linear-gradient(150deg,#262e22,#10190f);border:1px solid var(--gold);box-shadow:0 30px 100px #000a}
+.world-list>header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.world-list h2{margin:8px 0 0;font-size:26px}
+.world-list-note{font-size:12px;color:#9aa68e;line-height:1.7}
+.world-list-rows{display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.world-list-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #a38e6330;background:#29302440}
+.world-list-code{font-family:var(--condensed);letter-spacing:1.5px;font-size:15px;color:var(--gold);min-width:64px}
+.world-list-phase{flex:1;font-family:var(--condensed);font-size:9px;letter-spacing:1px;color:#9aa68e}
+.world-list-players{display:flex;align-items:center;gap:5px;font-size:11px;color:#b4bda5}
+.world-list-row .btn{padding:7px 14px;min-height:0}
+
+/* Nav exit group: visual separation between gameplay icons and leave/stop actions. */
+.nav-exit-group{display:flex;align-items:center;gap:10px;padding-left:12px;border-left:1px solid var(--line)}
+
+/* Hold-Tab scoreboard overlay. */
+.gx-roster-peek{position:fixed;inset:0;z-index:75;display:grid;place-items:center;background:#050805aa;pointer-events:none}
+.gx-roster-peek-card{width:min(360px,88vw);padding:20px 22px;background:linear-gradient(150deg,#262e22f5,#10190ff5);border:1px solid var(--gold);box-shadow:0 30px 100px #000a}
+.gx-roster-peek-rows{display:flex;flex-direction:column;gap:2px;margin-top:14px}
+.gx-roster-peek-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.gx-roster-peek-seat{font-family:var(--serif);font-size:16px;color:var(--gold);width:18px;text-align:center;flex-shrink:0}
+.gx-roster-peek-name{flex:1;font-size:13px;display:flex;align-items:center;min-width:0}
+.gx-roster-peek-status{font-family:var(--condensed);font-size:10px;letter-spacing:.6px;color:#9aa68e;flex-shrink:0}
+.gx-roster-peek-status.tone-bet{color:#d9c58f}.gx-roster-peek-status.tone-hot{color:#e0916b}.gx-roster-peek-status.tone-turn{color:var(--gold)}.gx-roster-peek-status.tone-out{color:#6d7461}

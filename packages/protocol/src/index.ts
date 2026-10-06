@@ -14,6 +14,8 @@ export interface PublicPlayer {
   id: string; name: string; seat: number; character: CharacterId;
   connected: boolean; ready: boolean; bot: boolean; folded: boolean;
   eliminated: boolean; allIn: boolean; bet: number; contribution: number;
+  /** Removed from the room; its committed chips remain in the current hand's accounting. */
+  kicked?: boolean;
   /** Number of hole cards held (0 or 2). */
   handSize: number;
   /** Hole cards forced public this hand (K02). Includes their modifiers. Usually []. */
@@ -111,8 +113,12 @@ export type Command = {commandId: string; handId?: number} & (
   | {type:'disband'}
   /** Host only, outside 'lobby'/'finished': aborts the match early (whoever has the most chips is declared the winner). */
   | {type:'endMatch'}
-  /** Host only, phase 'lobby' or 'finished' only: removes a seat (human or bot) and frees it up. */
+  /** Host only: removes a player. During a match, committed chips remain until settlement. */
   | {type:'kick'; targetPlayerId:string}
+  /** Host only, any time: hands host control to another connected human player. */
+  | {type:'transferHost'; targetPlayerId:string}
+  /** Host only, any time: toggles whether the room is listed in the public world list (GET /api/public-rooms). */
+  | {type:'setVisibility'; public:boolean}
 );
 export interface CommandResult {ok:boolean; error?:string}
 /**
@@ -153,5 +159,5 @@ export const modifierLabel = (m:CardModifier) => ({gold:'Vàng',wild:'Muôn ch�
 
 /** Ephemeral room communication; never contains private game state. */
 export interface ChatMessage {id:string;playerId:string;name:string;text:string;at:number}
-export interface SocialState {messages:ChatMessage[];microphones:Record<string,boolean>;voiceSessions?:Record<string,string>}
+export interface SocialState {messages:ChatMessage[];microphones:Record<string,boolean>;voiceSessions?:Record<string,string>;public?:boolean}
 export interface VoiceSignal {toPlayerId:string;fromPlayerId?:string;fromSession?:string;toSession?:string;description?:{type:'offer'|'answer';sdp:string};candidate?:{candidate:string;sdpMid?:string|null;sdpMLineIndex?:number|null;usernameFragment?:string|null}}

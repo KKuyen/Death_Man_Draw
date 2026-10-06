@@ -1,0 +1,334 @@
+/* Compact layouts use document flow; desktop keeps the immersive table HUD. */
+.mobile-magic-launch,.mobile-sheet-heading,.mobile-sheet-backdrop,.mobile-market-nav,.mobile-offer-details,.mobile-raise-toggle{display:none}
+.topbar nav .mobile-fullscreen,.mobile-market-ready{display:none}
+
+@media (max-width:1000px), (max-height:500px) and (pointer:coarse){
+  html{scroll-padding-top:12px}
+  body{overflow-x:hidden}
+  .app{width:100%;height:auto;min-height:100svh;overflow:visible;padding:env(safe-area-inset-top) max(12px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(12px,env(safe-area-inset-left))}
+  .world,.vignette,.grain{position:fixed;height:100dvh}
+  .vignette{background:linear-gradient(0deg,#0b100ee8,#0b100e65 60%,#0b100ebb)}
+  .topbar,.app.in-game .topbar{position:relative;inset:auto;height:60px;margin:0;flex-shrink:0;gap:8px}
+  .wordmark{font-size:13px;letter-spacing:1px;gap:7px;min-width:0}
+  .logo-spade{font-size:30px}
+  .top-center,.app.in-game .top-center{display:none}
+  .topbar nav{gap:0;flex-shrink:0}
+  .topbar nav button{display:grid;place-items:center;width:44px;height:44px;padding:10px}
+  .topbar nav .end-match-nav,.in-game .topbar nav .end-match-nav{width:auto;height:auto;min-height:36px;padding:0 10px;font-size:10px;letter-spacing:.6px;white-space:nowrap}
+  .btn{min-height:44px;white-space:normal;letter-spacing:.8px}
+  input:not([type=range]):not([type=checkbox]),select{font-size:16px!important;min-height:44px}
+  .drawer{position:fixed;width:min(440px,100%);padding: max(20px,env(safe-area-inset-top)) 20px max(24px,env(safe-area-inset-bottom));overscroll-behavior:contain}
+  .app.in-game .gx-drawer{position:fixed;inset:0 0 0 auto;width:min(440px,100%);z-index:45}
+  .drawer-heading>button,.gx-x{min-width:44px;min-height:44px}
+  .settings-tabs{margin:0;gap:0}.settings-tabs button{flex:1;min-height:44px;padding:10px 4px;font-size:12px}
+  .settings-content{padding:16px 0}
+  .gx-coach,.gx-peek-modal{padding:16px max(16px,env(safe-area-inset-right)) 16px max(16px,env(safe-area-inset-left))}
+  .gx-coach-card,.gx-peek-card{width:100%;max-width:480px;max-height:calc(100dvh - 32px);overflow:auto;padding:22px}
+  .toast,.error-toast{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom));width:auto;max-width:none;transform:none;font-size:13px;overflow-wrap:anywhere}
+
+  /* A real scrolling entry screen, including when the keyboard is open. */
+  .in-lobby .welcome{position:relative;inset:auto;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:24px;max-width:520px;margin:0 auto;padding:28px 4px 24px}
+  .welcome-copy{margin:0;align-self:stretch}
+  .welcome-copy>.eyebrow{font-size:10px;letter-spacing:1.6px}
+  .welcome-copy h1{font-size:clamp(54px,12vw,82px);margin:18px 0 16px;line-height:.95;letter-spacing:-2px}
+  .welcome-copy>p{font-size:14px;line-height:1.7;margin:0}
+  .welcome-tags{display:flex;gap:14px;margin-top:16px;font-size:10px;letter-spacing:.5px}
+  .entry-panel{width:100%;align-self:stretch;padding:22px;margin:0;border-radius:12px}
+  .entry-panel h2{font-size:30px;margin:12px 0 18px}
+  .field-label{font-size:11px;margin:18px 0 8px}
+  .entry-panel input{border-radius:6px;padding:12px}
+  .character-picker{gap:8px}.character-picker button{min-height:72px;padding:10px 3px;font-size:10px;letter-spacing:.3px;border-radius:6px}
+  .character-glyph{font-size:28px}
+  .entry-create{margin-top:22px;min-height:50px;border-radius:6px;font-size:14px}
+  .join-row{gap:8px}.join-row input{flex:1;width:0}.join-row .btn{width:auto;flex:0 0 104px;border-radius:6px;font-size:13px}
+  .demo-link{min-height:44px;font-size:13px;line-height:1.5;margin-top:12px;padding:8px 0;text-align:left}
+  .welcome-footer{position:relative;inset:auto;gap:16px;max-width:520px;margin:0 auto;padding:0 4px 20px;font-size:9px;letter-spacing:.6px;line-height:1.6}
+  .welcome-footer span:first-child{max-width:65%}
+
+  /* Phone table: header, opponents, board, then a thumb-friendly betting dock. */
+  .app.in-game{display:flex;flex-direction:column;gap:10px;--gx-bar:0px;--gx-top:0px}
+  .app.in-game .topbar{order:0;height:52px}
+  .in-game .wordmark>span:last-child{display:none}
+  .in-game .topbar nav{flex:1;justify-content:flex-end}
+  .app.in-game .room-label{position:relative;inset:auto;order:1;gap:12px;min-height:36px;flex-wrap:wrap}
+  .room-label>button{min-height:36px;justify-content:center}.room-label .eyebrow{font-size:9px}.room-label strong{font-size:17px}
+  .room-label>button.room-label-copy-link{min-width:44px;align-items:center}
+  .room-label .text-button{margin-left:auto;font-size:11px;letter-spacing:0}
+  .app.in-game .gx-stepper{position:relative;inset:auto;transform:none;order:2;align-items:stretch;gap:0}
+  .gx-stepper ol{justify-content:space-between;gap:3px}
+  .gx-stepper li{flex:1;justify-content:center;padding:5px!important;font-size:11px;letter-spacing:.3px;border-radius:5px!important;gap:4px}
+  .gx-stepper li+li::before,.gx-step-next{display:none}
+  .gx-stepper li:not(.now) .gx-step-name{display:none}
+  .app.in-game .gx-match{position:relative;inset:auto;transform:none;order:3;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:8px;min-width:0}
+  .gx-match .gx-m{flex-direction:column;gap:2px}.gx-match i{font-size:9px;letter-spacing:.6px}.gx-match b{font-size:14px}.gx-match strong{font-size:24px}.gx-match small{font-size:14px}.gx-match em{display:none}
+  .gx-plates{position:relative;inset:auto;order:4;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;pointer-events:auto}
+  .gx-plate{position:relative;inset:auto!important;width:auto!important;min-width:0;padding:8px 7px;box-shadow:none;border-radius:8px}
+  .gx-plate-head{gap:4px;min-width:0;flex-wrap:wrap}.gx-plate-head strong{font-size:12px;flex:1;min-width:0}.gx-seat{font-size:12px}.gx-plate-head small{font-size:8px;padding:1px 2px}.gx-plate-head .host-tag{margin:0;font-size:7px}
+  .gx-plate-status{font-size:10px;line-height:1.4;letter-spacing:0;gap:3px;flex-wrap:wrap}.gx-plate-status b{margin-left:auto}
+  .gx-revealed{flex-wrap:wrap}.gx-revealed .playing-card.small{width:28px;height:40px}.gx-revealed .card-corner{font-size:9px}.gx-revealed .card-corner small{font-size:7px}.gx-revealed .card-suit{font-size:15px}
+  .app.in-game .gx-board{position:relative;inset:auto;transform:none;order:5;align-self:center;padding:10px 14px 18px;gap:6px;border-radius:10px;width:min(100%,360px)}
+  .gx-board-cards{gap:8px;width:100%;justify-content:center}
+  .gx-board-slot,.gx-board .playing-card{width:clamp(40px,11vw,54px);height:clamp(58px,16vw,78px)}
+  .gx-board .card-corner{font-size:16px}.gx-board .card-suit{font-size:27px}.card-slot-empty{font-size:10px;letter-spacing:.4px}
+  .app.in-game .table-feed.gx-log{position:relative;inset:auto;order:6;width:100%;max-height:64px;gap:4px;font-size:11px;line-height:1.45;margin:0;padding:0 4px;justify-content:flex-end;flex-shrink:0}
+  .app.in-game .gx-log>div:nth-last-child(n+3){display:none}
+  .gx-banner{position:fixed;top:42%;max-width:calc(100% - 24px);font-size:24px;padding:10px 18px;white-space:normal;text-align:center;z-index:15}
+  .app.in-game .gx-dialog,.app.in-game .gx-market-head{position:relative;inset:auto;transform:none;order:7;width:100%;max-height:none;overflow:visible;padding:20px;border-radius:10px;box-shadow:none}
+  .app.in-game .gx-dialog h2,.app.in-game .gx-market-head h2{font-size:30px}
+  .app.in-game .gx-dialog p{font-size:13px}.gx-roster>div{font-size:13px;gap:8px}.gx-roster>div>span:first-child{min-width:0;overflow-wrap:anywhere}.ready-tag,.waiting-tag{flex-shrink:0;font-size:10px}
+  .dialog-actions{gap:8px}.gx-dialog .btn{flex:1;padding:10px;font-size:12px}.gx-dialog>.text-button{min-height:44px;font-size:12px}
+  .app.in-game .gx-bottom{position:sticky;bottom:0;order:10;margin: auto -12px 0;padding:10px max(12px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));display:grid;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;align-items:center;flex-shrink:0;background:linear-gradient(0deg,#0e1611 90%,#0e1611f5);border-top:1px solid #b6a37944;box-shadow:0 -10px 30px #0005;z-index:12}
+  .app.in-game .gx-bottom .wallet-block{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-self:auto;align-items:center;min-width:0;position:relative;padding-right:112px;min-height:72px}
+  .app.in-game .gx-bottom .wallet-block>.eyebrow{grid-column:1;display:block;font-size:10px;letter-spacing:.4px;overflow-wrap:anywhere;line-height:1.5}
+  .wallet-block>.eyebrow>span{display:none}
+  .app.in-game .gx-bottom .wallet-block>strong{grid-column:1;grid-row:2;font-size:30px;line-height:1}.wallet-block small{font-size:18px}
+  .app.in-game .gx-bottom .wallet-block>.gx-trend{grid-column:1;grid-row:3;font-size:9px;margin:0}
+  .gx-hand{position:absolute;right:0;top:0;gap:4px;padding-bottom:12px;align-items:center}
+  .gx-hand .gx-hud-label{font-size:9px;letter-spacing:.5px}.gx-hand-cards{gap:8px}
+  .gx-hand .playing-card.big{width:44px;height:62px}.gx-hand .playing-card.big .card-corner{font-size:14px}.gx-hand .playing-card.big .card-suit{font-size:24px}.gx-hand .mod-caption{font-size:8px;bottom:-12px}
+  .gx-hand.empty{position:static;grid-column:2;grid-row:1/4;padding:0;align-items:flex-end}.gx-hand-none{font-size:11px}
+  .app.in-game .gx-center{grid-column:1/-1;max-width:none;gap:6px}
+  .gx-turn{min-height:44px;padding:6px 8px;gap:8px}.gx-ring{width:36px;height:36px}.gx-turn b{font-size:13px;letter-spacing:.6px;overflow-wrap:anywhere}.gx-turn span{font-size:11px;line-height:1.4}
+  .gx-hint{font-size:12px;padding:8px;line-height:1.5}.gx-idle{display:none}
+  .gx-actions{padding:4px;border-radius:8px}
+  .gx-actions .bet-buttons{gap:5px;grid-template-columns:repeat(4,minmax(0,1fr))}
+  .gx-btn{min-height:50px;padding:6px 2px}.gx-btn b{font-size:15px;letter-spacing:.3px}.gx-btn small{font-size:8px;letter-spacing:0}.gx-btn:disabled{opacity:.48}
+  .gx-raise{display:grid;grid-template-columns:auto minmax(0,1fr) 72px;gap:6px;margin-top:6px}
+  .gx-raise-label{font-size:10px;letter-spacing:.2px}.gx-raise input[type=range]{width:100%;min-width:0;height:32px;margin:0}.gx-raise input[type=number]{width:72px;min-height:40px;padding:6px}
+  .gx-chips{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.gx-chips button{min-height:36px;font-size:11px;padding:6px 3px}
+  .mobile-magic-launch{display:block;grid-column:1/-1;grid-row:2}
+  .mobile-magic-launch>button{width:100%;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#24251c;border:1px solid #a88e5866;border-radius:6px;padding:10px 12px;color:#e4cf9e;font-size:13px}
+  .mobile-magic-launch>button>span:last-child{font-size:11px;color:#b6c7ab}
+  .app.in-game .gx-right{display:none;position:fixed;inset:auto max(12px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));width:auto;max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 32px);padding:16px;border:1px solid #a88e58;border-radius:14px;background:#141b14;box-shadow:0 20px 80px #000c;overflow-y:auto;overscroll-behavior:contain;z-index:40}
+  .magic-open .mobile-sheet-backdrop{display:block;position:fixed;inset:0;border:0;background:#020603b3;backdrop-filter:blur(3px);z-index:35}
+  .app.in-game .magic-open .gx-right{display:flex;flex-direction:column;gap:12px}
+  .mobile-sheet-heading{display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-size:26px;color:#e4cf9e}
+  .mobile-sheet-heading button{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:#242b1f;color:#e4cf9e;font-size:26px;flex-shrink:0}
+  .gx-tray-head{margin:0 0 10px}.gx-tray-head .gx-hud-label{font-size:12px}.gx-tray-priv{font-size:10px}
+  .gx-tray-slots{grid-template-columns:repeat(5,96px);gap:8px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x proximity}
+  .gx-slot-wrap,.gx-slot.empty{scroll-snap-align:start}
+  .gx-slot,.gx-slot.empty{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:96px;height:auto;min-height:160px!important;padding:7px;gap:4px;text-align:center;transform:none!important}
+  .gx-slot.empty{justify-content:center;font-size:24px}
+  .gx-slot .magic-art,.gx-slot .tray-reserve{height:70px;width:100%;max-height:none;flex:none}
+  .gx-slot-name{font-size:12px;text-align:center;line-height:1.3;min-height:32px}.gx-slot-state,.gx-slot-visibility{font-size:10px;text-align:center;line-height:1.4}
+  .gx-use{position:relative;inset:auto;width:100%;max-height:none!important;overflow:visible;margin-top:8px;padding:14px 12px;border-radius:8px;box-shadow:none}
+  .gx-use-head{grid-template-columns:48px minmax(0,1fr) 44px;gap:8px}.gx-use-art{width:48px;height:66px}.gx-use .magic-name{font-size:22px}.gx-use p,.magic-details p{font-size:13px;line-height:1.6}
+  .gx-use-row{font-size:13px;gap:8px}.chip{min-height:44px;padding:8px 12px;font-size:13px}.gx-use-actions{flex-wrap:wrap}.gx-use-actions .btn{flex:1;min-height:48px;font-size:13px}.gx-use-row .playing-card.small{width:42px;height:60px}
+  .app.in-game .secret-note{position:relative;inset:auto;order:8;max-width:none;width:100%;font-size:12px;padding:12px;border-radius:8px}
+  .app.in-game .gx-toasts{position:fixed;top:calc(64px + env(safe-area-inset-top));left:12px;right:12px;transform:none;align-items:stretch}
+  .gx-toasts .gx-toast,.gx-toast.gx-magic-banner{max-width:100%;font-size:12px;padding:10px;overflow-wrap:anywhere}.gx-banner-art{width:40px;height:55px;flex-shrink:0}
+  .chat-launch{display:none}.room-chat{position:fixed;inset:auto 12px calc(12px + env(safe-area-inset-bottom));width:auto;max-width:none;z-index:45;border-radius:12px}.chat-messages{height:min(36dvh,280px)}.room-chat header button,.room-chat form button{min-width:44px;min-height:44px}
+  .elim-banner{position:relative;inset:auto;transform:none;order:8;width:100%;margin-bottom:20px;z-index:8;border-radius:8px}
+
+  /* Shopping has one page scroll and a sticky timer / finish control. */
+  .app.phase-market .gx-bottom,.app.phase-lobby .gx-bottom,.app.phase-finished .gx-bottom{position:relative;bottom:auto;margin-top:0;order:4;box-shadow:none;border-radius:10px;margin-left:0;margin-right:0;padding:12px}
+  .phase-market .gx-bottom .gx-center{display:none}
+  .app.phase-market .gx-market-head{position:sticky;top:env(safe-area-inset-top);order:5;z-index:14;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:14px;background:#192217;box-shadow:0 8px 24px #0005}
+  .gx-market-head>.eyebrow{grid-column:1}.app.in-game .gx-market-head h2{grid-column:1;margin:0;font-size:26px}.gx-market-head .gx-countdown{grid-column:2;grid-row:1/3;padding:0;border:0;flex-direction:column;justify-content:center;gap:0;font-size:10px}.gx-countdown b{font-size:28px}
+  .gx-market-head .gx-roster{display:none}.gx-market-head>.btn{grid-column:1/-1;width:100%;min-height:46px;font-size:14px;border-radius:6px}
+  .app.in-game .gx-market{position:relative;inset:auto;order:6;display:flex;flex-direction:column;gap:12px;max-height:none;overflow:visible;padding:0 0 24px}
+  .gx-market-note{font-size:11px;line-height:1.6;padding:8px 10px;align-self:stretch}.market-refresh{flex-wrap:wrap;font-size:12px;line-height:1.5;gap:8px}.market-refresh .btn{min-height:44px;font-size:12px;margin-left:auto}
+  .gx-market-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .app.in-game .gx-offer{padding:12px;gap:8px;min-width:0;border-radius:10px;box-shadow:none}
+  .app.in-game .gx-offer .gx-offer-art{height:120px}.app.in-game .gx-offer h3{font-size:22px;line-height:1.15}
+  .gx-offer-top{gap:5px}.gx-offer .kind-pill,.gx-offer .vis-pill{font-size:10px;line-height:1.4;white-space:normal;padding:3px 5px}
+  .app.in-game .gx-offer p.gx-offer-text{font-size:13px;line-height:1.6}.gx-offer-timing,.gx-offer-vis{font-size:11px;line-height:1.5}.app.in-game .gx-offer footer{position:static;margin-top:auto}.app.in-game .gx-buy{min-height:48px;font-size:20px;padding:10px 12px;border-radius:6px}.price-button span{font-size:11px}
+  .reserve-art .playing-card.big{width:76px;min-width:76px;height:106px}.gx-replace{font-size:13px}.gx-replace button{min-height:44px;font-size:12px;white-space:normal}
+  .phase-market .gx-log,.phase-lobby .gx-log,.phase-finished .gx-log{display:none}
+}
+
+@media(max-width:480px){
+  .gx-market-grid{grid-template-columns:minmax(0,1fr)}
+  .app.in-game .gx-offer{display:grid;grid-template-columns:80px minmax(0,1fr);gap:8px 12px;align-items:start}
+  .app.in-game .gx-offer .gx-offer-art{grid-column:1;grid-row:1/3;width:80px;height:110px;order:initial}
+  .app.in-game .gx-offer h3{grid-column:2;grid-row:1;font-size:24px;order:initial;margin:0;align-self:end}
+  .app.in-game .gx-offer-top{grid-column:2;grid-row:2;order:initial;align-self:start}
+  .gx-offer-text,.gx-offer-timing,.gx-offer-vis,.app.in-game .gx-offer footer{grid-column:1/-1;order:initial}
+  .app.in-game .gx-offer .gx-offer-text{order:initial}
+  .in-game .topbar nav button{width:42px;height:44px;padding:10px}
+}
+
+@media(max-height:500px) and (orientation:landscape) and (max-width:1000px), (max-height:500px) and (pointer:coarse){
+  .in-lobby .welcome{max-width:800px;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1fr);align-items:start;gap:24px;padding-top:20px}
+  .welcome-copy h1{font-size:64px}.welcome-tags{flex-wrap:wrap}
+  .app.in-game .gx-bottom{position:relative;margin-top:0}
+  .app.in-game .gx-bottom .wallet-block{grid-column:1;grid-row:1/3;min-height:82px;padding-right:108px}
+  .mobile-magic-launch{grid-column:2;grid-row:1;min-width:200px}.mobile-magic-launch>button{flex-direction:column;align-items:flex-start;gap:3px}
+  .app.in-game .gx-center{grid-row:3;grid-column:1/-1}
+  .gx-raise{grid-template-columns:auto minmax(0,1fr) 72px auto}.gx-chips{grid-column:4;grid-row:1;display:flex}.gx-chips button{min-width:66px;min-height:44px}
+  .app.phase-market .gx-market-head{position:relative;top:auto}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .gx-banner,.gx-toast,.gx-slot.ready,.gx-slot.fired{animation:none}
+}
+
+/* The phone shop is a focused card picker, without the desktop information panels. */
+@media (max-width:1000px), (max-height:500px) and (pointer:coarse){
+  .mobile-raise-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:36px;margin-top:5px;padding:6px 10px;border:0;background:transparent;color:#c4cbb6;font-size:12px}
+  .gx-raise:not(.raise-open){display:none}
+  .app.in-game .table-feed.gx-log{max-height:30px}
+  .app.in-game .gx-log>div:nth-last-child(n+2){display:none}
+  .app.phase-market{height:100dvh;min-height:0;overflow:hidden;gap:10px;padding-bottom:calc(96px + env(safe-area-inset-bottom));background:#0c120ee6}
+  .phase-market .world{opacity:.3}
+  .app.phase-market .room-label,.app.phase-market .gx-stepper,.app.phase-market .gx-match,.app.phase-market .secret-note,.app.phase-market .gx-plates{display:none}
+  .app.phase-market .topbar{height:44px;min-height:44px}
+  .app.phase-market .gx-market-head{position:relative;inset:auto;order:1;display:grid;grid-template-columns:1fr auto;flex-shrink:0;gap:3px 12px;padding:8px 4px;background:transparent;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;z-index:auto}
+  .gx-market-head>.eyebrow{font-size:10px;letter-spacing:1.2px}.app.phase-market .gx-market-head h2{font-size:30px}.gx-market-head .gx-countdown b{font-size:30px}
+  .app.phase-market .gx-market-head>.btn{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));width:calc(50% - 18px);min-height:48px;z-index:16;padding:10px;font-size:13px}
+  .app.phase-market .gx-market{order:2;flex:1;min-height:0;gap:8px;padding:0;overflow:visible}
+  .phase-market .gx-market-note{display:none}
+  .phase-market .market-refresh{order:3;flex-shrink:0;font-size:10px;line-height:1.35;gap:8px;padding:0 2px}
+  .phase-market .market-refresh>span{flex:1;min-width:0}.phase-market .market-refresh .btn{min-height:36px;padding:6px 8px;font-size:10px;letter-spacing:.3px}
+  .mobile-market-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;order:0;flex-shrink:0}
+  .mobile-market-nav button{width:44px;height:44px;border:1px solid var(--line);border-radius:8px;background:#1d271c;font-size:28px;color:var(--gold)}
+  .mobile-market-nav>span{display:flex;align-items:center;gap:12px;font-size:13px;color:#e4cf9e}.mobile-market-nav small{font-size:10px;color:#aeb4a0}
+  .phase-market .gx-market-grid{position:relative;display:flex;order:1;flex:1;min-height:0;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;border-radius:12px}
+  .phase-market .gx-market-grid::-webkit-scrollbar{display:none}
+  .app.phase-market .gx-offer{display:flex;flex-direction:column;align-items:stretch;flex:0 0 100%;height:100%;min-width:0;padding:18px;gap:10px;overflow-y:auto;overscroll-behavior-y:contain;scroll-snap-align:start;scroll-snap-stop:always;background:linear-gradient(150deg,#292629,#121813);border-radius:12px}
+  .app.phase-market .gx-offer .gx-offer-art{width:100%;height:clamp(88px,22dvh,190px);align-self:center;order:0;flex-shrink:0}
+  .app.phase-market .gx-offer h3{order:1;font-size:30px;margin:0;flex-shrink:0;text-align:center}
+  .app.phase-market .gx-offer-top{order:2;justify-content:center;min-height:0;flex-shrink:0;gap:8px}
+  .app.phase-market .gx-offer p.gx-offer-text{order:3;font-size:14px;line-height:1.6;text-align:center;flex-shrink:0;color:#ddd6c6}
+  .phase-market .gx-offer>.gx-offer-timing,.phase-market .gx-offer>.gx-offer-vis{display:none}
+  .mobile-offer-details{display:block;order:4;flex-shrink:0;font-size:12px;line-height:1.5;color:#b7baa8;border-top:1px solid var(--line)}
+  .mobile-offer-details summary{cursor:pointer;min-height:36px;padding:8px 0;text-align:center}.mobile-offer-details p{font-size:12px;margin:4px 0 8px;line-height:1.6}
+  .app.phase-market .gx-offer footer{order:5;margin-top:auto;width:100%;flex-shrink:0}
+  .app.phase-market .gx-buy{min-height:48px;font-size:22px}.gx-owned{min-height:48px}
+  .phase-market .gx-replace{order:2;flex-shrink:0;max-height:80px;overflow:auto;font-size:11px;gap:5px}.phase-market .gx-replace button{min-height:36px;font-size:10px}
+  .app.phase-market .gx-bottom{position:fixed;inset:auto 0 0;order:3;height:calc(88px + env(safe-area-inset-bottom));padding:8px max(12px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));border-radius:0;background:#0e1611;grid-template-columns:calc(50% - 6px) 1fr!important;gap:4px!important;align-content:start;z-index:12}
+  .app.phase-market .gx-bottom .wallet-block{grid-column:1;grid-row:1;display:flex;justify-content:space-between;align-items:center;padding:0;min-height:24px;gap:8px}
+  .phase-market .wallet-block>.eyebrow{font-size:0!important}.phase-market .wallet-block>.eyebrow::before{content:'Ví của bạn';font-size:11px}.phase-market .wallet-block .host-tag{display:none}
+  .app.phase-market .gx-bottom .wallet-block>strong{font-size:25px;white-space:nowrap}.phase-market .wallet-block .gx-hand{display:none}
+  .phase-market .mobile-magic-launch{grid-column:1;grid-row:2;min-width:0}.phase-market .mobile-magic-launch>button{min-height:36px;font-size:12px;padding:7px 10px;display:block;text-align:left}.phase-market .mobile-magic-launch>button>span:last-child{display:none}
+  .app.phase-market .gx-toasts{top:calc(48px + env(safe-area-inset-top));align-items:center}.phase-market .gx-toast{font-size:11px;padding:7px 12px}
+  .phase-market .reserve-art .playing-card.big{height:132px;width:92px;min-width:92px}
+}
+
+@media(max-width:1000px) and (max-height:700px), (max-height:500px) and (pointer:coarse){
+  .app.phase-market{gap:6px}
+  .app.phase-market .gx-market-head h2{font-size:26px}
+  .app.phase-market .gx-offer{padding:12px;gap:6px}
+  .app.phase-market .gx-offer .gx-offer-art{height:78px}
+  .app.phase-market .gx-offer h3{font-size:25px}
+  .app.phase-market .gx-offer p.gx-offer-text{font-size:13px;line-height:1.45}
+  .phase-market .reserve-art .playing-card.big{height:74px;width:52px;min-width:52px}
+  .phase-market .mobile-market-nav button{height:36px}
+}
+
+@media(max-height:500px) and (orientation:landscape) and (max-width:1000px), (max-height:500px) and (pointer:coarse){
+  .app.phase-market{display:grid;grid-template-columns:190px minmax(0,1fr);grid-template-rows:44px minmax(0,1fr);gap:8px 16px;padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+  .app.phase-market .topbar{grid-column:1/-1;grid-row:1}
+  .app.phase-market .gx-market-head{grid-column:1;grid-row:2;align-self:start;grid-template-columns:1fr;gap:6px}.gx-market-head .gx-countdown{grid-column:1;grid-row:auto;flex-direction:row;justify-content:space-between;margin-top:8px}
+  .app.phase-market .gx-market{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr;grid-template-rows:36px minmax(0,1fr);gap:8px}
+  .phase-market .market-refresh{display:none}
+  .phase-market .gx-market-grid{height:100%;min-height:0}
+  .app.phase-market .gx-offer{display:grid;grid-template-columns:70px minmax(0,1fr) 100px;align-items:center;gap:6px 12px;padding:12px}
+  .app.phase-market .gx-offer .gx-offer-art{grid-column:1;grid-row:1/4;width:70px;height:100px}
+  .app.phase-market .gx-offer h3{grid-column:2;grid-row:1;text-align:left;font-size:23px}
+  .app.phase-market .gx-offer-top{grid-column:2;grid-row:2;justify-content:flex-start;gap:4px}.gx-offer .kind-pill,.gx-offer .vis-pill{font-size:9px}
+  .app.phase-market .gx-offer p.gx-offer-text{grid-column:2;grid-row:3;text-align:left;font-size:12px}
+  .app.phase-market .mobile-offer-details{grid-column:1/-1;grid-row:4}
+  .app.phase-market .gx-offer footer{grid-column:3;grid-row:1/4;margin:0}
+}
+
+/* Landscape is the default phone experience: the table and actions share one screen. */
+@media(max-height:600px) and (orientation:landscape) and (max-width:1000px), (max-height:600px) and (pointer:coarse) and (orientation:landscape){
+  .app.in-lobby{height:100dvh;min-height:0;overflow-y:auto;display:flex;flex-direction:column}
+  .in-lobby .topbar{height:44px;min-height:44px}
+  .in-lobby .welcome{flex:1;min-height:0;max-width:1100px;width:100%;display:grid;grid-template-columns:minmax(160px,.7fr) minmax(0,1.8fr);align-items:center;gap:24px;padding:12px 0;margin:0 auto}
+  .welcome-copy h1{font-size:54px;margin:14px 0}.welcome-copy>.eyebrow{font-size:8px;letter-spacing:1px}.welcome-copy>p{font-size:12px}.welcome-tags{display:none}
+  .entry-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;padding:16px;border-radius:10px}
+  .entry-heading{display:none}.entry-panel h2{grid-column:1/-1;grid-row:1;font-size:26px;margin:0}
+  .entry-panel .field-label{margin:0;font-size:10px;letter-spacing:1px}
+  .entry-panel label[for=player-name]{grid-column:1;grid-row:2}.entry-panel #player-name{grid-column:1;grid-row:3;height:56px}
+  .entry-panel label:not([for]){grid-column:2;grid-row:2}.character-picker{grid-column:2;grid-row:3;gap:5px}.character-picker button{min-height:56px;padding:5px 2px;font-size:8px}.character-glyph{font-size:22px;margin-bottom:2px}
+  .entry-create{grid-column:1;grid-row:4;margin:0;min-height:44px;font-size:12px;padding:8px 12px}
+  .join-row{grid-column:2;grid-row:4;margin:0;gap:5px}.join-row .btn{flex-basis:80px;font-size:11px;padding:6px}.join-row input{padding:8px}
+  .demo-link{grid-column:1/-1;grid-row:5;margin:0;min-height:36px;font-size:12px;padding:6px 0}
+  .welcome-footer{display:none}
+  .topbar nav .mobile-fullscreen{display:grid;font-size:24px}
+  .app.in-game .topbar{height:44px;min-height:44px}
+  .app.phase-playing,.app.phase-showdown{height:100dvh;min-height:0;overflow:hidden;display:grid;grid-template-columns:180px minmax(0,1fr);grid-template-rows:44px minmax(0,1fr) 128px;gap:8px 14px;padding-bottom:env(safe-area-inset-bottom)}
+  .phase-playing .topbar,.phase-showdown .topbar{grid-column:1/-1;grid-row:1}
+  .app.phase-playing .room-label,.app.phase-showdown .room-label{display:none}
+  .app.phase-playing .gx-stepper,.app.phase-showdown .gx-stepper{grid-column:1;grid-row:2;align-self:start;margin-top:60px;min-width:0}
+  .app.phase-playing .gx-match,.app.phase-showdown .gx-match{grid-column:1;grid-row:2;align-self:start;padding:8px;gap:5px;min-height:50px}
+  .gx-match i{font-size:8px}.gx-match b{font-size:12px}.gx-match strong{font-size:21px}
+  .phase-playing .gx-plates,.phase-showdown .gx-plates{grid-column:2;grid-row:2;align-self:start;min-width:0;gap:6px}
+  .gx-plate{padding:6px 8px}.gx-plate-head{flex-wrap:nowrap}.gx-plate-status{flex-wrap:nowrap;font-size:10px}.gx-plate-head strong{font-size:12px}
+  .app.phase-playing .gx-board,.app.phase-showdown .gx-board{grid-column:2;grid-row:2;align-self:end;justify-self:center;width:auto;max-width:100%;padding:6px 12px 14px;gap:4px}
+  .gx-board-slot,.gx-board .playing-card{width:42px;height:60px}.gx-board-cards{gap:8px}.gx-board .card-corner{font-size:14px}.gx-board .card-suit{font-size:24px}
+  .app.phase-playing .gx-log,.app.phase-showdown .gx-log{grid-column:1;grid-row:2;align-self:end;max-height:44px;font-size:10px;padding:0}
+  .app.phase-playing .gx-bottom,.app.phase-showdown .gx-bottom{position:relative;inset:auto;grid-column:1/-1;grid-row:3;margin:0 -12px;padding:8px max(12px,env(safe-area-inset-right)) 8px max(12px,env(safe-area-inset-left));height:100%;grid-template-columns:180px minmax(0,1fr)!important;gap:8px 14px!important;align-items:start;border-radius:0;box-shadow:none}
+  .app.phase-playing .gx-bottom .wallet-block,.app.phase-showdown .gx-bottom .wallet-block{grid-column:1;grid-row:1;min-height:70px;max-height:78px;padding-right:88px;display:grid;gap:2px 6px}
+  .gx-hand .playing-card.big{width:36px;height:52px}.gx-hand-cards{gap:5px}.gx-hand .playing-card.big .card-corner{font-size:12px}.gx-hand .playing-card.big .card-suit{font-size:20px}.gx-hand .gx-hud-label{font-size:8px}.gx-hand .mod-caption{font-size:7px}
+  .app.in-game .gx-bottom .wallet-block>strong{font-size:26px}.app.in-game .gx-bottom .wallet-block>.eyebrow{font-size:9px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wallet-block .host-tag{display:none}.app.in-game .gx-bottom .wallet-block>.gx-trend{font-size:8px}
+  .phase-playing .mobile-magic-launch,.phase-showdown .mobile-magic-launch{grid-column:1;grid-row:2;min-width:0;align-self:end}
+  .mobile-magic-launch>button{display:block;min-height:36px;padding:7px 10px;font-size:12px}.mobile-magic-launch>button>span:last-child{display:none}
+  .app.phase-playing .gx-center,.app.phase-showdown .gx-center{grid-column:2;grid-row:1/3;gap:5px;align-self:center;min-height:0}
+  .gx-turn{min-height:32px;padding:4px 8px;gap:8px}.gx-ring{width:28px;height:28px}.gx-turn b{font-size:12px}.gx-turn span{font-size:10px}.gx-turn:not(.mine) span{display:none}
+  .gx-actions{padding:0;border:0}.gx-actions .bet-buttons{gap:6px}.gx-btn{min-height:44px;padding:5px}.gx-btn b{font-size:16px}.gx-btn small{font-size:9px}
+  .mobile-raise-toggle{min-height:28px;padding:4px 8px;margin:0;font-size:11px}
+  .gx-raise.raise-open{position:fixed;bottom:calc(140px + env(safe-area-inset-bottom));left:calc(206px + env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));z-index:30;background:#182217;border:1px solid var(--gold);border-radius:8px;padding:12px;margin:0;grid-template-columns:auto minmax(0,1fr) 72px;box-shadow:0 8px 30px #000a}
+  .gx-raise .gx-chips{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(4,1fr)}.gx-raise .gx-chips button{min-height:36px;min-width:0}
+  .app.in-game .gx-right{left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:calc(8px + env(safe-area-inset-bottom));padding:12px;max-height:calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
+  .mobile-sheet-heading{font-size:22px}.mobile-sheet-heading button{width:36px;height:36px}
+  .gx-tray{display:grid;grid-template-columns:160px minmax(0,1fr);gap:8px 16px;align-items:start}.gx-tray-head{grid-column:1/-1;margin:0}
+  .gx-tray-slots{grid-template-columns:1fr;max-height:calc(100dvh - 110px);overflow-y:auto;overflow-x:hidden;gap:6px;padding:2px 4px 2px 2px}
+  .gx-slot,.gx-slot.empty{width:100%;min-height:58px!important;display:grid;grid-template-columns:40px 1fr;grid-template-rows:1fr auto;gap:3px 6px;padding:6px;text-align:left}
+  .gx-slot.empty{display:flex;min-height:44px!important;height:44px;font-size:18px}.gx-slot .magic-art,.gx-slot .tray-reserve{grid-column:1;grid-row:1/3;width:40px;height:52px}.gx-slot-name{grid-column:2;grid-row:1;min-height:0;font-size:12px;text-align:left}.gx-slot-state{grid-column:2;grid-row:2;text-align:left;font-size:9px}.gx-slot-visibility{display:none}
+  .gx-use{grid-column:2;grid-row:2;margin:0;max-height:calc(100dvh - 110px)!important;overflow:hidden;padding:12px;display:flex;flex-direction:column}
+  .gx-use-head,.gx-use-actions{flex-shrink:0}.gx-use-content{min-height:0;overflow-y:auto;overscroll-behavior:contain}.gx-use-actions{margin-top:8px;padding-top:6px;border-top:1px solid var(--line)}
+  .gx-tray:not(:has(.gx-use)) .gx-tray-slots{grid-column:1/-1;grid-template-columns:repeat(5,minmax(0,1fr));overflow:auto}.gx-tray:not(:has(.gx-use)) .gx-slot,.gx-tray:not(:has(.gx-use)) .gx-slot.empty{display:flex;min-height:130px!important}.gx-tray:not(:has(.gx-use)) .gx-slot-name{text-align:center}
+  .gx-use-head{grid-template-columns:44px minmax(0,1fr) 36px}.gx-use-art{width:44px;height:60px}.gx-use .magic-name{font-size:21px}.gx-use p,.gx-use .magic-details p{font-size:12px;line-height:1.5}.gx-x{min-width:36px;min-height:36px}.gx-use-actions .btn{min-height:44px}
+  .app.phase-playing .secret-note{position:absolute;top:150px;left:12px;width:180px;max-height:calc(100dvh - 292px);overflow:auto;padding:8px;font-size:10px;z-index:7}
+  .app.phase-showdown .gx-dialog{position:absolute;left:206px;right:12px;top:60px;bottom:140px;width:auto;max-height:none;padding:14px;overflow:auto;z-index:10}
+  .phase-showdown .gx-dialog h2{font-size:24px}.phase-showdown .gx-dialog p{font-size:12px;margin:4px 0}.phase-showdown .result-hands{margin:8px 0;gap:12px}
+  .gx-banner{top:38%;font-size:24px}
+  .app.in-game .gx-toasts{top:calc(48px + env(safe-area-inset-top));left:206px;align-items:center}
+  .app.phase-market{grid-template-columns:140px minmax(0,1fr);padding-bottom:calc(72px + env(safe-area-inset-bottom));gap:6px 14px}
+  .app.phase-market .gx-market-head{padding:6px 0}.app.phase-market .gx-market-head h2{font-size:24px}
+  .app.phase-market .gx-bottom{height:calc(66px + env(safe-area-inset-bottom));grid-template-columns:140px minmax(0,1fr)!important;align-content:center;gap:6px 14px!important;align-items:center}
+  .app.phase-market .gx-bottom .wallet-block{grid-column:1;grid-row:1;min-height:22px}.app.phase-market .gx-bottom .wallet-block>strong{font-size:24px}
+  .phase-market .mobile-magic-launch{grid-column:2;grid-row:1;min-width:0;justify-self:start}.phase-market .mobile-magic-launch>button{min-height:44px;padding:8px 14px}
+  .app.phase-market .gx-market-head>.btn{width:180px;right:max(12px,env(safe-area-inset-right));bottom:calc(10px + env(safe-area-inset-bottom));min-height:44px}
+  .phase-market .market-refresh{display:flex;position:fixed;left:12px;bottom:calc(4px + env(safe-area-inset-bottom));width:140px;z-index:14}.phase-market .market-refresh>span{display:none}.phase-market .market-refresh .btn{min-height:28px;width:100%;padding:3px;font-size:10px}
+  .app.phase-market .gx-offer{grid-template-columns:80px minmax(0,1fr) 94px;gap:5px 12px;padding:12px}
+  .app.phase-market .gx-offer .gx-offer-art{width:80px;height:110px}.app.phase-market .gx-offer h3{font-size:25px}.app.phase-market .gx-offer p.gx-offer-text{font-size:13px;line-height:1.5}
+  .app.phase-market .mobile-offer-details{grid-column:2;grid-row:4;font-size:11px}.mobile-offer-details summary{min-height:30px;padding:4px 0;text-align:left}
+  .app.phase-market .gx-offer footer{grid-row:1/5}.app.phase-market .gx-buy{min-height:70px;flex-direction:column;gap:8px;font-size:22px;padding:10px}.gx-buy>span{font-size:12px}
+  .phase-market .reserve-art .playing-card.big{height:100px;width:70px;min-width:70px}
+}
+
+@media(max-width:680px) and (orientation:landscape) and (max-height:600px){
+  .in-lobby .welcome{grid-template-columns:minmax(0,1fr);padding:8px 0;gap:0}.welcome-copy{display:none}.entry-panel{padding:12px;gap:6px 12px}.entry-panel h2{font-size:23px}.entry-panel #player-name{height:50px}.character-picker button{min-height:50px}
+  .app.phase-playing,.app.phase-showdown{grid-template-columns:130px minmax(0,1fr);grid-template-rows:40px minmax(0,1fr) 120px;gap:6px 10px}
+  .app.phase-playing .gx-bottom,.app.phase-showdown .gx-bottom{grid-template-columns:130px minmax(0,1fr)!important;gap:5px 10px!important}
+  .app.phase-playing .gx-bottom .wallet-block,.app.phase-showdown .gx-bottom .wallet-block{padding-right:72px}.gx-hand .playing-card.big{width:30px;height:44px}.gx-hand .gx-hud-label{font-size:7px}.gx-hand .playing-card.big .card-corner{font-size:10px}.gx-hand .playing-card.big .card-suit{font-size:17px}
+  .app.in-game .gx-bottom .wallet-block>strong{font-size:23px}.gx-plate-head small,.gx-plate-head .host-tag,.gx-plate-mic{display:none}.gx-plate{padding:5px}.gx-plate-head strong{font-size:10px}.gx-plate-status{font-size:9px}.gx-match i{font-size:7px}.gx-match b{font-size:10px}.gx-match strong{font-size:18px}
+  .gx-board-slot,.gx-board .playing-card{width:35px;height:50px}.gx-board-cards{gap:6px}.app.phase-playing .gx-board{padding:4px 8px 10px}.gx-board .gx-hud-label{font-size:8px}
+  .gx-turn b{font-size:11px}.gx-turn span{display:none}.gx-btn b{font-size:14px}.gx-btn small{font-size:8px}.gx-btn{padding:4px 2px}
+  .app.phase-market{grid-template-columns:110px minmax(0,1fr);gap:6px 10px}.app.phase-market .gx-market-head h2{font-size:21px}.app.phase-market .gx-bottom{grid-template-columns:110px minmax(0,1fr)!important;gap:5px 10px!important}.phase-market .market-refresh{width:110px}.app.phase-market .gx-market-head>.btn{width:144px;font-size:11px}
+  .app.phase-market .gx-offer{grid-template-columns:54px minmax(0,1fr) 70px;padding:9px;gap:4px 8px}.app.phase-market .gx-offer .gx-offer-art{width:54px;height:76px}.app.phase-market .gx-offer h3{font-size:20px}.app.phase-market .gx-offer p.gx-offer-text{font-size:12px;line-height:1.4}.phase-market .reserve-art .playing-card.big{width:50px;min-width:50px;height:72px}.app.phase-market .gx-buy{font-size:18px;padding:6px}.mobile-market-nav>span{gap:8px}.mobile-market-nav small{font-size:9px}
+  .gx-raise.raise-open{left:152px}.app.phase-showdown .gx-dialog{left:152px}.app.in-game .gx-toasts{left:152px}.app.phase-playing .secret-note{left:12px;width:130px}
+}
+
+@media (max-width:1000px), (max-height:600px) and (pointer:coarse){
+  .phase-market .market-refresh{display:none}
+  .mobile-market-nav .mobile-market-refresh{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font-size:19px;line-height:1;border-color:#a88e5880}
+  .mobile-market-nav .mobile-market-refresh small{font-size:10px;margin-top:3px}
+  .app.phase-market .gx-market-head>.btn{display:none}
+  .mobile-market-ready{display:flex;grid-column:2;grid-row:1/3;align-self:end;min-height:48px;width:100%;border-radius:6px;font-size:13px;z-index:auto}
+}
+@media(max-height:600px) and (orientation:landscape) and (max-width:1000px), (max-height:600px) and (pointer:coarse) and (orientation:landscape){
+  .app.phase-market .gx-market{height:100%;max-height:none;align-self:stretch}
+  .app.phase-market .gx-market-grid{height:auto;max-height:none;grid-row:2;min-height:0;align-self:stretch}
+  .app.phase-market .gx-offer{align-content:center;grid-template-rows:auto auto auto auto}
+  .app.phase-market .gx-offer footer{align-self:center}
+  .app.phase-market .gx-bottom{grid-template-columns:140px minmax(0,1fr) 180px!important}
+  .mobile-market-ready{grid-column:3;grid-row:1;min-height:44px;align-self:center}
+}
+@media(max-width:680px) and (orientation:landscape) and (max-height:600px){
+  .app.phase-market .gx-bottom{grid-template-columns:110px minmax(0,1fr) 144px!important}
+}

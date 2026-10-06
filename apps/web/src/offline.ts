@@ -1,6 +1,7 @@
 import {createGame} from '@saloon/rules';
 import {runBots,type BotMemory} from '@saloon/bots';
 import type {CharacterId,Command,GameEngine,GameEvent,PrivateSnapshot,RoomSnapshot} from '@saloon/protocol';
+import {uuid} from './uuid';
 
 export interface OfflineSink {public:(s:RoomSnapshot)=>void;private:(p:PrivateSnapshot)=>void;event:(e:GameEvent)=>void;error:(m:string)=>void}
 const botNames:[string,CharacterId][]=[['Dusty Pete','lynx'],['Mad Maggie','badger'],['Silas Reed','rabbit']];
@@ -15,12 +16,12 @@ export class OfflineRoom {
   addBots(n:number){for(let i=0;i<n&&this.bots<3;i++){const [name,character]=botNames[this.bots++];this.engine.addPlayer({id:`bot${this.bots}`,name,character,bot:true},Date.now());}this.publish(true);}
   send(command:Command){
     if(command.type==='addBot'){this.addBots(1);return;}
-    const r=this.engine.applyCommand(this.playerId,{...command,commandId:command.commandId||crypto.randomUUID()},Date.now());
+    const r=this.engine.applyCommand(this.playerId,{...command,commandId:command.commandId||uuid()},Date.now());
     if(!r.ok&&r.error)this.sink.error(r.error);
     this.publish(true);
   }
   private tick(){
-    const now=Date.now();this.engine.tick(now);runBots(this.engine,this.mems,now,Math.random,()=>crypto.randomUUID());this.publish(false);
+    const now=Date.now();this.engine.tick(now);runBots(this.engine,this.mems,now,Math.random,uuid);this.publish(false);
   }
   private publish(force:boolean){
     const now=Date.now();const pub=this.engine.publicSnapshot(now),priv=this.engine.privateSnapshot(this.playerId,now);
