@@ -31,6 +31,10 @@ test('mobile game: buy, open magic details, play, chat, settings and rotate',asy
   await page.setViewportSize(size);await fits(page,'.room-label,.gx-board,.gx-bottom,.bet-buttons');
   for(const el of await page.locator('.bet-buttons button').all()){const r=await el.boundingBox();expect(r!.height).toBeGreaterThanOrEqual(44);}
  }
+ await page.locator('.mobile-magic-launch button').click();
+ await expect(page.locator('.mobile-sheet-heading')).toBeVisible();
+ expect(await page.locator('.mobile-sheet-heading').evaluate(el=>{const r=el.getBoundingClientRect();return !!document.elementFromPoint(r.left+8,r.top+8)?.closest('.gx-right');})).toBe(true);
+ await page.getByRole('button',{name:'Đóng khay bài phép',exact:true}).click();
  await page.setViewportSize({width:390,height:844});
  await page.getByRole('button',{name:'Mở chat',exact:true}).click();await fits(page,'.room-chat');
  await page.getByRole('textbox',{name:'Tin nhắn'}).fill('Một tin nhắn dài '.repeat(15));await page.getByRole('button',{name:'Gửi',exact:true}).click();
